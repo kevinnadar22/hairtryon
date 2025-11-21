@@ -24,7 +24,7 @@ async def save_image_from_url(image_url: str) -> str:
                 raise Exception(f"Failed to download image: {response.status}")
             img_data = await response.read()
 
-    temp_dir  = tempfile.gettempdir()
+    temp_dir = tempfile.gettempdir()
     ext = get_extension_from_url(image_url, default=".jpg")
     filename = str(uuid.uuid4()) + ext
 

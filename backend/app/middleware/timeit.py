@@ -10,14 +10,11 @@ Description: Middleware to log the time taken for each request.
 __author__ = "Maria Kevin"
 __version__ = "0.1.0"
 
-
-import logging
 import time
 
 from fastapi import Request
+from loguru import logger
 from starlette.middleware.base import BaseHTTPMiddleware
-
-logger = logging.getLogger(__name__)
 
 
 class TimeItMiddleware(BaseHTTPMiddleware):

@@ -14,8 +14,12 @@ from core.exceptions import ImageNotFoundException
 from db import get_db
 from fastapi import APIRouter, BackgroundTasks, Depends
 from models import User
-from schemas import (ImageGenRequest, ImageGenResponse, ImageGenStatusResponse,
-                     StylesResponse)
+from schemas import (
+    ImageGenRequest,
+    ImageGenResponse,
+    ImageGenStatusResponse,
+    StylesResponse,
+)
 from services import ImageGenService
 
 router = APIRouter(prefix="/image", tags=["image"])
@@ -107,7 +111,7 @@ async def get_image_styles(
     """
     service = ImageGenService(db=db)
     styles = service.get_available_styles()
-    return styles  # type: ignore (Fast API will handle serialization)
+    return styles  # type: ignore
 
 
 @router.post("/like/{image_id}")

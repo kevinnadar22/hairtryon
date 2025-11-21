@@ -10,24 +10,31 @@ import string
 from typing import Literal, Optional, TypeVar
 
 from core.config import settings
-from core.exceptions import (EmailAlreadyRegisteredException,
-                             InvalidCredentialsException,
-                             InvalidResetTokenException,
-                             NotAuthenticatedException, UserNotFoundException,
-                             UserNotVerifiedException,
-                             VerificationCodeExpiredException,
-                             VerificationCodeInvalidException)
+from core.exceptions import (
+    EmailAlreadyRegisteredException,
+    InvalidCredentialsException,
+    InvalidResetTokenException,
+    NotAuthenticatedException,
+    UserNotFoundException,
+    UserNotVerifiedException,
+    VerificationCodeExpiredException,
+    VerificationCodeInvalidException,
+)
 from db import Session
 from fastapi import Response
 from fastapi.background import BackgroundTasks
 from fastapi.responses import JSONResponse
 from models import User
 from repository import TokenRepository, UserRepository
-from schemas import (CommentResponse, SignupRequest, TokenResponse,
-                     VerifyLoginResponse)
-from utils import (create_access_token, create_refresh_token,
-                   decode_access_token, decode_refresh_token, hash_password,
-                   verify_password)
+from schemas import CommentResponse, SignupRequest, TokenResponse, VerifyLoginResponse
+from utils import (
+    create_access_token,
+    create_refresh_token,
+    decode_access_token,
+    decode_refresh_token,
+    hash_password,
+    verify_password,
+)
 
 R = TypeVar("R", bound=Response)
 

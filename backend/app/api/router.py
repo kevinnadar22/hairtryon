@@ -10,7 +10,7 @@ Routes included:
 - /api/v1/image/*: Image processing and management endpoints
 """
 
-from api.v1 import auth_router, files_upload_router, image_router, user_router
+from .v1 import auth_router, files_upload_router, image_router, user_router
 from fastapi import APIRouter
 
 router = APIRouter(prefix="/api/v1")

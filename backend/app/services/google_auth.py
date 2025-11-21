@@ -54,9 +54,9 @@ class GoogleAuthService:
             RedirectResponse: Redirect to Google authorization URL.
         """
         redirect_url = settings.REDIRECT_URL
-        return await oauth.hairtryon.authorize_redirect( # type: ignore
+        return await oauth.hairtryon.authorize_redirect(  # type: ignore
             request, redirect_url, prompt="consent"
-        )  
+        )
 
     async def handle_authorization_callback(self, request: Request):
         """
@@ -92,7 +92,9 @@ class GoogleAuthService:
             raise GoogleAuthException("Email or user ID not found in user info")
 
         user = await self.create_or_get_user(token)
-        logged_in_user = self.auth_service.login_user(user=user, email=email, password=user_id)
+        logged_in_user = self.auth_service.login_user(
+            user=user, email=email, password=user_id
+        )
         # return self.auth_service.login_user_with_cookies(logged_in_user)
         return logged_in_user
 

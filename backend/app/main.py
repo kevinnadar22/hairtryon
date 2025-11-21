@@ -10,22 +10,16 @@ Routes included:
 management)
 """
 
-import logging
-
 from admin import admin_authentication, admin_views
 from api.router import router as api_router
+from core.logging import setup_logging
 from db import Base, engine
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from middleware import setup_middlewares
 from sqladmin import Admin
 
-from app.core.logging import setup_logging
-
 setup_logging()
-
-logger = logging.getLogger(__name__)
-
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()

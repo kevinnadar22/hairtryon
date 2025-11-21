@@ -40,7 +40,7 @@ async def send_mail_async(
     message = MessageSchema(
         subject=subject,
         recipients=[email],  # type: ignore
-        template_body=body, 
+        template_body=body,
         subtype=MessageType.html,
         from_name=settings.MAIL_FROM,
     )

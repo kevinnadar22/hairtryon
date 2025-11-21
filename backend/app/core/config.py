@@ -58,7 +58,7 @@ class Settings(BaseSettings):
     ADMIN_USERNAME: str | None = "admin"
     ADMIN_PASSWORD: str | None = "12345678"
 
-    model_config = ConfigDict(env_file=".env") # type: ignore
+    model_config = ConfigDict(env_file=".env")  # type: ignore
 
 
 settings = Settings()  # type: ignore

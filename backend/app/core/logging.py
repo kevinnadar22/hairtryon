@@ -1,44 +1,29 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-Logging configuration for the application.
-
-This module sets up structured logging for the FastAPI application,
-including formatters for default and access logs.
+File: logging.py
+Author: Maria Kevin
+Created: 2025-11-21
+Description: Brief description
 """
 
-from logging.config import dictConfig
+__author__ = "Maria Kevin"
+__version__ = "0.1.0"
 
-LOGGING_CONFIG = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "default": {
-            "format": "[%(asctime)s] [%(levelname)s] [%(name)s:%(lineno)d] — %(message)s",
-            "datefmt": "%Y-%m-%d %H:%M:%S",
-        },
-        "access": {
-            "format": "%(asctime)s — %(message)s",
-            "datefmt": "%Y-%m-%d %H:%M:%S",
-        },
-    },
-    "handlers": {
-        "default": {
-            "class": "logging.StreamHandler",
-            "formatter": "default",
-        },
-        "access": {
-            "class": "logging.StreamHandler",
-            "formatter": "access",
-        },
-    },
-    "loggers": {
-        "uvicorn": {"handlers": ["default"], "level": "INFO"},
-        "uvicorn.error": {"handlers": ["default"], "level": "INFO"},
-        "uvicorn.access": {"handlers": ["access"], "level": "INFO"},
-        "app": {"handlers": ["default"], "level": "DEBUG", "propagate": False},
-    },
-    "root": {"handlers": ["default"], "level": "INFO"},
-}
+
+import sys
+
+from loguru import logger
 
 
 def setup_logging():
-    dictConfig(LOGGING_CONFIG)
+    """Set up logging configuration."""
+    logger.add("app.log", rotation="10 MB", retention="10 days", level="INFO")
+    logger.add("error.log", rotation="10 MB", retention="30 days", level="ERROR")
+
+    logger.add(
+        sys.stderr,
+        format="<green>{time}</green> <level>{message}</level>",
+    )
+
+    logger.info("Logging is set up.")

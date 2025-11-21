@@ -1,29 +1,23 @@
+files: ^backend/
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    rev: v6.0.0
     hooks:
     -   id: check-yaml
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
     -   id: check-executables-have-shebangs
     -   id: check-illegal-windows-names
-    -   id: detect-aws-credentials
     -   id: check-added-large-files
     -   id: detect-private-key
     -   id:  pretty-format-json
     -   id: requirements-txt-fixer
 
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.6
-    hooks:
-      - id: ruff-check
-        args: [ --fix ]
-      - id: ruff-format
 
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.13.2
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.18.2
     hooks:
-      - id: isort
+      - id: mypy
 
   - repo: https://github.com/PyCQA/autoflake
     rev: v2.3.1
@@ -35,13 +29,9 @@ repos:
           - --in-place
           - --expand-star-imports
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.10.0
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.6
     hooks:
-      - id: mypy
-
-  - repo: https://github.com/psf/black
-    rev: 24.4.2
-    hooks:
-      - id: black
-        language_version: python3
+      - id: ruff-check
+        args: [ --fix ]
+      - id: ruff-format

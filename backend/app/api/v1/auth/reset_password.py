@@ -12,13 +12,16 @@ __version__ = "0.1.0"
 
 
 from core.config import settings
-from core.dependencies import (AuthServiceDep, MailServiceDep,
-                               UseAndBlacklistResetToken)
+from core.dependencies import AuthServiceDep, MailServiceDep, UseAndBlacklistResetToken
 from core.exceptions import InvalidResetTokenException
 from fastapi import APIRouter, BackgroundTasks
-from schemas import (CommentResponse, ForgotPasswordRequest,
-                     ResetPasswordRequest, VerifyResetTokenRequest,
-                     VerifyResetTokenResponse)
+from schemas import (
+    CommentResponse,
+    ForgotPasswordRequest,
+    ResetPasswordRequest,
+    VerifyResetTokenRequest,
+    VerifyResetTokenResponse,
+)
 
 router = APIRouter()
 

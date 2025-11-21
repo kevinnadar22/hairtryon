@@ -26,9 +26,11 @@ class AdminAuth(AuthenticationBackend):
 
         if username != settings.ADMIN_USERNAME or password != settings.ADMIN_PASSWORD:
             return False
-        
+
         token_data = {"sub": username}
-        token = create_access_token(token_data, expires_delta_minutes=60*60)  # 1 hour validity
+        token = create_access_token(
+            token_data, expires_delta_minutes=60 * 60
+        )  # 1 hour validity
         request.session.update({"token": token})
         return True
 
@@ -51,13 +53,13 @@ class AdminAuth(AuthenticationBackend):
         return True
 
 
-class UserAdmin(ModelView, model=User):
+class UserAdmin(ModelView, model=User):  # type: ignore
     column_list = [User.id, User.name, User.email, User.userpic]
     column_searchable_list = [User.name, User.email]
     column_sortable_list = [User.id, User.name, User.email]
 
 
-class StylesAdmin(ModelView, model=Styles):
+class StylesAdmin(ModelView, model=Styles):  # type: ignore
     column_list = [
         Styles.id,
         Styles.name,
@@ -69,7 +71,7 @@ class StylesAdmin(ModelView, model=Styles):
     column_searchable_list = [Styles.name, Styles.category]
 
 
-class GeneratedImageAdmin(ModelView, model=GeneratedImage):
+class GeneratedImageAdmin(ModelView, model=GeneratedImage):  # type: ignore
     column_list = [
         GeneratedImage.id,
         GeneratedImage.description,
@@ -92,7 +94,7 @@ class GeneratedImageAdmin(ModelView, model=GeneratedImage):
     column_default_sort = (GeneratedImage.created_at, True)
 
 
-class BlackListTokensAdmin(ModelView, model=BlackListTokens):
+class BlackListTokensAdmin(ModelView, model=BlackListTokens):  # type: ignore
     column_list = [
         BlackListTokens.id,
         BlackListTokens.jti,

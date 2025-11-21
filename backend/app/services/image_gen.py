@@ -5,15 +5,14 @@ This module handles the complete image generation workflow including
 record creation, Replicate API integration, and S3 storage management.
 """
 
-import logging
 import time
-from types import SimpleNamespace
 from typing import List, cast
 
 from core.config import settings
 from core.exceptions import StyleNotFoundException
 from db import Session
 from enums import ImageStatus
+from loguru import logger
 from models import GeneratedImage
 from pydantic import HttpUrl
 from replicate.client import Client
@@ -22,8 +21,6 @@ from schemas import SideViewsResponse, UserImages, UserImagesResponse
 from utils import get_file_info, save_image_from_url
 
 from .image_upload import ImageUploadService
-
-logger = logging.getLogger(__name__)
 
 
 class ImageGenService:

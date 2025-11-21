@@ -67,7 +67,12 @@ class ImageUploadService:
         )
 
     @staticmethod
-    def upload_image_to_s3(file_path: str, file_data: bytes, file_type: str, folder: str = settings.UPLOADS_FOLDER) -> str:
+    def upload_image_to_s3(
+        file_path: str,
+        file_data: bytes,
+        file_type: str,
+        folder: str = settings.UPLOADS_FOLDER,
+    ) -> str:
         """
         Upload image file directly to S3 bucket.
 
@@ -94,7 +99,9 @@ class ImageUploadService:
 
     # method to save to s3 from url
     @staticmethod
-    async def upload_image_from_url(image_url: str, folder: str = settings.UPLOADS_FOLDER) -> str:
+    async def upload_image_from_url(
+        image_url: str, folder: str = settings.UPLOADS_FOLDER
+    ) -> str:
         """
         Download image from URL and upload to S3.
 

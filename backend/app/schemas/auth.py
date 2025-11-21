@@ -7,14 +7,20 @@ including signup, login, and Google OAuth responses.
 
 from typing import Optional
 
-from pydantic import (BaseModel, ConfigDict, EmailStr, Field, HttpUrl,
-                      field_validator, model_validator)
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    EmailStr,
+    Field,
+    HttpUrl,
+    field_validator,
+    model_validator,
+)
 
 
 class CookiesModel(BaseModel):
     access_token: str | None = None
     refresh_token: str | None = None
-
 
 
 class SignupRequest(BaseModel):
@@ -125,7 +131,6 @@ class VerifySignupResponse(BaseModel):
     verified: bool
 
 
-
 class VerifyCodeTokenRequest(BaseModel):
     token: str
 
@@ -159,8 +164,7 @@ class RequestLoginTokenRequest(BaseModel):
     password: str
 
 
-class VerifyLoginRequest(VerifySignupRequest):
-    ...
+class VerifyLoginRequest(VerifySignupRequest): ...
 
-class VerifyLoginResponse(VerifySignupResponse):
-    ...
+
+class VerifyLoginResponse(VerifySignupResponse): ...

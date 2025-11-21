@@ -11,14 +11,18 @@ __author__ = "Maria Kevin"
 __version__ = "0.1.0"
 
 
-from core.dependencies import (AuthServiceDep, MailServiceDep,
-                               UseAndBlacklistVerifyToken)
+from core.dependencies import AuthServiceDep, MailServiceDep, UseAndBlacklistVerifyToken
 from core.exceptions import UserAlreadyVerifiedException, UserNotFoundException
 from enums import TokenType
 from fastapi import APIRouter, BackgroundTasks
-from schemas import (RequestSignupTokenRequest, RequestSignupTokenResponse,
-                     SignupRequest, SignupUserResponse, VerifySignupRequest,
-                     VerifySignupResponse)
+from schemas import (
+    RequestSignupTokenRequest,
+    RequestSignupTokenResponse,
+    SignupRequest,
+    SignupUserResponse,
+    VerifySignupRequest,
+    VerifySignupResponse,
+)
 
 router = APIRouter()
 

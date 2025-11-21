@@ -16,8 +16,6 @@ Routes included:
 - POST /auth/verify-signup: Verify user's email during signup
 """
 
-import logging
-
 from fastapi import APIRouter
 
 from .common import router as common_router
@@ -26,7 +24,6 @@ from .login import router as login_router
 from .reset_password import router as reset_password_router
 from .signup import router as signup_router
 
-logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 # Include sub-routers for different authentication functionalities

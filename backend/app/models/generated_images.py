@@ -9,8 +9,7 @@ import datetime
 
 from db import Base
 from enums import ImageStatus
-from sqlalchemy import (Boolean, DateTime, Enum, Float, ForeignKey, Integer,
-                        String)
+from sqlalchemy import Boolean, DateTime, Enum, Float, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
@@ -20,8 +19,12 @@ class GeneratedImage(Base):
     __tablename__ = "generated_images"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=False)
-    style_id: Mapped[int] = mapped_column(Integer, ForeignKey("styles.id"), nullable=False)
+    user_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("users.id"), nullable=False
+    )
+    style_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("styles.id"), nullable=False
+    )
 
     description: Mapped[str] = mapped_column(String, nullable=True)
     output_image_url: Mapped[str] = mapped_column(String, nullable=True)
@@ -33,8 +36,12 @@ class GeneratedImage(Base):
 
     liked: Mapped[bool] = mapped_column(Boolean, default=None, nullable=True)
 
-    status: Mapped[ImageStatus] = mapped_column(Enum(ImageStatus), default=ImageStatus.PENDING)
-    created_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=datetime.datetime.now(datetime.timezone.utc))
+    status: Mapped[ImageStatus] = mapped_column(
+        Enum(ImageStatus), default=ImageStatus.PENDING
+    )
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime, default=datetime.datetime.now(datetime.timezone.utc)
+    )
 
     # new field
     time_taken: Mapped[float] = mapped_column(Float, nullable=True)

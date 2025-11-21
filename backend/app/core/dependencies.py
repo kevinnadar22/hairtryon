@@ -4,20 +4,26 @@ FastAPI dependency injection for protected routes.
 This module provides authentication dependencies for securing API endpoints.
 """
 
-from core.exceptions import (InvalidRefreshTokenException,
-                             InvalidResetTokenException,
-                             InvalidSignupTokenException,
-                             NotAuthenticatedException, UserNotFoundException,
-                             UserNotVerifiedException)
+from core.exceptions import (
+    InvalidRefreshTokenException,
+    InvalidResetTokenException,
+    InvalidSignupTokenException,
+    NotAuthenticatedException,
+    UserNotFoundException,
+    UserNotVerifiedException,
+)
 from db import Session, get_db
 from enums import TokenType
 from fastapi import Cookie, Depends
 from models import User
 from repository import UserRepository
-from schemas import (CookiesModel, ResetPasswordRequest, VerifyLoginRequest,
-                     VerifySignupRequest)
-from services import (AuthService, BlacklistTokenService, GoogleAuthService,
-                      MailService)
+from schemas import (
+    CookiesModel,
+    ResetPasswordRequest,
+    VerifyLoginRequest,
+    VerifySignupRequest,
+)
+from services import AuthService, BlacklistTokenService, GoogleAuthService, MailService
 from typing_extensions import Annotated
 from utils import decode_access_token
 

@@ -17,8 +17,12 @@ __version__ = "0.1.0"
 from core.dependencies import AuthServiceDep
 from core.exceptions import UserNotFoundException
 from fastapi import APIRouter
-from schemas import (CheckEmailStatusRequest, CheckEmailStatusResponse,
-                     VerifyCodeTokenRequest, VerifyCodeTokenResponse)
+from schemas import (
+    CheckEmailStatusRequest,
+    CheckEmailStatusResponse,
+    VerifyCodeTokenRequest,
+    VerifyCodeTokenResponse,
+)
 
 router = APIRouter()
 
