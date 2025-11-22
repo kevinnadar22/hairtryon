@@ -47,7 +47,7 @@ const VerifyLogin: React.FC = () => {
     const { mutate: verifyOtp, isPending: isVerifyingOtp } = api.auth.verifyLoginApiV1AuthVerifyLoginPost.useMutation(
         undefined,
         {
-            onSuccess: (data) => {
+            onSuccess: () => {
                 toast.success("Your email has been verified! You are now logged in.");
                 login();
             },
