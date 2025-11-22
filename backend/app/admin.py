@@ -12,7 +12,7 @@ __version__ = "0.1.0"
 
 
 from core.config import settings
-from models import BlackListTokens, GeneratedImage, Styles, User
+from models import BlackListTokens, GeneratedImage, Styles, User, Transaction
 from sqladmin import ModelView
 from sqladmin.authentication import AuthenticationBackend
 from starlette.requests import Request
@@ -102,5 +102,31 @@ class BlackListTokensAdmin(ModelView, model=BlackListTokens):  # type: ignore
     ]
 
 
-admin_views = [UserAdmin, StylesAdmin, GeneratedImageAdmin, BlackListTokensAdmin]
+class TransactionAdmin(ModelView, model=Transaction):  # type: ignore
+    column_list = [
+        Transaction.id,
+        Transaction.session_id,
+        Transaction.payment_id,
+        Transaction.user_id,
+        Transaction.product_id,
+        Transaction.amount,
+        Transaction.status,
+        Transaction.quantity,
+    ]
+    column_searchable_list = [Transaction.session_id, Transaction.payment_id]
+    column_sortable_list = [
+        Transaction.id,
+        Transaction.created_at,
+        Transaction.status,
+    ]
+    column_default_sort = (Transaction.created_at, True)
+
+
+admin_views = [
+    UserAdmin,
+    StylesAdmin,
+    GeneratedImageAdmin,
+    BlackListTokensAdmin,
+    TransactionAdmin,
+]
 admin_authentication = AdminAuth(secret_key=settings.SECRET_KEY)

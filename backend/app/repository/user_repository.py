@@ -114,3 +114,13 @@ class UserRepository:
         user.verified = True
         self.update_user(user)
         return user
+
+    def inc_user_credits(self, user: User, credits: int) -> User:
+        user.credits += credits
+        self.update_user(user)
+        return user
+
+    def dec_user_credits(self, user: User, credits: int) -> User:
+        user.credits -= credits
+        self.update_user(user)
+        return user

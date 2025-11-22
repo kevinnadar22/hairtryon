@@ -8,6 +8,7 @@ and image upload settings. All settings are loaded from environment variables.
 from dotenv import load_dotenv
 from pydantic import ConfigDict
 from pydantic_settings import BaseSettings
+from typing import Literal
 
 # This is needed even though we use BaseSettings which loads .env automatically
 # Because some libraries may rely on environment variables being set at import time
@@ -18,6 +19,9 @@ class Settings(BaseSettings):
     """Application configuration settings."""
 
     DATABASE_URL: str = "sqlite:///./app/instance/test.db"
+
+    # Other
+    FREE_USER_CREDITS: int = 3
 
     # Auth Configurations
     SECRET_KEY: str = "your-secret"
@@ -57,6 +61,12 @@ class Settings(BaseSettings):
     # Admin Panel settings
     ADMIN_USERNAME: str | None = "admin"
     ADMIN_PASSWORD: str | None = "12345678"
+
+    # Payment API Key
+    DODO_PAYMENTS_API_KEY: str
+    DODO_PAYMENTS_MODE: Literal["test_mode", "live_mode"] = "test_mode"
+    DODO_PAYMENTS_PRODUCT_ID: str
+    DODO_PAYMENTS_WEBHOOK_SECRET: str
 
     model_config = ConfigDict(env_file=".env")  # type: ignore
 

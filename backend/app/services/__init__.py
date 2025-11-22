@@ -6,6 +6,7 @@ from .google_auth import GoogleAuthService
 from .image_gen import ImageGenService
 from .image_upload import ImageUploadService
 from .mail_service import MailService
+from .payment import PaymentService
 
 __all__ = [
     "AuthService",
@@ -14,4 +15,5 @@ __all__ = [
     "ImageGenService",
     "MailService",
     "BlacklistTokenService",
+    "PaymentService",
 ]

@@ -14,3 +14,4 @@ class UserBase(BaseModel):
     name: str
     email: EmailStr
     userpic: str | None
+    credits: int

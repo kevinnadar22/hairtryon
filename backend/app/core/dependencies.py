@@ -23,7 +23,13 @@ from schemas import (
     VerifyLoginRequest,
     VerifySignupRequest,
 )
-from services import AuthService, BlacklistTokenService, GoogleAuthService, MailService
+from services import (
+    AuthService,
+    BlacklistTokenService,
+    GoogleAuthService,
+    MailService,
+    PaymentService,
+)
 from typing_extensions import Annotated
 from utils import decode_access_token
 
@@ -131,10 +137,16 @@ def get_google_auth_service(db: Session = Depends(get_db)):
     return GoogleAuthService(db)
 
 
+def get_payment_service(db: Session = Depends(get_db)):
+    return PaymentService(db)
+
+
 MailServiceDep = Annotated[MailService, Depends(get_mail_service)]
 AuthServiceDep = Annotated[AuthService, Depends(get_auth_service)]
 GoogleAuthServiceDep = Annotated[GoogleAuthService, Depends(get_google_auth_service)]
+PaymentServiceDep = Annotated[PaymentService, Depends(get_payment_service)]
 AuthCookies = Annotated[CookiesModel, Depends(get_cookies)]
 UseAndBlacklistRefreshToken = Annotated[str, Depends(blacklist_refresh_token)]
 UseAndBlacklistVerifyToken = Annotated[str, Depends(require_valid_code_token)]
 UseAndBlacklistResetToken = Annotated[str, Depends(require_valid_reset_token)]
+CurrentUser = Annotated[User, Depends(get_current_user)]

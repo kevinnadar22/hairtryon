@@ -9,8 +9,6 @@ import type {
 let isRefreshing = false;
 let refreshPromise: Promise<boolean> | null = null;
 
-
-
 async function refreshAccessToken(): Promise<boolean> {
   if (isRefreshing && refreshPromise) {
     return refreshPromise;

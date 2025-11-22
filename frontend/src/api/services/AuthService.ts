@@ -1166,14 +1166,21 @@ export interface AuthService {
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
          * @example Mutation with predefined parameters, e.g., for updating
          * ```ts
-         * const { mutate, isPending } = qraft.authService.logoutApiV1AuthLogoutPost.useMutation({})
+         * const { mutate, isPending } = qraft.authService.logoutApiV1AuthLogoutPost.useMutation({
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * })
          * mutate(body);
          * ```
          * @example Mutation without predefined parameters, e.g., for creating
          * ```ts
          * const { mutate, isPending } = qraft.authService.logoutApiV1AuthLogoutPost.useMutation()
          * mutate({
-         *     body: bodyPayload
+         *     body: bodyPayload,
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
          * });
          * ```
          */
@@ -1193,14 +1200,21 @@ export interface AuthService {
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
          * @example Mutation with predefined parameters, e.g., for updating
          * ```ts
-         * const { mutate, isPending } = qraft.authService.logoutApiV1AuthLogoutPost.useMutation({})
+         * const { mutate, isPending } = qraft.authService.logoutApiV1AuthLogoutPost.useMutation({
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * })
          * mutate(body);
          * ```
          * @example Mutation without predefined parameters, e.g., for creating
          * ```ts
          * const { mutate, isPending } = qraft.authService.logoutApiV1AuthLogoutPost.useMutation()
          * mutate({
-         *     body: bodyPayload
+         *     body: bodyPayload,
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
          * });
          * ```
          */
@@ -1224,7 +1238,11 @@ export interface AuthService {
          * @example Check how many mutations are currently in progress with the specified parameters.
          * ```ts
          * const logoutApiV1AuthLogoutPostTotal = qraft.authService.logoutApiV1AuthLogoutPost.useIsMutating({
-         *     parameters: {}
+         *     parameters: {
+         *         cookie: {
+         *             access_token: accessToken
+         *         }
+         *     }
          * })
          * ```
          */
@@ -1254,7 +1272,11 @@ export interface AuthService {
          * ```ts
          * const logoutApiV1AuthLogoutPostMutationData = qraft.authService.logoutApiV1AuthLogoutPost.useMutationState({
          *     filters: {
-         *         parameters: {}
+         *         parameters: {
+         *             cookie: {
+         *                 access_token: accessToken
+         *             }
+         *         }
          *     },
          *     select: mutation => mutation.state.data
          * })
@@ -1293,7 +1315,11 @@ export interface AuthService {
          * ```ts
          * const mutationCache = qraft.authService.logoutApiV1AuthLogoutPost.getMutationCache();
          * const mutation = mutationCache.find({
-         *     parameters: {}
+         *     parameters: {
+         *         cookie: {
+         *             access_token: accessToken
+         *         }
+         *     }
          * });
          * ```
          *
@@ -1313,6 +1339,229 @@ export interface AuthService {
             data: LogoutApiV1AuthLogoutPostData;
             error: LogoutApiV1AuthLogoutPostError;
             body: LogoutApiV1AuthLogoutPostBody;
+        };
+    };
+    /**
+     * @summary Refresh
+     * @description Refresh user's access token.
+     *
+     * Args:
+     *     refresh_token (ValidRefreshTokenDep): Refresh token.
+     *
+     * Returns:
+     *     JSONResponse: JSON response containing new access token.
+     */
+    refreshApiV1AuthRefreshPost: {
+        /**
+         * @summary Refresh
+         * @description Refresh user's access token.
+         *
+         * Args:
+         *     refresh_token (ValidRefreshTokenDep): Refresh token.
+         *
+         * Returns:
+         *     JSONResponse: JSON response containing new access token.
+         */
+        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: ServiceOperationMutationFnOptions<RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostParameters, TMeta, TSignal>, client?: (schema: RefreshApiV1AuthRefreshPostSchema, options: ServiceOperationMutationFnOptions<RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostParameters, TMeta, TSignal>) => Promise<RequestFnResponse<RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostError>>): Promise<RequestFnResponse<RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostError>>;
+        /**
+         * @summary Refresh
+         * @description Refresh user's access token.
+         *
+         * Args:
+         *     refresh_token (ValidRefreshTokenDep): Refresh token.
+         *
+         * Returns:
+         *     JSONResponse: JSON response containing new access token.
+         */
+        getMutationKey(parameters: DeepReadonly<RefreshApiV1AuthRefreshPostParameters> | void): ServiceOperationMutationKey<RefreshApiV1AuthRefreshPostSchema, RefreshApiV1AuthRefreshPostParameters>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @summary Refresh
+         * @description Refresh user's access token.
+         *
+         * Args:
+         *     refresh_token (ValidRefreshTokenDep): Refresh token.
+         *
+         * Returns:
+         *     JSONResponse: JSON response containing new access token.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.authService.refreshApiV1AuthRefreshPost.useMutation({
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * })
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.authService.refreshApiV1AuthRefreshPost.useMutation()
+         * mutate({
+         *     body: bodyPayload,
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * });
+         * ```
+         */
+        useMutation<TVariables extends RefreshApiV1AuthRefreshPostBody, TContext = unknown>(parameters: DeepReadonly<RefreshApiV1AuthRefreshPostParameters>, options?: ServiceOperationUseMutationOptions<RefreshApiV1AuthRefreshPostSchema, RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostParameters, TVariables, OperationError<RefreshApiV1AuthRefreshPostError>, TContext>): UseMutationResult<RefreshApiV1AuthRefreshPostData, OperationError<RefreshApiV1AuthRefreshPostError>, TVariables | void, TContext>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @summary Refresh
+         * @description Refresh user's access token.
+         *
+         * Args:
+         *     refresh_token (ValidRefreshTokenDep): Refresh token.
+         *
+         * Returns:
+         *     JSONResponse: JSON response containing new access token.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.authService.refreshApiV1AuthRefreshPost.useMutation({
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * })
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.authService.refreshApiV1AuthRefreshPost.useMutation()
+         * mutate({
+         *     body: bodyPayload,
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * });
+         * ```
+         */
+        useMutation<TVariables extends MutationVariables<RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<RefreshApiV1AuthRefreshPostSchema, RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostParameters, TVariables, OperationError<RefreshApiV1AuthRefreshPostError>, TContext>): UseMutationResult<RefreshApiV1AuthRefreshPostData, OperationError<RefreshApiV1AuthRefreshPostError>, TVariables, TContext>;
+        /**
+         * Returns the count of currently in-progress mutations.
+         *
+         * @summary Refresh
+         * @description Refresh user's access token.
+         *
+         * Args:
+         *     refresh_token (ValidRefreshTokenDep): Refresh token.
+         *
+         * Returns:
+         *     JSONResponse: JSON response containing new access token.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+         * @example Check how many mutations are currently in progress for the specified service method.
+         * ```ts
+         * const refreshApiV1AuthRefreshPostTotal = qraft.authService.refreshApiV1AuthRefreshPost.useIsMutating()
+         * ```
+         * @example Check how many mutations are currently in progress with the specified parameters.
+         * ```ts
+         * const refreshApiV1AuthRefreshPostTotal = qraft.authService.refreshApiV1AuthRefreshPost.useIsMutating({
+         *     parameters: {
+         *         cookie: {
+         *             access_token: accessToken
+         *         }
+         *     }
+         * })
+         * ```
+         */
+        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostParameters, OperationError<RefreshApiV1AuthRefreshPostError>, TContext> | MutationFiltersByMutationKey<RefreshApiV1AuthRefreshPostSchema, RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostParameters, OperationError<RefreshApiV1AuthRefreshPostError>, TContext>): number;
+        /**
+         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+         *
+         * @summary Refresh
+         * @description Refresh user's access token.
+         *
+         * Args:
+         *     refresh_token (ValidRefreshTokenDep): Refresh token.
+         *
+         * Returns:
+         *     JSONResponse: JSON response containing new access token.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+         * @example Get all variables of all running mutations.
+         * ```ts
+         * const refreshApiV1AuthRefreshPostPendingMutationVariables = qraft.authService.refreshApiV1AuthRefreshPost.useMutationState({
+         *     filters: {
+         *         status: "pending"
+         *     },
+         *     select: mutation => mutation.state.variables
+         * })
+         * ```
+         * @example Get all data for specific mutations via the `parameters`.
+         * ```ts
+         * const refreshApiV1AuthRefreshPostMutationData = qraft.authService.refreshApiV1AuthRefreshPost.useMutationState({
+         *     filters: {
+         *         parameters: {
+         *             cookie: {
+         *                 access_token: accessToken
+         *             }
+         *         }
+         *     },
+         *     select: mutation => mutation.state.data
+         * })
+         * ```
+         */
+        useMutationState<TContext = unknown, TResult = MutationState<RefreshApiV1AuthRefreshPostData, OperationError<RefreshApiV1AuthRefreshPostError>, MutationVariables<RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostParameters>, TContext>>(options?: {
+            filters?: MutationFiltersByParameters<RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostParameters, OperationError<RefreshApiV1AuthRefreshPostError>, TContext> | MutationFiltersByMutationKey<RefreshApiV1AuthRefreshPostSchema, RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostParameters, OperationError<RefreshApiV1AuthRefreshPostError>, TContext>;
+            select?: (mutation: Mutation<RefreshApiV1AuthRefreshPostData, OperationError<RefreshApiV1AuthRefreshPostError>, MutationVariables<RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostParameters>, TContext>) => TResult;
+        }): Array<TResult>;
+        /**
+         * @summary Refresh
+         * @description Refresh user's access token.
+         *
+         * Args:
+         *     refresh_token (ValidRefreshTokenDep): Refresh token.
+         *
+         * Returns:
+         *     JSONResponse: JSON response containing new access token.
+         */
+        isMutating<TContext>(filters?: MutationFiltersByParameters<RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostParameters, OperationError<RefreshApiV1AuthRefreshPostError>, TContext> | MutationFiltersByMutationKey<RefreshApiV1AuthRefreshPostSchema, RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostParameters, OperationError<RefreshApiV1AuthRefreshPostError>, TContext>): number;
+        /**
+         * Returns a `MutationCache` object that provides access to mutation cache operations
+         * for the specific endpoint.
+         *
+         * @summary Refresh
+         * @description Refresh user's access token.
+         *
+         * Args:
+         *     refresh_token (ValidRefreshTokenDep): Refresh token.
+         *
+         * Returns:
+         *     JSONResponse: JSON response containing new access token.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/query-client/getMutationCache|`getMutationCache(...)` documentation}
+         *
+         * @example Find a mutation with specific parameters
+         * ```ts
+         * const mutationCache = qraft.authService.refreshApiV1AuthRefreshPost.getMutationCache();
+         * const mutation = mutationCache.find({
+         *     parameters: {
+         *         cookie: {
+         *             access_token: accessToken
+         *         }
+         *     }
+         * });
+         * ```
+         *
+         * @example Find all mutations for the endpoint
+         * ```ts
+         * const mutationCache = qraft.authService.refreshApiV1AuthRefreshPost.getMutationCache();
+         * const mutations = mutationCache.findAll();
+         * ```
+         */
+        getMutationCache(): Omit<MutationCache, "find" | "findAll"> & {
+            find<TContext = unknown>(filters: MutationFiltersByParameters<RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostParameters, OperationError<RefreshApiV1AuthRefreshPostError>, TContext> | MutationFiltersByMutationKey<RefreshApiV1AuthRefreshPostSchema, RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostParameters, OperationError<RefreshApiV1AuthRefreshPostError>, TContext>): Mutation<RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostError, MutationVariables<RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostParameters>, TContext> | undefined;
+            findAll<TContext = unknown>(filters?: MutationFiltersByParameters<RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostParameters, OperationError<RefreshApiV1AuthRefreshPostError>, TContext> | MutationFiltersByMutationKey<RefreshApiV1AuthRefreshPostSchema, RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostParameters, OperationError<RefreshApiV1AuthRefreshPostError>, TContext>): Array<Mutation<RefreshApiV1AuthRefreshPostData, RefreshApiV1AuthRefreshPostError, MutationVariables<RefreshApiV1AuthRefreshPostBody, RefreshApiV1AuthRefreshPostParameters>, TContext>>;
+        };
+        schema: RefreshApiV1AuthRefreshPostSchema;
+        types: {
+            parameters: RefreshApiV1AuthRefreshPostParameters;
+            data: RefreshApiV1AuthRefreshPostData;
+            error: RefreshApiV1AuthRefreshPostError;
+            body: RefreshApiV1AuthRefreshPostBody;
         };
     };
     /**
@@ -3591,6 +3840,25 @@ export const logoutApiV1AuthLogoutPost = {
     [QraftServiceOperationsToken]: AuthService["logoutApiV1AuthLogoutPost"];
 };
 /**
+ * @summary Refresh
+ * @description Refresh user's access token.
+ *
+ * Args:
+ *     refresh_token (ValidRefreshTokenDep): Refresh token.
+ *
+ * Returns:
+ *     JSONResponse: JSON response containing new access token.
+ */
+export const refreshApiV1AuthRefreshPost = {
+    schema: {
+        method: "post",
+        url: "/api/v1/auth/refresh"
+    }
+} as {
+    schema: RefreshApiV1AuthRefreshPostSchema;
+    [QraftServiceOperationsToken]: AuthService["refreshApiV1AuthRefreshPost"];
+};
+/**
  * @summary Google Login
  * @description Initiate Google OAuth authentication flow.
  *
@@ -3739,6 +4007,7 @@ export const authService = {
     requestLoginTokenApiV1AuthRequestLoginTokenPost,
     verifyLoginApiV1AuthVerifyLoginPost,
     logoutApiV1AuthLogoutPost,
+    refreshApiV1AuthRefreshPost,
     googleLoginApiV1AuthGoogleGet,
     googleAuthApiV1AuthGoogleCallbackGet,
     forgotPasswordApiV1AuthForgotPasswordPost,
@@ -3760,7 +4029,7 @@ type SignupApiV1AuthSignupPostParameters = {
     path?: never;
 };
 type SignupApiV1AuthSignupPostData = paths["/api/v1/auth/signup"]["post"]["responses"]["200"]["content"]["application/json"];
-type SignupApiV1AuthSignupPostError = null | paths["/api/v1/auth/signup"]["post"]["responses"]["422"]["content"]["application/json"];
+type SignupApiV1AuthSignupPostError = null | paths["/api/v1/auth/signup"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type SignupApiV1AuthSignupPostBody = paths["/api/v1/auth/signup"]["post"]["requestBody"]["content"]["application/json"];
 type RequestSignupTokenApiV1AuthRequestSignupTokenPostSchema = {
     method: "post";
@@ -3775,7 +4044,7 @@ type RequestSignupTokenApiV1AuthRequestSignupTokenPostParameters = {
     path?: never;
 };
 type RequestSignupTokenApiV1AuthRequestSignupTokenPostData = paths["/api/v1/auth/request-signup-token"]["post"]["responses"]["200"]["content"]["application/json"];
-type RequestSignupTokenApiV1AuthRequestSignupTokenPostError = null | null | paths["/api/v1/auth/request-signup-token"]["post"]["responses"]["422"]["content"]["application/json"];
+type RequestSignupTokenApiV1AuthRequestSignupTokenPostError = null | null | paths["/api/v1/auth/request-signup-token"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type RequestSignupTokenApiV1AuthRequestSignupTokenPostBody = paths["/api/v1/auth/request-signup-token"]["post"]["requestBody"]["content"]["application/json"];
 type VerifySignupApiV1AuthVerifySignupPostSchema = {
     method: "post";
@@ -3790,7 +4059,7 @@ type VerifySignupApiV1AuthVerifySignupPostParameters = {
     path?: never;
 };
 type VerifySignupApiV1AuthVerifySignupPostData = paths["/api/v1/auth/verify-signup"]["post"]["responses"]["200"]["content"]["application/json"];
-type VerifySignupApiV1AuthVerifySignupPostError = null | paths["/api/v1/auth/verify-signup"]["post"]["responses"]["422"]["content"]["application/json"];
+type VerifySignupApiV1AuthVerifySignupPostError = null | paths["/api/v1/auth/verify-signup"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type VerifySignupApiV1AuthVerifySignupPostBody = paths["/api/v1/auth/verify-signup"]["post"]["requestBody"]["content"]["application/json"];
 type RequestLoginTokenApiV1AuthRequestLoginTokenPostSchema = {
     method: "post";
@@ -3805,7 +4074,7 @@ type RequestLoginTokenApiV1AuthRequestLoginTokenPostParameters = {
     path?: never;
 };
 type RequestLoginTokenApiV1AuthRequestLoginTokenPostData = paths["/api/v1/auth/request-login-token"]["post"]["responses"]["200"]["content"]["application/json"];
-type RequestLoginTokenApiV1AuthRequestLoginTokenPostError = null | null | paths["/api/v1/auth/request-login-token"]["post"]["responses"]["422"]["content"]["application/json"];
+type RequestLoginTokenApiV1AuthRequestLoginTokenPostError = null | null | paths["/api/v1/auth/request-login-token"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type RequestLoginTokenApiV1AuthRequestLoginTokenPostBody = paths["/api/v1/auth/request-login-token"]["post"]["requestBody"]["content"]["application/json"];
 type VerifyLoginApiV1AuthVerifyLoginPostSchema = {
     method: "post";
@@ -3820,34 +4089,38 @@ type VerifyLoginApiV1AuthVerifyLoginPostParameters = {
     path?: never;
 };
 type VerifyLoginApiV1AuthVerifyLoginPostData = paths["/api/v1/auth/verify-login"]["post"]["responses"]["200"]["content"]["application/json"];
-type VerifyLoginApiV1AuthVerifyLoginPostError = null | paths["/api/v1/auth/verify-login"]["post"]["responses"]["422"]["content"]["application/json"];
+type VerifyLoginApiV1AuthVerifyLoginPostError = null | paths["/api/v1/auth/verify-login"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type VerifyLoginApiV1AuthVerifyLoginPostBody = paths["/api/v1/auth/verify-login"]["post"]["requestBody"]["content"]["application/json"];
 type LogoutApiV1AuthLogoutPostSchema = {
     method: "post";
     url: "/api/v1/auth/logout";
 };
-type LogoutApiV1AuthLogoutPostParameters = {
-    query?: never;
-    header?: never;
-    path?: never;
-};
+type LogoutApiV1AuthLogoutPostParameters = paths["/api/v1/auth/logout"]["post"]["parameters"];
 type LogoutApiV1AuthLogoutPostData = paths["/api/v1/auth/logout"]["post"]["responses"]["200"]["content"]["application/json"];
-type LogoutApiV1AuthLogoutPostError = unknown;
+type LogoutApiV1AuthLogoutPostError = paths["/api/v1/auth/logout"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type LogoutApiV1AuthLogoutPostBody = undefined;
+type RefreshApiV1AuthRefreshPostSchema = {
+    method: "post";
+    url: "/api/v1/auth/refresh";
+};
+type RefreshApiV1AuthRefreshPostParameters = paths["/api/v1/auth/refresh"]["post"]["parameters"];
+type RefreshApiV1AuthRefreshPostData = paths["/api/v1/auth/refresh"]["post"]["responses"]["200"]["content"]["application/json"];
+type RefreshApiV1AuthRefreshPostError = null | paths["/api/v1/auth/refresh"]["post"]["responses"]["422"]["content"]["application/json"] | null;
+type RefreshApiV1AuthRefreshPostBody = undefined;
 type GoogleLoginApiV1AuthGoogleGetSchema = {
     method: "get";
     url: "/api/v1/auth/google";
 };
 type GoogleLoginApiV1AuthGoogleGetParameters = undefined;
 type GoogleLoginApiV1AuthGoogleGetData = paths["/api/v1/auth/google"]["get"]["responses"]["200"]["content"]["application/json"];
-type GoogleLoginApiV1AuthGoogleGetError = unknown;
+type GoogleLoginApiV1AuthGoogleGetError = null;
 type GoogleAuthApiV1AuthGoogleCallbackGetSchema = {
     method: "get";
     url: "/api/v1/auth/google/callback";
 };
 type GoogleAuthApiV1AuthGoogleCallbackGetParameters = undefined;
 type GoogleAuthApiV1AuthGoogleCallbackGetData = paths["/api/v1/auth/google/callback"]["get"]["responses"]["200"]["content"]["application/json"];
-type GoogleAuthApiV1AuthGoogleCallbackGetError = null;
+type GoogleAuthApiV1AuthGoogleCallbackGetError = null | null;
 type ForgotPasswordApiV1AuthForgotPasswordPostSchema = {
     method: "post";
     url: "/api/v1/auth/forgot-password";
@@ -3861,7 +4134,7 @@ type ForgotPasswordApiV1AuthForgotPasswordPostParameters = {
     path?: never;
 };
 type ForgotPasswordApiV1AuthForgotPasswordPostData = paths["/api/v1/auth/forgot-password"]["post"]["responses"]["200"]["content"]["application/json"];
-type ForgotPasswordApiV1AuthForgotPasswordPostError = paths["/api/v1/auth/forgot-password"]["post"]["responses"]["422"]["content"]["application/json"];
+type ForgotPasswordApiV1AuthForgotPasswordPostError = paths["/api/v1/auth/forgot-password"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type ForgotPasswordApiV1AuthForgotPasswordPostBody = paths["/api/v1/auth/forgot-password"]["post"]["requestBody"]["content"]["application/json"];
 type VerifyResetTokenApiV1AuthVerifyResetTokenPostSchema = {
     method: "post";
@@ -3876,7 +4149,7 @@ type VerifyResetTokenApiV1AuthVerifyResetTokenPostParameters = {
     path?: never;
 };
 type VerifyResetTokenApiV1AuthVerifyResetTokenPostData = paths["/api/v1/auth/verify-reset-token"]["post"]["responses"]["200"]["content"]["application/json"];
-type VerifyResetTokenApiV1AuthVerifyResetTokenPostError = paths["/api/v1/auth/verify-reset-token"]["post"]["responses"]["422"]["content"]["application/json"];
+type VerifyResetTokenApiV1AuthVerifyResetTokenPostError = paths["/api/v1/auth/verify-reset-token"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type VerifyResetTokenApiV1AuthVerifyResetTokenPostBody = paths["/api/v1/auth/verify-reset-token"]["post"]["requestBody"]["content"]["application/json"];
 type ResetPasswordApiV1AuthResetPasswordPostSchema = {
     method: "post";
@@ -3891,7 +4164,7 @@ type ResetPasswordApiV1AuthResetPasswordPostParameters = {
     path?: never;
 };
 type ResetPasswordApiV1AuthResetPasswordPostData = paths["/api/v1/auth/reset-password"]["post"]["responses"]["200"]["content"]["application/json"];
-type ResetPasswordApiV1AuthResetPasswordPostError = null | paths["/api/v1/auth/reset-password"]["post"]["responses"]["422"]["content"]["application/json"];
+type ResetPasswordApiV1AuthResetPasswordPostError = null | paths["/api/v1/auth/reset-password"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type ResetPasswordApiV1AuthResetPasswordPostBody = paths["/api/v1/auth/reset-password"]["post"]["requestBody"]["content"]["application/json"];
 type CheckEmailStatusApiV1AuthCheckEmailStatusPostSchema = {
     method: "post";
@@ -3906,7 +4179,7 @@ type CheckEmailStatusApiV1AuthCheckEmailStatusPostParameters = {
     path?: never;
 };
 type CheckEmailStatusApiV1AuthCheckEmailStatusPostData = paths["/api/v1/auth/check-email-status"]["post"]["responses"]["200"]["content"]["application/json"];
-type CheckEmailStatusApiV1AuthCheckEmailStatusPostError = paths["/api/v1/auth/check-email-status"]["post"]["responses"]["422"]["content"]["application/json"];
+type CheckEmailStatusApiV1AuthCheckEmailStatusPostError = paths["/api/v1/auth/check-email-status"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type CheckEmailStatusApiV1AuthCheckEmailStatusPostBody = paths["/api/v1/auth/check-email-status"]["post"]["requestBody"]["content"]["application/json"];
 type VerifyCodeTokenApiV1AuthVerifyCodeTokenPostSchema = {
     method: "post";
@@ -3921,5 +4194,5 @@ type VerifyCodeTokenApiV1AuthVerifyCodeTokenPostParameters = {
     path?: never;
 };
 type VerifyCodeTokenApiV1AuthVerifyCodeTokenPostData = paths["/api/v1/auth/verify-code-token"]["post"]["responses"]["200"]["content"]["application/json"];
-type VerifyCodeTokenApiV1AuthVerifyCodeTokenPostError = null | paths["/api/v1/auth/verify-code-token"]["post"]["responses"]["422"]["content"]["application/json"];
+type VerifyCodeTokenApiV1AuthVerifyCodeTokenPostError = null | paths["/api/v1/auth/verify-code-token"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type VerifyCodeTokenApiV1AuthVerifyCodeTokenPostBody = paths["/api/v1/auth/verify-code-token"]["post"]["requestBody"]["content"]["application/json"];

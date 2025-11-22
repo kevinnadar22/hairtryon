@@ -23,7 +23,7 @@ import homelogo from '@/assets/homeiso.png';
 import contact from '@/assets/contactiso.png';
 import historyiso from '@/assets/historyiso.png';
 import tryonIcon from '@/assets/3dsiscors.png';
-import aboutusiso from '@/assets/aboutiso.png'
+import pricingIcon from '@/assets/pricingiso.png';
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/app/store';
@@ -41,18 +41,20 @@ const links = [
         icon: tryonIcon,
         type: 'image' as const,
     },
+    // pricing
+    {
+        href: '/pricing',
+        label: 'Pricing',
+        icon: pricingIcon,
+        type: 'image' as const,
+    },
     {
         href: '/history',
         label: 'History',
         icon: historyiso,
         type: 'image' as const,
     },
-    {
-        href: '/about',
-        label: 'About Us',
-        icon: aboutusiso,
-        type: 'image' as const,
-    },
+
     {
         href: '/contact',
         label: 'Contact',
@@ -66,7 +68,7 @@ const Navbar = () => {
     const auth = useSelector((state: RootState) => state.auth);
 
     return (
-        <nav className="bg-card border-b-1 border-primary/40 shadow-sm py-1">
+        <nav className="bg-card border-b border-primary/40 shadow-sm py-1">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
@@ -111,7 +113,12 @@ const Navbar = () => {
                                         {auth.user?.name?.split(' ').map((n: string) => n[0]).slice(0, 2).join('') || 'U'}
                                     </AvatarFallback>
                                 </Avatar>
-                                <span className="hidden lg:inline-block text-sm font-medium">{auth.user?.name}</span>
+                                <div className="hidden lg:flex flex-col">
+                                    <span className="text-sm font-medium leading-none">{auth.user?.name}</span>
+                                    <span className="text-[10px] font-semibold text-primary whitespace-nowrap mt-1">
+                                        {auth.user?.credits ?? 0} Credits
+                                    </span>
+                                </div>
                             </Link>
                         ) : (
                             <Link to="/login" className="ml-4">
@@ -180,7 +187,7 @@ const Navbar = () => {
                                         </Avatar>
                                         <div className="flex flex-col">
                                             <span className="text-base font-medium">{auth.user?.name}</span>
-                                            <span className="text-sm text-muted-foreground">View profile</span>
+                                            <span className="text-sm text-muted-foreground">{auth.user?.credits ?? 0} Credits</span>
                                         </div>
                                     </Link>
                                 ) : (

@@ -1,15 +1,16 @@
 interface User {
-    name: string;
-    profilePictureUrl?: string | null;
-    email: string;
+  name: string;
+  profilePictureUrl?: string | null;
+  email: string;
+  credits: number;
 }
 
 export interface AuthState {
-    isAuthenticated: boolean;
-    user: User | null;
+  isAuthenticated: boolean;
+  user: User | null;
 
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    error: string | null;
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | null;
 }
 
 export type { User };

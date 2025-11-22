@@ -28,7 +28,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<ReadCurrentUserApiV1UserMeGetParameters, TMeta, TSignal>), client?: (schema: ReadCurrentUserApiV1UserMeGetSchema, options: {
+        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<ReadCurrentUserApiV1UserMeGetParameters, TMeta, TSignal> | void), client?: (schema: ReadCurrentUserApiV1UserMeGetSchema, options: {
             parameters: ReadCurrentUserApiV1UserMeGetParameters;
             signal?: TSignal;
             meta?: TMeta;
@@ -43,7 +43,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        getQueryKey(parameters: DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>): ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>;
+        getQueryKey(parameters: DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | void): ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>;
         /**
          * Performs asynchronous data fetching, manages loading states and error handling.
          *
@@ -56,6 +56,10 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.userService.readCurrentUserApiV1UserMeGet.useQuery()
+         * ```
          * @example Query with parameters
          * ```ts
          * const { data, isLoading } = qraft.userService.readCurrentUserApiV1UserMeGet.useQuery({
@@ -65,7 +69,7 @@ export interface UserService {
          * })
          * ```
          */
-        useQuery<TData = ReadCurrentUserApiV1UserMeGetData>(parameters: ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>), options?: Omit<UndefinedInitialDataOptions<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetError, TData, ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>>, "queryKey">): UseQueryResult<TData, OperationError<ReadCurrentUserApiV1UserMeGetError>>;
+        useQuery<TData = ReadCurrentUserApiV1UserMeGetData>(parameters: ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | void), options?: Omit<UndefinedInitialDataOptions<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetError, TData, ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>>, "queryKey">): UseQueryResult<TData, OperationError<ReadCurrentUserApiV1UserMeGetError>>;
         /**
          * Performs asynchronous data fetching, manages loading states and error handling.
          *
@@ -78,6 +82,10 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.userService.readCurrentUserApiV1UserMeGet.useQuery()
+         * ```
          * @example Query with parameters
          * ```ts
          * const { data, isLoading } = qraft.userService.readCurrentUserApiV1UserMeGet.useQuery({
@@ -87,7 +95,7 @@ export interface UserService {
          * })
          * ```
          */
-        useQuery<TData = ReadCurrentUserApiV1UserMeGetData>(parameters: ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>), options: Omit<DefinedInitialDataOptions<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetError, TData, ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>>, "queryKey">): DefinedUseQueryResult<TData, OperationError<ReadCurrentUserApiV1UserMeGetError>>;
+        useQuery<TData = ReadCurrentUserApiV1UserMeGetData>(parameters: ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | void), options: Omit<DefinedInitialDataOptions<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetError, TData, ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>>, "queryKey">): DefinedUseQueryResult<TData, OperationError<ReadCurrentUserApiV1UserMeGetError>>;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -98,7 +106,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        getInfiniteQueryKey(parameters: DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>): ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>;
+        getInfiniteQueryKey(parameters: DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | void): ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>;
         /**
          * Performs asynchronous data fetching with support for infinite scrolling scenarios.
          * Manages paginated data and provides utilities for fetching additional pages.
@@ -128,7 +136,7 @@ export interface UserService {
          * fetchNextPage(); // Fetch the next page
          * ```
          */
-        useInfiniteQuery<TPageParam extends ReadCurrentUserApiV1UserMeGetParameters, TQueryFnData = ReadCurrentUserApiV1UserMeGetData, TData = OperationInfiniteData<TQueryFnData, ReadCurrentUserApiV1UserMeGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>), options: Omit<UndefinedInitialDataInfiniteOptions<TQueryFnData, ReadCurrentUserApiV1UserMeGetError, TData, ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<TQueryFnData, PartialParameters<DeepReadonly<TPageParam>>>): UseInfiniteQueryResult<TData, OperationError<ReadCurrentUserApiV1UserMeGetError>>;
+        useInfiniteQuery<TPageParam extends ReadCurrentUserApiV1UserMeGetParameters, TQueryFnData = ReadCurrentUserApiV1UserMeGetData, TData = OperationInfiniteData<TQueryFnData, ReadCurrentUserApiV1UserMeGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | void), options: Omit<UndefinedInitialDataInfiniteOptions<TQueryFnData, ReadCurrentUserApiV1UserMeGetError, TData, ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<TQueryFnData, PartialParameters<DeepReadonly<TPageParam>>>): UseInfiniteQueryResult<TData, OperationError<ReadCurrentUserApiV1UserMeGetError>>;
         /**
          * Performs asynchronous data fetching with support for infinite scrolling scenarios.
          * Manages paginated data and provides utilities for fetching additional pages.
@@ -158,7 +166,7 @@ export interface UserService {
          * fetchNextPage(); // Fetch the next page
          * ```
          */
-        useInfiniteQuery<TPageParam extends ReadCurrentUserApiV1UserMeGetParameters, TQueryFnData = ReadCurrentUserApiV1UserMeGetData, TData = OperationInfiniteData<TQueryFnData, ReadCurrentUserApiV1UserMeGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>), options: Omit<DefinedInitialDataInfiniteOptions<TQueryFnData, ReadCurrentUserApiV1UserMeGetError, TData, ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ReadCurrentUserApiV1UserMeGetData, PartialParameters<DeepReadonly<TPageParam>>>): DefinedUseInfiniteQueryResult<TData, OperationError<ReadCurrentUserApiV1UserMeGetError>>;
+        useInfiniteQuery<TPageParam extends ReadCurrentUserApiV1UserMeGetParameters, TQueryFnData = ReadCurrentUserApiV1UserMeGetData, TData = OperationInfiniteData<TQueryFnData, ReadCurrentUserApiV1UserMeGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | void), options: Omit<DefinedInitialDataInfiniteOptions<TQueryFnData, ReadCurrentUserApiV1UserMeGetError, TData, ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ReadCurrentUserApiV1UserMeGetData, PartialParameters<DeepReadonly<TPageParam>>>): DefinedUseInfiniteQueryResult<TData, OperationError<ReadCurrentUserApiV1UserMeGetError>>;
         /**
          * Monitors the number of queries currently fetching, matching the provided filters.
          * Useful for creating loading indicators or performing actions based on active requests.
@@ -257,6 +265,10 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseQuery|`useSuspenseQuery(...)` documentation}
+         * @example Suspense Query without parameters
+         * ```ts
+         * const data = qraft.userService.readCurrentUserApiV1UserMeGet.useSuspenseQuery()
+         * ```
          * @example Suspense Query with parameters
          * ```ts
          * const data = qraft.userService.readCurrentUserApiV1UserMeGet.useSuspenseQuery({
@@ -266,7 +278,7 @@ export interface UserService {
          * })
          * ```
          */
-        useSuspenseQuery<TData = ReadCurrentUserApiV1UserMeGetData>(parameters: ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>), options?: Omit<UseSuspenseQueryOptions<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetError, TData, ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>>, "queryKey">): UseSuspenseQueryResult<TData, OperationError<ReadCurrentUserApiV1UserMeGetError>>;
+        useSuspenseQuery<TData = ReadCurrentUserApiV1UserMeGetData>(parameters: ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | void), options?: Omit<UseSuspenseQueryOptions<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetError, TData, ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>>, "queryKey">): UseSuspenseQueryResult<TData, OperationError<ReadCurrentUserApiV1UserMeGetError>>;
         /**
          * Performs asynchronous data fetching with support for infinite scrolling scenarios.
          * Manages paginated data and provides utilities for fetching additional pages.
@@ -297,7 +309,7 @@ export interface UserService {
          * fetchNextPage(); // Fetch the next page
          * ```
          */
-        useSuspenseInfiniteQuery<TPageParam extends ReadCurrentUserApiV1UserMeGetParameters, TData = ReadCurrentUserApiV1UserMeGetData>(parameters: ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>), options: Omit<UseSuspenseInfiniteQueryOptions<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetError, OperationInfiniteData<TData, ReadCurrentUserApiV1UserMeGetParameters>, ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ReadCurrentUserApiV1UserMeGetData, PartialParameters<DeepReadonly<TPageParam>>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, ReadCurrentUserApiV1UserMeGetParameters>, OperationError<ReadCurrentUserApiV1UserMeGetError>>;
+        useSuspenseInfiniteQuery<TPageParam extends ReadCurrentUserApiV1UserMeGetParameters, TData = ReadCurrentUserApiV1UserMeGetData>(parameters: ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | void), options: Omit<UseSuspenseInfiniteQueryOptions<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetError, OperationInfiniteData<TData, ReadCurrentUserApiV1UserMeGetParameters>, ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ReadCurrentUserApiV1UserMeGetData, PartialParameters<DeepReadonly<TPageParam>>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, ReadCurrentUserApiV1UserMeGetParameters>, OperationError<ReadCurrentUserApiV1UserMeGetError>>;
         /**
          * Allows you to execute multiple asynchronous data fetching operations concurrently with Suspense support.
          * Similar to useQueries but integrates with React Suspense for loading states.
@@ -363,7 +375,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        fetchQuery(options: ServiceOperationFetchQueryOptions<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters, ReadCurrentUserApiV1UserMeGetError>): Promise<ReadCurrentUserApiV1UserMeGetData>;
+        fetchQuery(options: ServiceOperationFetchQueryOptions<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters, ReadCurrentUserApiV1UserMeGetError> | void): Promise<ReadCurrentUserApiV1UserMeGetData>;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -374,7 +386,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        prefetchQuery(options: ServiceOperationFetchQueryOptions<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters, ReadCurrentUserApiV1UserMeGetError>): Promise<void>;
+        prefetchQuery(options: ServiceOperationFetchQueryOptions<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters, ReadCurrentUserApiV1UserMeGetError> | void): Promise<void>;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -385,7 +397,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters, ReadCurrentUserApiV1UserMeGetError>): Promise<ReadCurrentUserApiV1UserMeGetData>;
+        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters, ReadCurrentUserApiV1UserMeGetError> | void): Promise<ReadCurrentUserApiV1UserMeGetData>;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -396,7 +408,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        fetchInfiniteQuery<TPageParam extends ReadCurrentUserApiV1UserMeGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters, DeepReadonly<TPageParam>, ReadCurrentUserApiV1UserMeGetError>): Promise<OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters>>;
+        fetchInfiniteQuery<TPageParam extends ReadCurrentUserApiV1UserMeGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters, DeepReadonly<TPageParam>, ReadCurrentUserApiV1UserMeGetError> | void): Promise<OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters>>;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -407,7 +419,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        prefetchInfiniteQuery<TPageParam extends ReadCurrentUserApiV1UserMeGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters, DeepReadonly<TPageParam>, ReadCurrentUserApiV1UserMeGetError>): Promise<void>;
+        prefetchInfiniteQuery<TPageParam extends ReadCurrentUserApiV1UserMeGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters, DeepReadonly<TPageParam>, ReadCurrentUserApiV1UserMeGetError> | void): Promise<void>;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -418,7 +430,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        ensureInfiniteQueryData<TPageParam extends ReadCurrentUserApiV1UserMeGetParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters, DeepReadonly<TPageParam>, ReadCurrentUserApiV1UserMeGetError>): Promise<OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters>>;
+        ensureInfiniteQueryData<TPageParam extends ReadCurrentUserApiV1UserMeGetParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters, DeepReadonly<TPageParam>, ReadCurrentUserApiV1UserMeGetError> | void): Promise<OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters>>;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -429,7 +441,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        getQueryData(parameters: ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>)): ReadCurrentUserApiV1UserMeGetData | undefined;
+        getQueryData(parameters: ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | void)): ReadCurrentUserApiV1UserMeGetData | undefined;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -440,7 +452,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>)): OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters> | undefined;
+        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | void)): OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters> | undefined;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -468,7 +480,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        getQueryState(parameters: ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>)): QueryState<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetError> | undefined;
+        getQueryState(parameters: ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | void)): QueryState<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetError> | undefined;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -479,7 +491,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        getInfiniteQueryState(parameters: DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>): QueryState<OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters>, ReadCurrentUserApiV1UserMeGetError> | undefined;
+        getInfiniteQueryState(parameters: DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters> | void): QueryState<OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters>, ReadCurrentUserApiV1UserMeGetError> | undefined;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -490,7 +502,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        setQueryData(parameters: (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>) | ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>, updater: Updater<NoInfer<ReadCurrentUserApiV1UserMeGetData> | undefined, NoInfer<DeepReadonly<ReadCurrentUserApiV1UserMeGetData>> | undefined>, options?: SetDataOptions): ReadCurrentUserApiV1UserMeGetData | undefined;
+        setQueryData(parameters: (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | undefined) | ServiceOperationQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>, updater: Updater<NoInfer<ReadCurrentUserApiV1UserMeGetData> | undefined, NoInfer<DeepReadonly<ReadCurrentUserApiV1UserMeGetData>> | undefined>, options?: SetDataOptions): ReadCurrentUserApiV1UserMeGetData | undefined;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -501,7 +513,7 @@ export interface UserService {
          * Returns:
          *     UserBase: Current user information.
          */
-        setInfiniteQueryData(parameters: (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters>) | ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>, updater: Updater<NoInfer<OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters>> | undefined, NoInfer<DeepReadonly<OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters>>> | undefined>, options?: SetDataOptions): OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters> | undefined;
+        setInfiniteQueryData(parameters: (DeepReadonly<ReadCurrentUserApiV1UserMeGetParameters> | undefined) | ServiceOperationInfiniteQueryKey<ReadCurrentUserApiV1UserMeGetSchema, ReadCurrentUserApiV1UserMeGetParameters>, updater: Updater<NoInfer<OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters>> | undefined, NoInfer<DeepReadonly<OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters>>> | undefined>, options?: SetDataOptions): OperationInfiniteData<ReadCurrentUserApiV1UserMeGetData, ReadCurrentUserApiV1UserMeGetParameters> | undefined;
         /**
          * @summary Read Current User
          * @description Retrieve authenticated user profile.
@@ -609,7 +621,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<GetUserImagesApiV1UserImagesGetParameters, TMeta, TSignal>), client?: (schema: GetUserImagesApiV1UserImagesGetSchema, options: {
+        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<GetUserImagesApiV1UserImagesGetParameters, TMeta, TSignal> | void), client?: (schema: GetUserImagesApiV1UserImagesGetSchema, options: {
             parameters: GetUserImagesApiV1UserImagesGetParameters;
             signal?: TSignal;
             meta?: TMeta;
@@ -625,7 +637,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        getQueryKey(parameters: DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>): ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>;
+        getQueryKey(parameters: DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | void): ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>;
         /**
          * Performs asynchronous data fetching, manages loading states and error handling.
          *
@@ -639,6 +651,10 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.userService.getUserImagesApiV1UserImagesGet.useQuery()
+         * ```
          * @example Query with parameters
          * ```ts
          * const { data, isLoading } = qraft.userService.getUserImagesApiV1UserImagesGet.useQuery({
@@ -651,7 +667,7 @@ export interface UserService {
          * })
          * ```
          */
-        useQuery<TData = GetUserImagesApiV1UserImagesGetData>(parameters: ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>), options?: Omit<UndefinedInitialDataOptions<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetError, TData, ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>>, "queryKey">): UseQueryResult<TData, OperationError<GetUserImagesApiV1UserImagesGetError>>;
+        useQuery<TData = GetUserImagesApiV1UserImagesGetData>(parameters: ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | void), options?: Omit<UndefinedInitialDataOptions<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetError, TData, ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>>, "queryKey">): UseQueryResult<TData, OperationError<GetUserImagesApiV1UserImagesGetError>>;
         /**
          * Performs asynchronous data fetching, manages loading states and error handling.
          *
@@ -665,6 +681,10 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.userService.getUserImagesApiV1UserImagesGet.useQuery()
+         * ```
          * @example Query with parameters
          * ```ts
          * const { data, isLoading } = qraft.userService.getUserImagesApiV1UserImagesGet.useQuery({
@@ -677,7 +697,7 @@ export interface UserService {
          * })
          * ```
          */
-        useQuery<TData = GetUserImagesApiV1UserImagesGetData>(parameters: ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>), options: Omit<DefinedInitialDataOptions<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetError, TData, ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>>, "queryKey">): DefinedUseQueryResult<TData, OperationError<GetUserImagesApiV1UserImagesGetError>>;
+        useQuery<TData = GetUserImagesApiV1UserImagesGetData>(parameters: ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | void), options: Omit<DefinedInitialDataOptions<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetError, TData, ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>>, "queryKey">): DefinedUseQueryResult<TData, OperationError<GetUserImagesApiV1UserImagesGetError>>;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -689,7 +709,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        getInfiniteQueryKey(parameters: DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>): ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>;
+        getInfiniteQueryKey(parameters: DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | void): ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>;
         /**
          * Performs asynchronous data fetching with support for infinite scrolling scenarios.
          * Manages paginated data and provides utilities for fetching additional pages.
@@ -724,7 +744,7 @@ export interface UserService {
          * fetchNextPage(); // Fetch the next page
          * ```
          */
-        useInfiniteQuery<TPageParam extends GetUserImagesApiV1UserImagesGetParameters, TQueryFnData = GetUserImagesApiV1UserImagesGetData, TData = OperationInfiniteData<TQueryFnData, GetUserImagesApiV1UserImagesGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>), options: Omit<UndefinedInitialDataInfiniteOptions<TQueryFnData, GetUserImagesApiV1UserImagesGetError, TData, ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<TQueryFnData, PartialParameters<DeepReadonly<TPageParam>>>): UseInfiniteQueryResult<TData, OperationError<GetUserImagesApiV1UserImagesGetError>>;
+        useInfiniteQuery<TPageParam extends GetUserImagesApiV1UserImagesGetParameters, TQueryFnData = GetUserImagesApiV1UserImagesGetData, TData = OperationInfiniteData<TQueryFnData, GetUserImagesApiV1UserImagesGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | void), options: Omit<UndefinedInitialDataInfiniteOptions<TQueryFnData, GetUserImagesApiV1UserImagesGetError, TData, ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<TQueryFnData, PartialParameters<DeepReadonly<TPageParam>>>): UseInfiniteQueryResult<TData, OperationError<GetUserImagesApiV1UserImagesGetError>>;
         /**
          * Performs asynchronous data fetching with support for infinite scrolling scenarios.
          * Manages paginated data and provides utilities for fetching additional pages.
@@ -759,7 +779,7 @@ export interface UserService {
          * fetchNextPage(); // Fetch the next page
          * ```
          */
-        useInfiniteQuery<TPageParam extends GetUserImagesApiV1UserImagesGetParameters, TQueryFnData = GetUserImagesApiV1UserImagesGetData, TData = OperationInfiniteData<TQueryFnData, GetUserImagesApiV1UserImagesGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>), options: Omit<DefinedInitialDataInfiniteOptions<TQueryFnData, GetUserImagesApiV1UserImagesGetError, TData, ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<GetUserImagesApiV1UserImagesGetData, PartialParameters<DeepReadonly<TPageParam>>>): DefinedUseInfiniteQueryResult<TData, OperationError<GetUserImagesApiV1UserImagesGetError>>;
+        useInfiniteQuery<TPageParam extends GetUserImagesApiV1UserImagesGetParameters, TQueryFnData = GetUserImagesApiV1UserImagesGetData, TData = OperationInfiniteData<TQueryFnData, GetUserImagesApiV1UserImagesGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | void), options: Omit<DefinedInitialDataInfiniteOptions<TQueryFnData, GetUserImagesApiV1UserImagesGetError, TData, ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<GetUserImagesApiV1UserImagesGetData, PartialParameters<DeepReadonly<TPageParam>>>): DefinedUseInfiniteQueryResult<TData, OperationError<GetUserImagesApiV1UserImagesGetError>>;
         /**
          * Monitors the number of queries currently fetching, matching the provided filters.
          * Useful for creating loading indicators or performing actions based on active requests.
@@ -876,6 +896,10 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseQuery|`useSuspenseQuery(...)` documentation}
+         * @example Suspense Query without parameters
+         * ```ts
+         * const data = qraft.userService.getUserImagesApiV1UserImagesGet.useSuspenseQuery()
+         * ```
          * @example Suspense Query with parameters
          * ```ts
          * const data = qraft.userService.getUserImagesApiV1UserImagesGet.useSuspenseQuery({
@@ -888,7 +912,7 @@ export interface UserService {
          * })
          * ```
          */
-        useSuspenseQuery<TData = GetUserImagesApiV1UserImagesGetData>(parameters: ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>), options?: Omit<UseSuspenseQueryOptions<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetError, TData, ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>>, "queryKey">): UseSuspenseQueryResult<TData, OperationError<GetUserImagesApiV1UserImagesGetError>>;
+        useSuspenseQuery<TData = GetUserImagesApiV1UserImagesGetData>(parameters: ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | void), options?: Omit<UseSuspenseQueryOptions<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetError, TData, ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>>, "queryKey">): UseSuspenseQueryResult<TData, OperationError<GetUserImagesApiV1UserImagesGetError>>;
         /**
          * Performs asynchronous data fetching with support for infinite scrolling scenarios.
          * Manages paginated data and provides utilities for fetching additional pages.
@@ -924,7 +948,7 @@ export interface UserService {
          * fetchNextPage(); // Fetch the next page
          * ```
          */
-        useSuspenseInfiniteQuery<TPageParam extends GetUserImagesApiV1UserImagesGetParameters, TData = GetUserImagesApiV1UserImagesGetData>(parameters: ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>), options: Omit<UseSuspenseInfiniteQueryOptions<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetError, OperationInfiniteData<TData, GetUserImagesApiV1UserImagesGetParameters>, ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<GetUserImagesApiV1UserImagesGetData, PartialParameters<DeepReadonly<TPageParam>>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, GetUserImagesApiV1UserImagesGetParameters>, OperationError<GetUserImagesApiV1UserImagesGetError>>;
+        useSuspenseInfiniteQuery<TPageParam extends GetUserImagesApiV1UserImagesGetParameters, TData = GetUserImagesApiV1UserImagesGetData>(parameters: ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | void), options: Omit<UseSuspenseInfiniteQueryOptions<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetError, OperationInfiniteData<TData, GetUserImagesApiV1UserImagesGetParameters>, ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<GetUserImagesApiV1UserImagesGetData, PartialParameters<DeepReadonly<TPageParam>>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, GetUserImagesApiV1UserImagesGetParameters>, OperationError<GetUserImagesApiV1UserImagesGetError>>;
         /**
          * Allows you to execute multiple asynchronous data fetching operations concurrently with Suspense support.
          * Similar to useQueries but integrates with React Suspense for loading states.
@@ -1004,7 +1028,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        fetchQuery(options: ServiceOperationFetchQueryOptions<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters, GetUserImagesApiV1UserImagesGetError>): Promise<GetUserImagesApiV1UserImagesGetData>;
+        fetchQuery(options: ServiceOperationFetchQueryOptions<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters, GetUserImagesApiV1UserImagesGetError> | void): Promise<GetUserImagesApiV1UserImagesGetData>;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -1016,7 +1040,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        prefetchQuery(options: ServiceOperationFetchQueryOptions<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters, GetUserImagesApiV1UserImagesGetError>): Promise<void>;
+        prefetchQuery(options: ServiceOperationFetchQueryOptions<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters, GetUserImagesApiV1UserImagesGetError> | void): Promise<void>;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -1028,7 +1052,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters, GetUserImagesApiV1UserImagesGetError>): Promise<GetUserImagesApiV1UserImagesGetData>;
+        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters, GetUserImagesApiV1UserImagesGetError> | void): Promise<GetUserImagesApiV1UserImagesGetData>;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -1040,7 +1064,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        fetchInfiniteQuery<TPageParam extends GetUserImagesApiV1UserImagesGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters, DeepReadonly<TPageParam>, GetUserImagesApiV1UserImagesGetError>): Promise<OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters>>;
+        fetchInfiniteQuery<TPageParam extends GetUserImagesApiV1UserImagesGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters, DeepReadonly<TPageParam>, GetUserImagesApiV1UserImagesGetError> | void): Promise<OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters>>;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -1052,7 +1076,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        prefetchInfiniteQuery<TPageParam extends GetUserImagesApiV1UserImagesGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters, DeepReadonly<TPageParam>, GetUserImagesApiV1UserImagesGetError>): Promise<void>;
+        prefetchInfiniteQuery<TPageParam extends GetUserImagesApiV1UserImagesGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters, DeepReadonly<TPageParam>, GetUserImagesApiV1UserImagesGetError> | void): Promise<void>;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -1064,7 +1088,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        ensureInfiniteQueryData<TPageParam extends GetUserImagesApiV1UserImagesGetParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters, DeepReadonly<TPageParam>, GetUserImagesApiV1UserImagesGetError>): Promise<OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters>>;
+        ensureInfiniteQueryData<TPageParam extends GetUserImagesApiV1UserImagesGetParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters, DeepReadonly<TPageParam>, GetUserImagesApiV1UserImagesGetError> | void): Promise<OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters>>;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -1076,7 +1100,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        getQueryData(parameters: ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>)): GetUserImagesApiV1UserImagesGetData | undefined;
+        getQueryData(parameters: ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | void)): GetUserImagesApiV1UserImagesGetData | undefined;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -1088,7 +1112,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>)): OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters> | undefined;
+        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | void)): OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters> | undefined;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -1118,7 +1142,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        getQueryState(parameters: ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>)): QueryState<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetError> | undefined;
+        getQueryState(parameters: ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | void)): QueryState<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetError> | undefined;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -1130,7 +1154,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        getInfiniteQueryState(parameters: DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>): QueryState<OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters>, GetUserImagesApiV1UserImagesGetError> | undefined;
+        getInfiniteQueryState(parameters: DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters> | void): QueryState<OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters>, GetUserImagesApiV1UserImagesGetError> | undefined;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -1142,7 +1166,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        setQueryData(parameters: (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>) | ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>, updater: Updater<NoInfer<GetUserImagesApiV1UserImagesGetData> | undefined, NoInfer<DeepReadonly<GetUserImagesApiV1UserImagesGetData>> | undefined>, options?: SetDataOptions): GetUserImagesApiV1UserImagesGetData | undefined;
+        setQueryData(parameters: (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | undefined) | ServiceOperationQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>, updater: Updater<NoInfer<GetUserImagesApiV1UserImagesGetData> | undefined, NoInfer<DeepReadonly<GetUserImagesApiV1UserImagesGetData>> | undefined>, options?: SetDataOptions): GetUserImagesApiV1UserImagesGetData | undefined;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -1154,7 +1178,7 @@ export interface UserService {
          *     current_user (User): Authenticated user via dependency.
          *     db: Database session.
          */
-        setInfiniteQueryData(parameters: (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters>) | ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>, updater: Updater<NoInfer<OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters>> | undefined, NoInfer<DeepReadonly<OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters>>> | undefined>, options?: SetDataOptions): OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters> | undefined;
+        setInfiniteQueryData(parameters: (DeepReadonly<GetUserImagesApiV1UserImagesGetParameters> | undefined) | ServiceOperationInfiniteQueryKey<GetUserImagesApiV1UserImagesGetSchema, GetUserImagesApiV1UserImagesGetParameters>, updater: Updater<NoInfer<OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters>> | undefined, NoInfer<DeepReadonly<OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters>>> | undefined>, options?: SetDataOptions): OperationInfiniteData<GetUserImagesApiV1UserImagesGetData, GetUserImagesApiV1UserImagesGetParameters> | undefined;
         /**
          * @summary Get User Images
          * @description Retrieve user's generated images.
@@ -1269,7 +1293,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<GetUserUploadsApiV1UserUploadsGetParameters, TMeta, TSignal>), client?: (schema: GetUserUploadsApiV1UserUploadsGetSchema, options: {
+        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<GetUserUploadsApiV1UserUploadsGetParameters, TMeta, TSignal> | void), client?: (schema: GetUserUploadsApiV1UserUploadsGetSchema, options: {
             parameters: GetUserUploadsApiV1UserUploadsGetParameters;
             signal?: TSignal;
             meta?: TMeta;
@@ -1285,7 +1309,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        getQueryKey(parameters: DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>): ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>;
+        getQueryKey(parameters: DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | void): ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>;
         /**
          * Performs asynchronous data fetching, manages loading states and error handling.
          *
@@ -1299,6 +1323,10 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.userService.getUserUploadsApiV1UserUploadsGet.useQuery()
+         * ```
          * @example Query with parameters
          * ```ts
          * const { data, isLoading } = qraft.userService.getUserUploadsApiV1UserUploadsGet.useQuery({
@@ -1308,7 +1336,7 @@ export interface UserService {
          * })
          * ```
          */
-        useQuery<TData = GetUserUploadsApiV1UserUploadsGetData>(parameters: ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>), options?: Omit<UndefinedInitialDataOptions<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetError, TData, ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>>, "queryKey">): UseQueryResult<TData, OperationError<GetUserUploadsApiV1UserUploadsGetError>>;
+        useQuery<TData = GetUserUploadsApiV1UserUploadsGetData>(parameters: ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | void), options?: Omit<UndefinedInitialDataOptions<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetError, TData, ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>>, "queryKey">): UseQueryResult<TData, OperationError<GetUserUploadsApiV1UserUploadsGetError>>;
         /**
          * Performs asynchronous data fetching, manages loading states and error handling.
          *
@@ -1322,6 +1350,10 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.userService.getUserUploadsApiV1UserUploadsGet.useQuery()
+         * ```
          * @example Query with parameters
          * ```ts
          * const { data, isLoading } = qraft.userService.getUserUploadsApiV1UserUploadsGet.useQuery({
@@ -1331,7 +1363,7 @@ export interface UserService {
          * })
          * ```
          */
-        useQuery<TData = GetUserUploadsApiV1UserUploadsGetData>(parameters: ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>), options: Omit<DefinedInitialDataOptions<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetError, TData, ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>>, "queryKey">): DefinedUseQueryResult<TData, OperationError<GetUserUploadsApiV1UserUploadsGetError>>;
+        useQuery<TData = GetUserUploadsApiV1UserUploadsGetData>(parameters: ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | void), options: Omit<DefinedInitialDataOptions<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetError, TData, ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>>, "queryKey">): DefinedUseQueryResult<TData, OperationError<GetUserUploadsApiV1UserUploadsGetError>>;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1343,7 +1375,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        getInfiniteQueryKey(parameters: DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>): ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>;
+        getInfiniteQueryKey(parameters: DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | void): ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>;
         /**
          * Performs asynchronous data fetching with support for infinite scrolling scenarios.
          * Manages paginated data and provides utilities for fetching additional pages.
@@ -1374,7 +1406,7 @@ export interface UserService {
          * fetchNextPage(); // Fetch the next page
          * ```
          */
-        useInfiniteQuery<TPageParam extends GetUserUploadsApiV1UserUploadsGetParameters, TQueryFnData = GetUserUploadsApiV1UserUploadsGetData, TData = OperationInfiniteData<TQueryFnData, GetUserUploadsApiV1UserUploadsGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>), options: Omit<UndefinedInitialDataInfiniteOptions<TQueryFnData, GetUserUploadsApiV1UserUploadsGetError, TData, ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<TQueryFnData, PartialParameters<DeepReadonly<TPageParam>>>): UseInfiniteQueryResult<TData, OperationError<GetUserUploadsApiV1UserUploadsGetError>>;
+        useInfiniteQuery<TPageParam extends GetUserUploadsApiV1UserUploadsGetParameters, TQueryFnData = GetUserUploadsApiV1UserUploadsGetData, TData = OperationInfiniteData<TQueryFnData, GetUserUploadsApiV1UserUploadsGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | void), options: Omit<UndefinedInitialDataInfiniteOptions<TQueryFnData, GetUserUploadsApiV1UserUploadsGetError, TData, ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<TQueryFnData, PartialParameters<DeepReadonly<TPageParam>>>): UseInfiniteQueryResult<TData, OperationError<GetUserUploadsApiV1UserUploadsGetError>>;
         /**
          * Performs asynchronous data fetching with support for infinite scrolling scenarios.
          * Manages paginated data and provides utilities for fetching additional pages.
@@ -1405,7 +1437,7 @@ export interface UserService {
          * fetchNextPage(); // Fetch the next page
          * ```
          */
-        useInfiniteQuery<TPageParam extends GetUserUploadsApiV1UserUploadsGetParameters, TQueryFnData = GetUserUploadsApiV1UserUploadsGetData, TData = OperationInfiniteData<TQueryFnData, GetUserUploadsApiV1UserUploadsGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>), options: Omit<DefinedInitialDataInfiniteOptions<TQueryFnData, GetUserUploadsApiV1UserUploadsGetError, TData, ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<GetUserUploadsApiV1UserUploadsGetData, PartialParameters<DeepReadonly<TPageParam>>>): DefinedUseInfiniteQueryResult<TData, OperationError<GetUserUploadsApiV1UserUploadsGetError>>;
+        useInfiniteQuery<TPageParam extends GetUserUploadsApiV1UserUploadsGetParameters, TQueryFnData = GetUserUploadsApiV1UserUploadsGetData, TData = OperationInfiniteData<TQueryFnData, GetUserUploadsApiV1UserUploadsGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | void), options: Omit<DefinedInitialDataInfiniteOptions<TQueryFnData, GetUserUploadsApiV1UserUploadsGetError, TData, ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<GetUserUploadsApiV1UserUploadsGetData, PartialParameters<DeepReadonly<TPageParam>>>): DefinedUseInfiniteQueryResult<TData, OperationError<GetUserUploadsApiV1UserUploadsGetError>>;
         /**
          * Monitors the number of queries currently fetching, matching the provided filters.
          * Useful for creating loading indicators or performing actions based on active requests.
@@ -1507,6 +1539,10 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseQuery|`useSuspenseQuery(...)` documentation}
+         * @example Suspense Query without parameters
+         * ```ts
+         * const data = qraft.userService.getUserUploadsApiV1UserUploadsGet.useSuspenseQuery()
+         * ```
          * @example Suspense Query with parameters
          * ```ts
          * const data = qraft.userService.getUserUploadsApiV1UserUploadsGet.useSuspenseQuery({
@@ -1516,7 +1552,7 @@ export interface UserService {
          * })
          * ```
          */
-        useSuspenseQuery<TData = GetUserUploadsApiV1UserUploadsGetData>(parameters: ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>), options?: Omit<UseSuspenseQueryOptions<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetError, TData, ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>>, "queryKey">): UseSuspenseQueryResult<TData, OperationError<GetUserUploadsApiV1UserUploadsGetError>>;
+        useSuspenseQuery<TData = GetUserUploadsApiV1UserUploadsGetData>(parameters: ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | void), options?: Omit<UseSuspenseQueryOptions<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetError, TData, ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>>, "queryKey">): UseSuspenseQueryResult<TData, OperationError<GetUserUploadsApiV1UserUploadsGetError>>;
         /**
          * Performs asynchronous data fetching with support for infinite scrolling scenarios.
          * Manages paginated data and provides utilities for fetching additional pages.
@@ -1548,7 +1584,7 @@ export interface UserService {
          * fetchNextPage(); // Fetch the next page
          * ```
          */
-        useSuspenseInfiniteQuery<TPageParam extends GetUserUploadsApiV1UserUploadsGetParameters, TData = GetUserUploadsApiV1UserUploadsGetData>(parameters: ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>), options: Omit<UseSuspenseInfiniteQueryOptions<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetError, OperationInfiniteData<TData, GetUserUploadsApiV1UserUploadsGetParameters>, ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<GetUserUploadsApiV1UserUploadsGetData, PartialParameters<DeepReadonly<TPageParam>>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, GetUserUploadsApiV1UserUploadsGetParameters>, OperationError<GetUserUploadsApiV1UserUploadsGetError>>;
+        useSuspenseInfiniteQuery<TPageParam extends GetUserUploadsApiV1UserUploadsGetParameters, TData = GetUserUploadsApiV1UserUploadsGetData>(parameters: ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | void), options: Omit<UseSuspenseInfiniteQueryOptions<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetError, OperationInfiniteData<TData, GetUserUploadsApiV1UserUploadsGetParameters>, ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<GetUserUploadsApiV1UserUploadsGetData, PartialParameters<DeepReadonly<TPageParam>>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, GetUserUploadsApiV1UserUploadsGetParameters>, OperationError<GetUserUploadsApiV1UserUploadsGetError>>;
         /**
          * Allows you to execute multiple asynchronous data fetching operations concurrently with Suspense support.
          * Similar to useQueries but integrates with React Suspense for loading states.
@@ -1616,7 +1652,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        fetchQuery(options: ServiceOperationFetchQueryOptions<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters, GetUserUploadsApiV1UserUploadsGetError>): Promise<GetUserUploadsApiV1UserUploadsGetData>;
+        fetchQuery(options: ServiceOperationFetchQueryOptions<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters, GetUserUploadsApiV1UserUploadsGetError> | void): Promise<GetUserUploadsApiV1UserUploadsGetData>;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1628,7 +1664,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        prefetchQuery(options: ServiceOperationFetchQueryOptions<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters, GetUserUploadsApiV1UserUploadsGetError>): Promise<void>;
+        prefetchQuery(options: ServiceOperationFetchQueryOptions<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters, GetUserUploadsApiV1UserUploadsGetError> | void): Promise<void>;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1640,7 +1676,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters, GetUserUploadsApiV1UserUploadsGetError>): Promise<GetUserUploadsApiV1UserUploadsGetData>;
+        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters, GetUserUploadsApiV1UserUploadsGetError> | void): Promise<GetUserUploadsApiV1UserUploadsGetData>;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1652,7 +1688,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        fetchInfiniteQuery<TPageParam extends GetUserUploadsApiV1UserUploadsGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters, DeepReadonly<TPageParam>, GetUserUploadsApiV1UserUploadsGetError>): Promise<OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters>>;
+        fetchInfiniteQuery<TPageParam extends GetUserUploadsApiV1UserUploadsGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters, DeepReadonly<TPageParam>, GetUserUploadsApiV1UserUploadsGetError> | void): Promise<OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters>>;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1664,7 +1700,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        prefetchInfiniteQuery<TPageParam extends GetUserUploadsApiV1UserUploadsGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters, DeepReadonly<TPageParam>, GetUserUploadsApiV1UserUploadsGetError>): Promise<void>;
+        prefetchInfiniteQuery<TPageParam extends GetUserUploadsApiV1UserUploadsGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters, DeepReadonly<TPageParam>, GetUserUploadsApiV1UserUploadsGetError> | void): Promise<void>;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1676,7 +1712,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        ensureInfiniteQueryData<TPageParam extends GetUserUploadsApiV1UserUploadsGetParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters, DeepReadonly<TPageParam>, GetUserUploadsApiV1UserUploadsGetError>): Promise<OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters>>;
+        ensureInfiniteQueryData<TPageParam extends GetUserUploadsApiV1UserUploadsGetParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters, DeepReadonly<TPageParam>, GetUserUploadsApiV1UserUploadsGetError> | void): Promise<OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters>>;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1688,7 +1724,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        getQueryData(parameters: ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>)): GetUserUploadsApiV1UserUploadsGetData | undefined;
+        getQueryData(parameters: ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | void)): GetUserUploadsApiV1UserUploadsGetData | undefined;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1700,7 +1736,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>)): OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters> | undefined;
+        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | void)): OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters> | undefined;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1730,7 +1766,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        getQueryState(parameters: ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>)): QueryState<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetError> | undefined;
+        getQueryState(parameters: ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | void)): QueryState<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetError> | undefined;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1742,7 +1778,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        getInfiniteQueryState(parameters: DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>): QueryState<OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters>, GetUserUploadsApiV1UserUploadsGetError> | undefined;
+        getInfiniteQueryState(parameters: DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters> | void): QueryState<OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters>, GetUserUploadsApiV1UserUploadsGetError> | undefined;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1754,7 +1790,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        setQueryData(parameters: (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>) | ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>, updater: Updater<NoInfer<GetUserUploadsApiV1UserUploadsGetData> | undefined, NoInfer<DeepReadonly<GetUserUploadsApiV1UserUploadsGetData>> | undefined>, options?: SetDataOptions): GetUserUploadsApiV1UserUploadsGetData | undefined;
+        setQueryData(parameters: (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | undefined) | ServiceOperationQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>, updater: Updater<NoInfer<GetUserUploadsApiV1UserUploadsGetData> | undefined, NoInfer<DeepReadonly<GetUserUploadsApiV1UserUploadsGetData>> | undefined>, options?: SetDataOptions): GetUserUploadsApiV1UserUploadsGetData | undefined;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1766,7 +1802,7 @@ export interface UserService {
          * Returns:
          *     List[HttpUrl]: List of URLs of uploaded images.
          */
-        setInfiniteQueryData(parameters: (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters>) | ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>, updater: Updater<NoInfer<OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters>> | undefined, NoInfer<DeepReadonly<OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters>>> | undefined>, options?: SetDataOptions): OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters> | undefined;
+        setInfiniteQueryData(parameters: (DeepReadonly<GetUserUploadsApiV1UserUploadsGetParameters> | undefined) | ServiceOperationInfiniteQueryKey<GetUserUploadsApiV1UserUploadsGetSchema, GetUserUploadsApiV1UserUploadsGetParameters>, updater: Updater<NoInfer<OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters>> | undefined, NoInfer<DeepReadonly<OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters>>> | undefined>, options?: SetDataOptions): OperationInfiniteData<GetUserUploadsApiV1UserUploadsGetData, GetUserUploadsApiV1UserUploadsGetParameters> | undefined;
         /**
          * @summary Get User Uploads
          * @description Retrieve URLs of user's uploaded images.
@@ -1858,6 +1894,597 @@ export interface UserService {
             error: GetUserUploadsApiV1UserUploadsGetError;
         };
     };
+    /**
+     * @summary Get User Credits
+     * @description Retrieve user's credits.
+     *
+     * Args:
+     *     current_user (User): Authenticated user via dependency.
+     *
+     * Returns:
+     *     int: Number of credits.
+     */
+    getUserCreditsApiV1UserCreditsGet: {
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<GetUserCreditsApiV1UserCreditsGetParameters, TMeta, TSignal> | void), client?: (schema: GetUserCreditsApiV1UserCreditsGetSchema, options: {
+            parameters: GetUserCreditsApiV1UserCreditsGetParameters;
+            signal?: TSignal;
+            meta?: TMeta;
+        }) => Promise<RequestFnResponse<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError>>): Promise<RequestFnResponse<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError>>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        getQueryKey(parameters: DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | void): ServiceOperationQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.userService.getUserCreditsApiV1UserCreditsGet.useQuery()
+         * ```
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.userService.getUserCreditsApiV1UserCreditsGet.useQuery({
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = GetUserCreditsApiV1UserCreditsGetData>(parameters: ServiceOperationQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters> | (DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | void), options?: Omit<UndefinedInitialDataOptions<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError, TData, ServiceOperationQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters>>, "queryKey">): UseQueryResult<TData, OperationError<GetUserCreditsApiV1UserCreditsGetError>>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.userService.getUserCreditsApiV1UserCreditsGet.useQuery()
+         * ```
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.userService.getUserCreditsApiV1UserCreditsGet.useQuery({
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = GetUserCreditsApiV1UserCreditsGetData>(parameters: ServiceOperationQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters> | (DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | void), options: Omit<DefinedInitialDataOptions<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError, TData, ServiceOperationQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters>>, "queryKey">): DefinedUseQueryResult<TData, OperationError<GetUserCreditsApiV1UserCreditsGetError>>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        getInfiniteQueryKey(parameters: DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | void): ServiceOperationInfiniteQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.userService.getUserCreditsApiV1UserCreditsGet.useInfiniteQuery({
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends GetUserCreditsApiV1UserCreditsGetParameters, TQueryFnData = GetUserCreditsApiV1UserCreditsGetData, TData = OperationInfiniteData<TQueryFnData, GetUserCreditsApiV1UserCreditsGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters> | (DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | void), options: Omit<UndefinedInitialDataInfiniteOptions<TQueryFnData, GetUserCreditsApiV1UserCreditsGetError, TData, ServiceOperationInfiniteQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<TQueryFnData, PartialParameters<DeepReadonly<TPageParam>>>): UseInfiniteQueryResult<TData, OperationError<GetUserCreditsApiV1UserCreditsGetError>>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.userService.getUserCreditsApiV1UserCreditsGet.useInfiniteQuery({
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends GetUserCreditsApiV1UserCreditsGetParameters, TQueryFnData = GetUserCreditsApiV1UserCreditsGetData, TData = OperationInfiniteData<TQueryFnData, GetUserCreditsApiV1UserCreditsGetParameters>>(parameters: ServiceOperationInfiniteQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters> | (DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | void), options: Omit<DefinedInitialDataInfiniteOptions<TQueryFnData, GetUserCreditsApiV1UserCreditsGetError, TData, ServiceOperationInfiniteQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<GetUserCreditsApiV1UserCreditsGetData, PartialParameters<DeepReadonly<TPageParam>>>): DefinedUseInfiniteQueryResult<TData, OperationError<GetUserCreditsApiV1UserCreditsGetError>>;
+        /**
+         * Monitors the number of queries currently fetching, matching the provided filters.
+         * Useful for creating loading indicators or performing actions based on active requests.
+         *
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+         * @example Checks the total number of queries fetching from the specified service method,
+         * both normal and infinite. If no parameters are provided, no filtering is applied.
+         * ```ts
+         * const getUserCreditsApiV1UserCreditsGetTotal = qraft.userService.getUserCreditsApiV1UserCreditsGet.useIsFetching()
+         * ```
+         * @example Checks the number of normal queries fetching with the specified parameters.
+         * ```ts
+         * const getUserCreditsApiV1UserCreditsGetByParametersTotal = qraft.userService.getUserCreditsApiV1UserCreditsGet.useIsFetching({
+         *     infinite: false,
+         *     parameters: {
+         *         cookie: {
+         *             access_token: accessToken
+         *         }
+         *     }
+         * })
+         * ```
+         */
+        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError> | QueryFiltersByQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError>): number;
+        /**
+         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+         *
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+         * ```ts
+         * const getUserCreditsApiV1UserCreditsGetResults = qraft.userService.getUserCreditsApiV1UserCreditsGet.useQueries({
+         *     queries: [
+         *         {
+         *             cookie: {
+         *                 access_token: accessToken1
+         *             }
+         *         },
+         *         {
+         *             cookie: {
+         *                 access_token: accessToken2
+         *             }
+         *         }
+         *     ]
+         * });
+         * getUserCreditsApiV1UserCreditsGetResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+         * ```
+         * @example Combined results. Only the data will be returned.
+         * ```ts
+         * const getUserCreditsApiV1UserCreditsGetCombinedResults = qraft.userService.getUserCreditsApiV1UserCreditsGet.useQueries({
+         *     combine: results => results.map(result => result.data),
+         *     queries: [
+         *         {
+         *             cookie: {
+         *                 access_token: accessToken1
+         *             }
+         *         },
+         *         {
+         *             cookie: {
+         *                 access_token: accessToken2
+         *             }
+         *         }
+         *     ]
+         * });
+         * getUserCreditsApiV1UserCreditsGetCombinedResults.forEach(data => console.log({ data }));
+         * ```
+         */
+        useQueries<T extends Array<UseQueryOptionsForUseQueries<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError>>, TCombinedResult = Array<UseQueryResult<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError>>>(options: {
+            queries: T;
+            combine?: (results: Array<UseQueryResult<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError>>) => TCombinedResult;
+        }): TCombinedResult;
+        /**
+         * Performs asynchronous data fetching with Suspense support.
+         * Similar to useQuery but integrates with React Suspense for loading states.
+         *
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseQuery|`useSuspenseQuery(...)` documentation}
+         * @example Suspense Query without parameters
+         * ```ts
+         * const data = qraft.userService.getUserCreditsApiV1UserCreditsGet.useSuspenseQuery()
+         * ```
+         * @example Suspense Query with parameters
+         * ```ts
+         * const data = qraft.userService.getUserCreditsApiV1UserCreditsGet.useSuspenseQuery({
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * })
+         * ```
+         */
+        useSuspenseQuery<TData = GetUserCreditsApiV1UserCreditsGetData>(parameters: ServiceOperationQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters> | (DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | void), options?: Omit<UseSuspenseQueryOptions<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError, TData, ServiceOperationQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters>>, "queryKey">): UseSuspenseQueryResult<TData, OperationError<GetUserCreditsApiV1UserCreditsGetError>>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+         *
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+         *
+         * @example Suspense Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.userService.getUserCreditsApiV1UserCreditsGet.useSuspenseInfiniteQuery({
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useSuspenseInfiniteQuery<TPageParam extends GetUserCreditsApiV1UserCreditsGetParameters, TData = GetUserCreditsApiV1UserCreditsGetData>(parameters: ServiceOperationInfiniteQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters> | (DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | void), options: Omit<UseSuspenseInfiniteQueryOptions<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError, OperationInfiniteData<TData, GetUserCreditsApiV1UserCreditsGetParameters>, ServiceOperationInfiniteQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters>, PartialParameters<DeepReadonly<TPageParam>>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<GetUserCreditsApiV1UserCreditsGetData, PartialParameters<DeepReadonly<TPageParam>>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, GetUserCreditsApiV1UserCreditsGetParameters>, OperationError<GetUserCreditsApiV1UserCreditsGetError>>;
+        /**
+         * Allows you to execute multiple asynchronous data fetching operations concurrently with Suspense support.
+         * Similar to useQueries but integrates with React Suspense for loading states.
+         *
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseQueries|`useSuspenseQueries(...)` documentation}
+         * @example Basic usage with Suspense
+         * ```ts
+         * const getUserCreditsApiV1UserCreditsGetData = qraft.userService.getUserCreditsApiV1UserCreditsGet.useSuspenseQueries({
+         *     queries: [
+         *         {
+         *             cookie: {
+         *                 access_token: accessToken1
+         *             }
+         *         },
+         *         {
+         *             cookie: {
+         *                 access_token: accessToken2
+         *             }
+         *         }
+         *     ]
+         * });
+         * getUserCreditsApiV1UserCreditsGetResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+         * ```
+         * @example With data transformation using combine
+         * ```ts
+         * const getUserCreditsApiV1UserCreditsGetCombinedData = qraft.userService.getUserCreditsApiV1UserCreditsGet.useSuspenseQueries({
+         *     combine: results => results.map(result => result.data),
+         *     queries: [
+         *         {
+         *             cookie: {
+         *                 access_token: accessToken1
+         *             }
+         *         },
+         *         {
+         *             cookie: {
+         *                 access_token: accessToken2
+         *             }
+         *         }
+         *     ]
+         * });
+         * getUserCreditsApiV1UserCreditsGetCombinedData.forEach(data => console.log({ data }));
+         * ```
+         */
+        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError>>, TCombinedResult = Array<UseSuspenseQueryResult<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError>>>(options: {
+            queries: T;
+            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError>, "data">>) => TCombinedResult;
+        }): TCombinedResult;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        fetchQuery(options: ServiceOperationFetchQueryOptions<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError> | void): Promise<GetUserCreditsApiV1UserCreditsGetData>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        prefetchQuery(options: ServiceOperationFetchQueryOptions<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError> | void): Promise<void>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError> | void): Promise<GetUserCreditsApiV1UserCreditsGetData>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        fetchInfiniteQuery<TPageParam extends GetUserCreditsApiV1UserCreditsGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters, DeepReadonly<TPageParam>, GetUserCreditsApiV1UserCreditsGetError> | void): Promise<OperationInfiniteData<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters>>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        prefetchInfiniteQuery<TPageParam extends GetUserCreditsApiV1UserCreditsGetParameters>(options: ServiceOperationFetchInfiniteQueryOptions<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters, DeepReadonly<TPageParam>, GetUserCreditsApiV1UserCreditsGetError> | void): Promise<void>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        ensureInfiniteQueryData<TPageParam extends GetUserCreditsApiV1UserCreditsGetParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters, DeepReadonly<TPageParam>, GetUserCreditsApiV1UserCreditsGetError> | void): Promise<OperationInfiniteData<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters>>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        getQueryData(parameters: ServiceOperationQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters> | (DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | void)): GetUserCreditsApiV1UserCreditsGetData | undefined;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters> | (DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | void)): OperationInfiniteData<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters> | undefined;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError> | QueryFiltersByQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError>): TInfinite extends true ? Array<[
+            queryKey: ServiceOperationInfiniteQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters>,
+            data: NoInfer<OperationInfiniteData<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters>> | undefined
+        ]> : Array<[
+            queryKey: ServiceOperationQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters>,
+            data: GetUserCreditsApiV1UserCreditsGetData | undefined
+        ]>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        getQueryState(parameters: ServiceOperationQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters> | (DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | void)): QueryState<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetError> | undefined;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        getInfiniteQueryState(parameters: DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | ServiceOperationInfiniteQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters> | void): QueryState<OperationInfiniteData<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters>, GetUserCreditsApiV1UserCreditsGetError> | undefined;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        setQueryData(parameters: (DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | undefined) | ServiceOperationQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters>, updater: Updater<NoInfer<GetUserCreditsApiV1UserCreditsGetData> | undefined, NoInfer<DeepReadonly<GetUserCreditsApiV1UserCreditsGetData>> | undefined>, options?: SetDataOptions): GetUserCreditsApiV1UserCreditsGetData | undefined;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        setInfiniteQueryData(parameters: (DeepReadonly<GetUserCreditsApiV1UserCreditsGetParameters> | undefined) | ServiceOperationInfiniteQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetParameters>, updater: Updater<NoInfer<OperationInfiniteData<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters>> | undefined, NoInfer<DeepReadonly<OperationInfiniteData<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters>>> | undefined>, options?: SetDataOptions): OperationInfiniteData<GetUserCreditsApiV1UserCreditsGetData, GetUserCreditsApiV1UserCreditsGetParameters> | undefined;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError> | QueryFiltersByQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError>, updater: Updater<NoInfer<GetUserCreditsApiV1UserCreditsGetData> | undefined, NoInfer<GetUserCreditsApiV1UserCreditsGetData> | undefined>, options?: SetDataOptions): Array<GetUserCreditsApiV1UserCreditsGetData | undefined>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError>, options?: InvalidateOptions): Promise<void>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError> | QueryFiltersByQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError>, options?: RefetchOptions): Promise<void>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError> | QueryFiltersByQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError>, options?: CancelOptions): Promise<void>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError> | QueryFiltersByQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError>): void;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError> | QueryFiltersByQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError>, options?: ResetOptions): Promise<void>;
+        /**
+         * @summary Get User Credits
+         * @description Retrieve user's credits.
+         *
+         * Args:
+         *     current_user (User): Authenticated user via dependency.
+         *
+         * Returns:
+         *     int: Number of credits.
+         */
+        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError> | QueryFiltersByQueryKey<GetUserCreditsApiV1UserCreditsGetSchema, GetUserCreditsApiV1UserCreditsGetData, TInfinite, GetUserCreditsApiV1UserCreditsGetParameters, GetUserCreditsApiV1UserCreditsGetError>): number;
+        schema: GetUserCreditsApiV1UserCreditsGetSchema;
+        types: {
+            parameters: GetUserCreditsApiV1UserCreditsGetParameters;
+            data: GetUserCreditsApiV1UserCreditsGetData;
+            error: GetUserCreditsApiV1UserCreditsGetError;
+        };
+    };
 }
 /**
  * @summary Read Current User
@@ -1918,10 +2545,30 @@ export const getUserUploadsApiV1UserUploadsGet = {
     schema: GetUserUploadsApiV1UserUploadsGetSchema;
     [QraftServiceOperationsToken]: UserService["getUserUploadsApiV1UserUploadsGet"];
 };
+/**
+ * @summary Get User Credits
+ * @description Retrieve user's credits.
+ *
+ * Args:
+ *     current_user (User): Authenticated user via dependency.
+ *
+ * Returns:
+ *     int: Number of credits.
+ */
+export const getUserCreditsApiV1UserCreditsGet = {
+    schema: {
+        method: "get",
+        url: "/api/v1/user/credits"
+    }
+} as {
+    schema: GetUserCreditsApiV1UserCreditsGetSchema;
+    [QraftServiceOperationsToken]: UserService["getUserCreditsApiV1UserCreditsGet"];
+};
 export const userService = {
     readCurrentUserApiV1UserMeGet,
     getUserImagesApiV1UserImagesGet,
-    getUserUploadsApiV1UserUploadsGet
+    getUserUploadsApiV1UserUploadsGet,
+    getUserCreditsApiV1UserCreditsGet
 } as const;
 type ReadCurrentUserApiV1UserMeGetSchema = {
     method: "get";
@@ -1929,18 +2576,25 @@ type ReadCurrentUserApiV1UserMeGetSchema = {
 };
 type ReadCurrentUserApiV1UserMeGetParameters = paths["/api/v1/user/me"]["get"]["parameters"];
 type ReadCurrentUserApiV1UserMeGetData = paths["/api/v1/user/me"]["get"]["responses"]["200"]["content"]["application/json"];
-type ReadCurrentUserApiV1UserMeGetError = paths["/api/v1/user/me"]["get"]["responses"]["422"]["content"]["application/json"];
+type ReadCurrentUserApiV1UserMeGetError = paths["/api/v1/user/me"]["get"]["responses"]["422"]["content"]["application/json"] | null;
 type GetUserImagesApiV1UserImagesGetSchema = {
     method: "get";
     url: "/api/v1/user/images";
 };
 type GetUserImagesApiV1UserImagesGetParameters = paths["/api/v1/user/images"]["get"]["parameters"];
 type GetUserImagesApiV1UserImagesGetData = paths["/api/v1/user/images"]["get"]["responses"]["200"]["content"]["application/json"];
-type GetUserImagesApiV1UserImagesGetError = paths["/api/v1/user/images"]["get"]["responses"]["422"]["content"]["application/json"];
+type GetUserImagesApiV1UserImagesGetError = paths["/api/v1/user/images"]["get"]["responses"]["422"]["content"]["application/json"] | null;
 type GetUserUploadsApiV1UserUploadsGetSchema = {
     method: "get";
     url: "/api/v1/user/uploads";
 };
 type GetUserUploadsApiV1UserUploadsGetParameters = paths["/api/v1/user/uploads"]["get"]["parameters"];
 type GetUserUploadsApiV1UserUploadsGetData = paths["/api/v1/user/uploads"]["get"]["responses"]["200"]["content"]["application/json"];
-type GetUserUploadsApiV1UserUploadsGetError = paths["/api/v1/user/uploads"]["get"]["responses"]["422"]["content"]["application/json"];
+type GetUserUploadsApiV1UserUploadsGetError = paths["/api/v1/user/uploads"]["get"]["responses"]["422"]["content"]["application/json"] | null;
+type GetUserCreditsApiV1UserCreditsGetSchema = {
+    method: "get";
+    url: "/api/v1/user/credits";
+};
+type GetUserCreditsApiV1UserCreditsGetParameters = paths["/api/v1/user/credits"]["get"]["parameters"];
+type GetUserCreditsApiV1UserCreditsGetData = paths["/api/v1/user/credits"]["get"]["responses"]["200"]["content"]["application/json"];
+type GetUserCreditsApiV1UserCreditsGetError = paths["/api/v1/user/credits"]["get"]["responses"]["422"]["content"]["application/json"] | null;

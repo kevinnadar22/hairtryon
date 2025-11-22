@@ -1,6 +1,6 @@
 function getErrorMessage(error: unknown, defaultMessage: string = 'An unexpected error occurred'): string {
     // @ts-ignore
-    return error?.detail?.[0]?.msg ?? error?.detail ?? defaultMessage;
+    return error?.detail?.[0]?.msg ?? error?.detail ?? error?.error ?? defaultMessage;
 }
 
 const getVerifySignupUrl = (token: string): string => {

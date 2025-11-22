@@ -81,3 +81,18 @@ async def get_user_uploads(
     service = ImageGenService(db=db)
     uploads = service.get_user_input_images(user_id=current_user.id)
     return uploads
+
+
+# get credits
+@router.get("/credits", response_model=int)
+async def get_user_credits(current_user: UserBase = Depends(get_current_user)) -> int:
+    """
+    Retrieve user's credits.
+
+    Args:
+        current_user (User): Authenticated user via dependency.
+
+    Returns:
+        int: Number of credits.
+    """
+    return current_user.credits

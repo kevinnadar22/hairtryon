@@ -122,3 +122,27 @@ class UserNotVerifiedException(HTTPException):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="User is not verified.",
         )
+
+
+class TransactionNotFoundException(HTTPException):
+    def __init__(self):
+        super().__init__(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Transaction not found",
+        )
+
+
+class InvalidWebhookException(HTTPException):
+    def __init__(self):
+        super().__init__(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid webhook",
+        )
+
+
+class NotEnoughCreditsException(HTTPException):
+    def __init__(self):
+        super().__init__(
+            status_code=status.HTTP_402_PAYMENT_REQUIRED,
+            detail="Not enough credits, please top up your account.",
+        )

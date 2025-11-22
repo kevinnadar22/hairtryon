@@ -76,7 +76,7 @@ const HistoryPage: React.FC = () => {
     if (!user) {
         // show a message to log in
         return (
-            <div className="container mx-auto px-4 py-8 max-w-4xl">
+            <div className="container min-h-screen mx-auto px-4 py-8 max-w-4xl">
                 <div className="flex items-center justify-between mb-8">
                     <h1 className="text-3xl font-bold flex items-center gap-3">
                         <IsoImage src={historyiso} alt="History" className="w-8 h-8 text-primary" />
@@ -101,7 +101,7 @@ const HistoryPage: React.FC = () => {
 
     if (historyItems?.pages[0].total_images === 0) {
         return (
-            <div className="container mx-auto px-4 py-8 max-w-5xl">
+            <div className="container min-h-screen mx-auto px-4 py-8 max-w-5xl">
                 <Card className="text-center p-8 shadow-none border-0">
                     <IsoImage src={noitemsfound} alt="No Items Found" className="w-32 h-32 mx-auto text-muted-foreground opacity-90" />
                     <h3 className="text-xl font-semibold mb-2 text-foreground">No History Yet</h3>
@@ -114,7 +114,7 @@ const HistoryPage: React.FC = () => {
     }
 
     return (
-        <div className="container mx-auto px-4 py-8 max-w-5xl">
+        <div className="container min-h-screen mx-auto px-4 py-8 max-w-5xl">
             {/* Header */}
             <div className="flex items-center justify-between mb-8 flex-wrap gap-2">
                 <div className="flex items-center gap-3">

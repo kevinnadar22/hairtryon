@@ -10,9 +10,10 @@ Handles image generation workflow:
 from typing import List
 
 from core.dependencies import get_current_user
-from core.exceptions import ImageNotFoundException
+from core.exceptions import ImageNotFoundException, NotEnoughCreditsException
+from core.ratelimiting import limiter
 from db import get_db
-from fastapi import APIRouter, BackgroundTasks, Depends
+from fastapi import APIRouter, BackgroundTasks, Depends, Request
 from models import User
 from schemas import (
     ImageGenRequest,
@@ -25,8 +26,14 @@ from services import ImageGenService
 router = APIRouter(prefix="/image", tags=["image"])
 
 
-@router.post("/generate", response_model=ImageGenResponse)
+@router.post(
+    "/generate",
+    response_model=ImageGenResponse,
+    responses={402: {"description": "Not enough credits"}},
+)
+@limiter.limit("5/minute")
 async def generate_image(
+    request: Request,
     data: ImageGenRequest,
     background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
@@ -45,8 +52,13 @@ async def generate_image(
         ImageGenResponse: Contains image_id and confirmation message.
 
     Raises:
+        NotEnoughCreditsException: If user has not enough credits.
         HTTPException: If database record creation fails.
     """
+
+    if current_user.credits < 1:
+        raise NotEnoughCreditsException()
+
     service = ImageGenService(db=db)
 
     image = service.create_image_generation_record(

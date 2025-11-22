@@ -8,6 +8,7 @@ including authentication credentials and profile information.
 from db import Base
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from core.config import settings
 
 
 class User(Base):
@@ -20,5 +21,9 @@ class User(Base):
     hashed_password: Mapped[str] = mapped_column(String(length=128), nullable=False)
     userpic: Mapped[str] = mapped_column(String, nullable=True)
     verified: Mapped[bool] = mapped_column(nullable=False, server_default="false")
+    credits: Mapped[int] = mapped_column(
+        Integer, nullable=False, server_default=str(settings.FREE_USER_CREDITS)
+    )
 
     generated_images = relationship("GeneratedImage", back_populates="user")
+    transactions = relationship("Transaction", back_populates="user")

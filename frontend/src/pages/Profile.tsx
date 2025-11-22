@@ -8,15 +8,24 @@ import { logout } from '@/features';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import {api} from '@/api/client';
+import { api } from '@/api/client';
 import { toast } from 'sonner';
-    
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+
 
 export const Profile: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const {mutate: logoutMutate} = api.auth.logoutApiV1AuthLogoutPost.useMutation(
+    const { mutate: logoutMutate } = api.auth.logoutApiV1AuthLogoutPost.useMutation(
         {},
         {
             onSuccess: () => {
@@ -30,21 +39,23 @@ export const Profile: React.FC = () => {
         }
     );
 
+    const { data: transactions } = api.payments.getTransactionsByUserIdApiV1PaymentsTransactionsGet.useQuery();
+
     const handleLogout = () => {
         logoutMutate();
     };
 
-    const { user } = useSelector((state: RootState) => state.auth);
+    const { user, status } = useSelector((state: RootState) => state.auth);
 
     useEffect(() => {
-        if (!user) {
+        if (!user && status === 'succeeded') {
             navigate('/try');
         }
-    }, [user, navigate]);
+    }, [user, navigate, status]);
 
     return (
         <main className="flex flex-1 justify-center py-5 sm:py-10">
-            <div className="flex flex-col w-full max-w-5xl flex-1 px-4">
+            <div className="flex flex-col w-full max-w-5xl gap-6 px-4">
                 {/* Profile Header */}
                 <Card className="p-6 @container">
                     <div className="flex w-full flex-col gap-6 @[520px]:flex-row @[520px]:justify-between @[520px]:items-center">
@@ -63,6 +74,9 @@ export const Profile: React.FC = () => {
                                 <p className="text-muted-foreground text-base font-normal leading-normal">
                                     {user?.email}
                                 </p>
+                                <p className="text-primary font-medium">
+                                    {user?.credits ?? 0} Credits Available
+                                </p>
                             </div>
                         </div>
                         <Button
@@ -75,8 +89,32 @@ export const Profile: React.FC = () => {
                     </div>
                 </Card>
 
-
-
+                <Card className="p-6">
+                    <h3 className="text-lg font-semibold mb-4">Transaction History</h3>
+                    <Table>
+                        <TableCaption>A list of your recent transactions.</TableCaption>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead className="w-[100px]">Invoice</TableHead>
+                                <TableHead>Date</TableHead>
+                                <TableHead>Credits</TableHead>
+                                <TableHead>Status</TableHead>
+                                <TableHead className="text-right">Amount</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {transactions?.map((transaction) => (
+                                <TableRow key={transaction.id}>
+                                    <TableCell className="font-medium">{transaction.id}</TableCell>
+                                    <TableCell>{new Date(transaction.created_at).toLocaleDateString()}</TableCell>
+                                    <TableCell>{transaction.quantity}</TableCell>
+                                    <TableCell>{transaction.status}</TableCell>
+                                    <TableCell className="text-right">₹{transaction.amount}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Card>
             </div>
         </main>
     );

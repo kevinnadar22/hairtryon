@@ -174,6 +174,32 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/auth/refresh": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Refresh
+         * @description Refresh user's access token.
+         *
+         *     Args:
+         *         refresh_token (ValidRefreshTokenDep): Refresh token.
+         *
+         *     Returns:
+         *         JSONResponse: JSON response containing new access token.
+         */
+        post: operations["refresh_api_v1_auth_refresh_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/auth/google": {
         parameters: {
             query?: never;
@@ -440,6 +466,32 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/user/credits": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get User Credits
+         * @description Retrieve user's credits.
+         *
+         *     Args:
+         *         current_user (User): Authenticated user via dependency.
+         *
+         *     Returns:
+         *         int: Number of credits.
+         */
+        get: operations["get_user_credits_api_v1_user_credits_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/files/presign": {
         parameters: {
             query?: never;
@@ -491,6 +543,7 @@ export interface paths {
          *         ImageGenResponse: Contains image_id and confirmation message.
          *
          *     Raises:
+         *         NotEnoughCreditsException: If user has not enough credits.
          *         HTTPException: If database record creation fails.
          */
         post: operations["generate_image_api_v1_image_generate_post"];
@@ -620,15 +673,58 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/": {
+    "/api/v1/payments/checkout": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Read Root */
-        get: operations["read_root__get"];
+        get?: never;
+        put?: never;
+        /**
+         * Create Checkout Session
+         * @description Create a checkout session.
+         */
+        post: operations["create_checkout_session_api_v1_payments_checkout_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/payments/transaction/{payment_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Transaction By Id
+         * @description Get a transaction by id.
+         */
+        get: operations["get_transaction_by_id_api_v1_payments_transaction__payment_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/payments/transactions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Transactions By User Id
+         * @description Get a list of transactions by user id.
+         */
+        get: operations["get_transactions_by_user_id_api_v1_payments_transactions_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -719,6 +815,23 @@ export interface components {
             fields?: {
                 [key: string]: unknown;
             } | null;
+        };
+        /**
+         * IntentStatus
+         * @enum {string}
+         */
+        IntentStatus: "succeeded" | "failed" | "cancelled" | "processing" | "requires_customer_action" | "requires_merchant_action" | "requires_payment_method" | "requires_confirmation" | "requires_capture" | "partially_captured" | "partially_captured_and_capturable";
+        /** PaymentSessionRequest */
+        PaymentSessionRequest: {
+            /** Quantity */
+            quantity: number;
+        };
+        /** PaymentSessionResponse */
+        PaymentSessionResponse: {
+            /** Session Id */
+            session_id: string;
+            /** Checkout Url */
+            checkout_url: string;
         };
         /** RequestLoginTokenRequest */
         RequestLoginTokenRequest: {
@@ -816,6 +929,27 @@ export interface components {
              */
             image_url: string;
         };
+        /** TransactionResponse */
+        TransactionResponse: {
+            /** Id */
+            id: number;
+            /** Session Id */
+            session_id: string;
+            /** User Id */
+            user_id: number;
+            /** Product Id */
+            product_id: string;
+            /** Amount */
+            amount: number;
+            status: components["schemas"]["IntentStatus"];
+            /** Quantity */
+            quantity: number;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+        };
         /**
          * UserBase
          * @description Response schema for user's profile.
@@ -832,6 +966,8 @@ export interface components {
             email: string;
             /** Userpic */
             userpic: string | null;
+            /** Credits */
+            credits: number;
         };
         /**
          * UserImages
@@ -974,6 +1110,13 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     request_signup_token_api_v1_auth_request_signup_token_post: {
@@ -1021,6 +1164,13 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     verify_signup_api_v1_auth_verify_signup_post: {
@@ -1060,6 +1210,13 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1108,6 +1265,13 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     verify_login_api_v1_auth_verify_login_post: {
@@ -1148,6 +1312,13 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     logout_api_v1_auth_logout_post: {
@@ -1155,7 +1326,10 @@ export interface operations {
             query?: never;
             header?: never;
             path?: never;
-            cookie?: never;
+            cookie?: {
+                access_token?: string | null;
+                refresh_token?: string | null;
+            };
         };
         requestBody?: never;
         responses: {
@@ -1167,6 +1341,68 @@ export interface operations {
                 content: {
                     "application/json": unknown;
                 };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    refresh_api_v1_auth_refresh_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: {
+                access_token?: string | null;
+                refresh_token?: string | null;
+            };
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VerifyLoginResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1187,6 +1423,13 @@ export interface operations {
                 content: {
                     "application/json": unknown;
                 };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1210,6 +1453,13 @@ export interface operations {
             };
             /** @description Bad Request */
             400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Too Many Requests */
+            429: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -1248,6 +1498,13 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     verify_reset_token_api_v1_auth_verify_reset_token_post: {
@@ -1280,6 +1537,13 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1321,6 +1585,13 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     check_email_status_api_v1_auth_check_email_status_post: {
@@ -1353,6 +1624,13 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1394,6 +1672,13 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     read_current_user_api_v1_user_me_get: {
@@ -1401,8 +1686,8 @@ export interface operations {
             query?: never;
             header?: never;
             path?: never;
-            cookie: {
-                access_token: string;
+            cookie?: {
+                access_token?: string | null;
                 refresh_token?: string | null;
             };
         };
@@ -1426,6 +1711,13 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     get_user_images_api_v1_user_images_get: {
@@ -1438,8 +1730,8 @@ export interface operations {
             };
             header?: never;
             path?: never;
-            cookie: {
-                access_token: string;
+            cookie?: {
+                access_token?: string | null;
                 refresh_token?: string | null;
             };
         };
@@ -1463,6 +1755,13 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     get_user_uploads_api_v1_user_uploads_get: {
@@ -1470,8 +1769,8 @@ export interface operations {
             query?: never;
             header?: never;
             path?: never;
-            cookie: {
-                access_token: string;
+            cookie?: {
+                access_token?: string | null;
                 refresh_token?: string | null;
             };
         };
@@ -1495,6 +1794,52 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    get_user_credits_api_v1_user_credits_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: {
+                access_token?: string | null;
+                refresh_token?: string | null;
+            };
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": number;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     get_presigned_url_api_v1_files_presign_get: {
@@ -1505,8 +1850,8 @@ export interface operations {
             };
             header?: never;
             path?: never;
-            cookie: {
-                access_token: string;
+            cookie?: {
+                access_token?: string | null;
                 refresh_token?: string | null;
             };
         };
@@ -1530,6 +1875,13 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     generate_image_api_v1_image_generate_post: {
@@ -1537,8 +1889,8 @@ export interface operations {
             query?: never;
             header?: never;
             path?: never;
-            cookie: {
-                access_token: string;
+            cookie?: {
+                access_token?: string | null;
                 refresh_token?: string | null;
             };
         };
@@ -1557,6 +1909,13 @@ export interface operations {
                     "application/json": components["schemas"]["ImageGenResponse"];
                 };
             };
+            /** @description Not enough credits */
+            402: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Validation Error */
             422: {
                 headers: {
@@ -1565,6 +1924,13 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1575,8 +1941,8 @@ export interface operations {
             path: {
                 image_id: number;
             };
-            cookie: {
-                access_token: string;
+            cookie?: {
+                access_token?: string | null;
                 refresh_token?: string | null;
             };
         };
@@ -1607,6 +1973,13 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     get_image_styles_api_v1_image_styles_get: {
@@ -1627,6 +2000,13 @@ export interface operations {
                     "application/json": components["schemas"]["StylesResponse"][];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
     like_image_api_v1_image_like__image_id__post: {
@@ -1636,8 +2016,8 @@ export interface operations {
             path: {
                 image_id: number;
             };
-            cookie: {
-                access_token: string;
+            cookie?: {
+                access_token?: string | null;
                 refresh_token?: string | null;
             };
         };
@@ -1662,6 +2042,13 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
@@ -1672,8 +2059,8 @@ export interface operations {
             path: {
                 image_id: number;
             };
-            cookie: {
-                access_token: string;
+            cookie?: {
+                access_token?: string | null;
                 refresh_token?: string | null;
             };
         };
@@ -1699,14 +2086,69 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
-    read_root__get: {
+    create_checkout_session_api_v1_payments_checkout_post: {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
-            cookie?: never;
+            cookie?: {
+                access_token?: string | null;
+                refresh_token?: string | null;
+            };
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PaymentSessionRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaymentSessionResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    get_transaction_by_id_api_v1_payments_transaction__payment_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                payment_id: string;
+            };
+            cookie?: {
+                access_token?: string | null;
+                refresh_token?: string | null;
+            };
         };
         requestBody?: never;
         responses: {
@@ -1716,8 +2158,63 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "text/html": string;
+                    "application/json": components["schemas"]["TransactionResponse"];
                 };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    get_transactions_by_user_id_api_v1_payments_transactions_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: {
+                access_token?: string | null;
+                refresh_token?: string | null;
+            };
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TransactionResponse"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

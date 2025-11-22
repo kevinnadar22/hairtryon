@@ -16,7 +16,7 @@ from loguru import logger
 from models import GeneratedImage
 from pydantic import HttpUrl
 from replicate.client import Client
-from repository import GeneratedImageRepository, StyleRepository
+from repository import GeneratedImageRepository, StyleRepository, UserRepository
 from schemas import SideViewsResponse, UserImages, UserImagesResponse
 from utils import get_file_info, save_image_from_url
 
@@ -30,6 +30,7 @@ class ImageGenService:
         self.db = db
         self.style_repository = StyleRepository(db)
         self.image_repository = GeneratedImageRepository(db)
+        self.user_repository = UserRepository(db)
 
     def create_image_generation_record(
         self,
@@ -104,6 +105,10 @@ class ImageGenService:
 
                 # upload to S3
                 output_url = await self._save_output_to_s3(prediction[0].url)  # type: ignore
+                self.user_repository.dec_user_credits(
+                    user=image.user,
+                    credits=1,
+                )
 
         except StyleNotFoundException:
             status = ImageStatus.FAILED

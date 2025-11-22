@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { generateImage } from '@/features/imageSlide/slice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import uploadToS3 from '@/lib/uploadS3';
 import { useUploadContext } from '@/contexts';
 import { useQueryClient } from '@tanstack/react-query';
 import { getErrorMessage } from '@/utils';
+import { CreditPurchaseModal } from '../Payments/CreditPurchaseModal';
 
 interface GenerateButtonProps extends Omit<React.ComponentProps<typeof ActionButton>, 'onClick' | 'errorMessage' | 'loadingMessage' | 'successMessage'> {
     className?: string;
@@ -21,9 +22,9 @@ interface GenerateButtonProps extends Omit<React.ComponentProps<typeof ActionBut
 function GenerateButton({ className, ...props }: GenerateButtonProps) {
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
+    const [showCreditModal, setShowCreditModal] = useState(false);
 
-    //  States
-    const [imageId, setImageId] = React.useState<number>(0);
+
     const { isGenerating, generatedImage, styleId: selectedHairstyle } = useSelector((state: RootState) => state.imageSlide);
     const { userUploadedImage, selectFileFromUrl } = useUploadContext();
     const { user } = useSelector((state: RootState) => state.auth);
@@ -49,22 +50,28 @@ function GenerateButton({ className, ...props }: GenerateButtonProps) {
         { enabled: false }
     );
 
-    const imageStatusRes = api.image.getImageStatusApiV1ImageStatusImageIdGet.useQuery({ path: { image_id: imageId } }, { enabled: false });
+    const invalidateQueries = () => {
+        queryClient.invalidateQueries({
+            queryKey: api.user.getUserImagesApiV1UserImagesGet.getQueryKey()
+        });
+
+        queryClient.invalidateQueries({
+            queryKey: api.user.readCurrentUserApiV1UserMeGet.getQueryKey()
+        });
+    }
+
 
     const pollStatus = async (image_id: number) => {
-        setImageId(image_id);
+
         for (; ;) {
             try {
-                const res = await imageStatusRes.refetch();
+                const res = await api.image.getImageStatusApiV1ImageStatusImageIdGet({ parameters: { path: { image_id: image_id } } });
                 if (res.data?.status === 'completed') {
                     dispatch(generateImage(
                         { imageUrl: res.data.output_image_url!, imageId: image_id, description: res.data.description || '' }));
                     dispatch(setIsGeneratingImage(false));
 
-                    // Invalidate history to refetch the updated list
-                    queryClient.invalidateQueries({
-                        queryKey: api.user.getUserImagesApiV1UserImagesGet.getQueryKey()
-                    });
+                    invalidateQueries();
 
                     toast.success('Image generated successfully!');
                     break;
@@ -74,7 +81,7 @@ function GenerateButton({ className, ...props }: GenerateButtonProps) {
                     toast.error('Image generation failed. Please try again.');
                     break;
                 }
-                await new Promise(resolve => setTimeout(resolve, 1000)); // wait for 1 second before polling again
+                await new Promise(resolve => setTimeout(resolve, 3000)); // wait for 1 second before polling again
             }
             catch (error) {
                 dispatch(setIsGeneratingImage(false));
@@ -100,6 +107,13 @@ function GenerateButton({ className, ...props }: GenerateButtonProps) {
 
         if (!selectedHairstyle) {
             toast.error('Please select a hairstyle first');
+            return false;
+        }
+
+        // check if user has credits
+        if (user.credits < 1) {
+            // toast.error('You have no credits left. Please purchase more credits to generate images');
+            setShowCreditModal(true);
             return false;
         }
 
@@ -140,14 +154,20 @@ function GenerateButton({ className, ...props }: GenerateButtonProps) {
 
 
     return (
-        <ActionButton
-            {...props}
-            label={label}
-            className={cn('cursor-pointer text-sm font-semibold', className)}
-            onClick={handleGenerate}
-            errorMessage="Please try again!"
-            isLoading={isGenerating}
-        />
+        <>
+            <ActionButton
+                {...props}
+                label={label}
+                className={cn('cursor-pointer text-sm font-semibold', className)}
+                onClick={handleGenerate}
+                errorMessage="Please try again!"
+                isLoading={isGenerating}
+            />
+            <CreditPurchaseModal
+                isOpen={showCreditModal}
+                onClose={() => setShowCreditModal(false)}
+            />
+        </>
     )
 }
 

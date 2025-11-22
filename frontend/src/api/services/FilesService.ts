@@ -758,4 +758,4 @@ type GetPresignedUrlApiV1FilesPresignGetSchema = {
 };
 type GetPresignedUrlApiV1FilesPresignGetParameters = paths["/api/v1/files/presign"]["get"]["parameters"];
 type GetPresignedUrlApiV1FilesPresignGetData = paths["/api/v1/files/presign"]["get"]["responses"]["200"]["content"]["application/json"];
-type GetPresignedUrlApiV1FilesPresignGetError = paths["/api/v1/files/presign"]["get"]["responses"]["422"]["content"]["application/json"];
+type GetPresignedUrlApiV1FilesPresignGetError = paths["/api/v1/files/presign"]["get"]["responses"]["422"]["content"]["application/json"] | null;

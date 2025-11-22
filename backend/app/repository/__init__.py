@@ -7,10 +7,12 @@ from .image_respository import GeneratedImageRepository
 from .style_repository import StyleRepository
 from .token_repository import TokenRepository
 from .user_repository import UserRepository
+from .transaction_repository import TransactionRepository
 
 __all__ = [
     "UserRepository",
     "StyleRepository",
     "GeneratedImageRepository",
     "TokenRepository",
+    "TransactionRepository",
 ]

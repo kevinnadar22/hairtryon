@@ -8,6 +8,7 @@ import homelogo from '@/assets/homeiso.png';
 import contact from '@/assets/contactiso.png';
 import historyiso from '@/assets/historyiso.png';
 import tryon from '@/assets/3dsiscors.png';
+import pricing from '@/assets/pricingiso.png';
 
 // Footer links configuration
 const links = {
@@ -23,6 +24,7 @@ const links = {
     social: [
         { label: 'Home', href: '/', icon: homelogo },
         { label: 'Try On', href: '/try', icon: tryon },
+        { label: 'Pricing', href: '/pricing', icon: pricing },
         { label: 'History', href: '/history', icon: historyiso },
         { label: 'Contact', href: '/contact', icon: contact },
     ],

@@ -11,19 +11,19 @@ import type { FilesService } from "./FilesService";
 import { filesService } from "./FilesService";
 import type { ImageService } from "./ImageService";
 import { imageService } from "./ImageService";
-import type { DefaultService } from "./DefaultService";
-import { defaultService } from "./DefaultService";
+import type { PaymentsService } from "./PaymentsService";
+import { paymentsService } from "./PaymentsService";
 export type Services = {
     auth: AuthService;
     user: UserService;
     files: FilesService;
     image: ImageService;
-    default: DefaultService;
+    payments: PaymentsService;
 };
 export const services = {
     auth: authService,
     user: userService,
     files: filesService,
     image: imageService,
-    default: defaultService
+    payments: paymentsService
 } as const;

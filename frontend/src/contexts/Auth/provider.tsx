@@ -29,6 +29,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       dispatch(
         login({
           user: {
+            credits: user.credits,
             name: user.name,
             email: user.email,
             profilePictureUrl: user.userpic,

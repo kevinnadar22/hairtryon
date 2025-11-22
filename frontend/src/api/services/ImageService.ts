@@ -21,6 +21,7 @@ export interface ImageService {
      *     ImageGenResponse: Contains image_id and confirmation message.
      *
      * Raises:
+     *     NotEnoughCreditsException: If user has not enough credits.
      *     HTTPException: If database record creation fails.
      */
     generateImageApiV1ImageGeneratePost: {
@@ -38,6 +39,7 @@ export interface ImageService {
          *     ImageGenResponse: Contains image_id and confirmation message.
          *
          * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
          *     HTTPException: If database record creation fails.
          */
         <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: ServiceOperationMutationFnOptions<GenerateImageApiV1ImageGeneratePostBody, GenerateImageApiV1ImageGeneratePostParameters, TMeta, TSignal>, client?: (schema: GenerateImageApiV1ImageGeneratePostSchema, options: ServiceOperationMutationFnOptions<GenerateImageApiV1ImageGeneratePostBody, GenerateImageApiV1ImageGeneratePostParameters, TMeta, TSignal>) => Promise<RequestFnResponse<GenerateImageApiV1ImageGeneratePostData, GenerateImageApiV1ImageGeneratePostError>>): Promise<RequestFnResponse<GenerateImageApiV1ImageGeneratePostData, GenerateImageApiV1ImageGeneratePostError>>;
@@ -55,6 +57,7 @@ export interface ImageService {
          *     ImageGenResponse: Contains image_id and confirmation message.
          *
          * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
          *     HTTPException: If database record creation fails.
          */
         getMutationKey(parameters: DeepReadonly<GenerateImageApiV1ImageGeneratePostParameters> | void): ServiceOperationMutationKey<GenerateImageApiV1ImageGeneratePostSchema, GenerateImageApiV1ImageGeneratePostParameters>;
@@ -75,6 +78,7 @@ export interface ImageService {
          *     ImageGenResponse: Contains image_id and confirmation message.
          *
          * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
          *     HTTPException: If database record creation fails.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
          * @example Mutation with predefined parameters, e.g., for updating
@@ -115,6 +119,7 @@ export interface ImageService {
          *     ImageGenResponse: Contains image_id and confirmation message.
          *
          * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
          *     HTTPException: If database record creation fails.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
          * @example Mutation with predefined parameters, e.g., for updating
@@ -154,6 +159,7 @@ export interface ImageService {
          *     ImageGenResponse: Contains image_id and confirmation message.
          *
          * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
          *     HTTPException: If database record creation fails.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
          * @example Check how many mutations are currently in progress for the specified service method.
@@ -188,6 +194,7 @@ export interface ImageService {
          *     ImageGenResponse: Contains image_id and confirmation message.
          *
          * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
          *     HTTPException: If database record creation fails.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
          * @example Get all variables of all running mutations.
@@ -231,6 +238,7 @@ export interface ImageService {
          *     ImageGenResponse: Contains image_id and confirmation message.
          *
          * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
          *     HTTPException: If database record creation fails.
          */
         isMutating<TContext>(filters?: MutationFiltersByParameters<GenerateImageApiV1ImageGeneratePostBody, GenerateImageApiV1ImageGeneratePostData, GenerateImageApiV1ImageGeneratePostParameters, OperationError<GenerateImageApiV1ImageGeneratePostError>, TContext> | MutationFiltersByMutationKey<GenerateImageApiV1ImageGeneratePostSchema, GenerateImageApiV1ImageGeneratePostBody, GenerateImageApiV1ImageGeneratePostData, GenerateImageApiV1ImageGeneratePostParameters, OperationError<GenerateImageApiV1ImageGeneratePostError>, TContext>): number;
@@ -251,6 +259,7 @@ export interface ImageService {
          *     ImageGenResponse: Contains image_id and confirmation message.
          *
          * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
          *     HTTPException: If database record creation fails.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/query-client/getMutationCache|`getMutationCache(...)` documentation}
          *
@@ -2211,6 +2220,7 @@ export interface ImageService {
  *     ImageGenResponse: Contains image_id and confirmation message.
  *
  * Raises:
+ *     NotEnoughCreditsException: If user has not enough credits.
  *     HTTPException: If database record creation fails.
  */
 export const generateImageApiV1ImageGeneratePost = {
@@ -2331,7 +2341,7 @@ type GenerateImageApiV1ImageGeneratePostSchema = {
 };
 type GenerateImageApiV1ImageGeneratePostParameters = paths["/api/v1/image/generate"]["post"]["parameters"];
 type GenerateImageApiV1ImageGeneratePostData = paths["/api/v1/image/generate"]["post"]["responses"]["200"]["content"]["application/json"];
-type GenerateImageApiV1ImageGeneratePostError = paths["/api/v1/image/generate"]["post"]["responses"]["422"]["content"]["application/json"];
+type GenerateImageApiV1ImageGeneratePostError = null | paths["/api/v1/image/generate"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type GenerateImageApiV1ImageGeneratePostBody = paths["/api/v1/image/generate"]["post"]["requestBody"]["content"]["application/json"];
 type GetImageStatusApiV1ImageStatusImageIdGetSchema = {
     method: "get";
@@ -2339,21 +2349,21 @@ type GetImageStatusApiV1ImageStatusImageIdGetSchema = {
 };
 type GetImageStatusApiV1ImageStatusImageIdGetParameters = paths["/api/v1/image/status/{image_id}"]["get"]["parameters"];
 type GetImageStatusApiV1ImageStatusImageIdGetData = paths["/api/v1/image/status/{image_id}"]["get"]["responses"]["200"]["content"]["application/json"];
-type GetImageStatusApiV1ImageStatusImageIdGetError = null | paths["/api/v1/image/status/{image_id}"]["get"]["responses"]["422"]["content"]["application/json"];
+type GetImageStatusApiV1ImageStatusImageIdGetError = null | paths["/api/v1/image/status/{image_id}"]["get"]["responses"]["422"]["content"]["application/json"] | null;
 type GetImageStylesApiV1ImageStylesGetSchema = {
     method: "get";
     url: "/api/v1/image/styles";
 };
 type GetImageStylesApiV1ImageStylesGetParameters = undefined;
 type GetImageStylesApiV1ImageStylesGetData = paths["/api/v1/image/styles"]["get"]["responses"]["200"]["content"]["application/json"];
-type GetImageStylesApiV1ImageStylesGetError = unknown;
+type GetImageStylesApiV1ImageStylesGetError = null;
 type LikeImageApiV1ImageLikeImageIdPostSchema = {
     method: "post";
     url: "/api/v1/image/like/{image_id}";
 };
 type LikeImageApiV1ImageLikeImageIdPostParameters = paths["/api/v1/image/like/{image_id}"]["post"]["parameters"];
 type LikeImageApiV1ImageLikeImageIdPostData = paths["/api/v1/image/like/{image_id}"]["post"]["responses"]["200"]["content"]["application/json"];
-type LikeImageApiV1ImageLikeImageIdPostError = paths["/api/v1/image/like/{image_id}"]["post"]["responses"]["422"]["content"]["application/json"];
+type LikeImageApiV1ImageLikeImageIdPostError = paths["/api/v1/image/like/{image_id}"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type LikeImageApiV1ImageLikeImageIdPostBody = undefined;
 type DislikeImageApiV1ImageDislikeImageIdPostSchema = {
     method: "post";
@@ -2361,5 +2371,5 @@ type DislikeImageApiV1ImageDislikeImageIdPostSchema = {
 };
 type DislikeImageApiV1ImageDislikeImageIdPostParameters = paths["/api/v1/image/dislike/{image_id}"]["post"]["parameters"];
 type DislikeImageApiV1ImageDislikeImageIdPostData = paths["/api/v1/image/dislike/{image_id}"]["post"]["responses"]["200"]["content"]["application/json"];
-type DislikeImageApiV1ImageDislikeImageIdPostError = paths["/api/v1/image/dislike/{image_id}"]["post"]["responses"]["422"]["content"]["application/json"];
+type DislikeImageApiV1ImageDislikeImageIdPostError = paths["/api/v1/image/dislike/{image_id}"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type DislikeImageApiV1ImageDislikeImageIdPostBody = undefined;
