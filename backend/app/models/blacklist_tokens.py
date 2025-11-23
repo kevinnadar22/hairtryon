@@ -13,13 +13,13 @@ __version__ = "0.1.0"
 
 from db import Base
 from enums import TokenType
-from sqlalchemy import DateTime, Enum, Integer, String
+from sqlalchemy import DateTime, Enum, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 
 class BlackListTokens(Base):
     __tablename__ = "blacklist_tokens"
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    jti: Mapped[str] = mapped_column(String(36), nullable=False, unique=True)
+    jti: Mapped[str] = mapped_column(Text, nullable=False, unique=True)
     token_type: Mapped[TokenType] = mapped_column(Enum(TokenType), nullable=False)
     blacklisted_on: Mapped[DateTime] = mapped_column(DateTime, nullable=False)
