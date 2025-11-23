@@ -43,10 +43,10 @@ def get_current_user(
     cookies: CookiesModel = Depends(get_cookies),
     db: Session = Depends(get_db),
 ) -> User:
-    if not cookies.access_token:
+    if not cookies.refresh_token:
         raise NoCookiesException()
 
-    decoded_token = decode_access_token(cookies.access_token)
+    decoded_token = decode_access_token(cookies.access_token or "")
 
     if not decoded_token:
         raise NotAuthenticatedException()
