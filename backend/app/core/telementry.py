@@ -14,7 +14,9 @@ __version__ = "0.1.0"
 import logfire
 
 
-def init_telemetry(app, engine=None):
+def init_telemetry(app, engine=None, logfire_token=None):
+    if not logfire_token:
+        return
     logfire.configure()
     logfire.instrument_fastapi(app, capture_headers=True)
     logfire.instrument_system_metrics()

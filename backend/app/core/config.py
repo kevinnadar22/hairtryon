@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     FREE_USER_CREDITS: int = 3
     PORT: int = 8000
     LOGFIRE_TOKEN: Optional[str] = None
+    ENV: Literal["dev", "prod"] = "dev"
 
     # Auth Configurations
     SECRET_KEY: str = "your-secret"
@@ -69,6 +70,8 @@ class Settings(BaseSettings):
     DODO_PAYMENTS_MODE: Literal["test_mode", "live_mode"] = "test_mode"
     DODO_PAYMENTS_PRODUCT_ID: str
     DODO_PAYMENTS_WEBHOOK_SECRET: str
+
+    IS_PROD: bool = ENV == "prod"
 
     model_config = ConfigDict(env_file=".env", extra="ignore")  # type: ignore
 
