@@ -70,7 +70,7 @@ class Settings(BaseSettings):
     DODO_PAYMENTS_PRODUCT_ID: str
     DODO_PAYMENTS_WEBHOOK_SECRET: str
 
-    model_config = ConfigDict(env_file=".env")  # type: ignore
+    model_config = ConfigDict(env_file=".env", extra="ignore")  # type: ignore
 
 
 settings = Settings()  # type: ignore
