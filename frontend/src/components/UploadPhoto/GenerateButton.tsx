@@ -140,9 +140,9 @@ function GenerateButton({ className, ...props }: GenerateButtonProps) {
             try {
                 // @ts-ignore
                 uploadUrl = await uploadToS3(upload_url, fields, file_url, userUploadedImage);
-            } catch (error) {
+            } catch (error: any) {
                 dispatch(setIsGeneratingImage(false));
-                toast.error('Failed to upload image. Please try again.');
+                toast.error(error?.message || "Failed to upload image to S3");
                 return false;
             }
             selectFileFromUrl(uploadUrl);
