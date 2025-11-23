@@ -26,7 +26,7 @@ const tiers: PricingTier[] = [
     name: "Starter",
     price: "₹0",
     description: "Perfect for testing the waters.",
-    features: ["2 Images Total (Lifetime)"],
+    features: ["3 Images Total (Lifetime)"],
     href: "/try",
   },
   {
@@ -34,7 +34,7 @@ const tiers: PricingTier[] = [
     price: "₹1",
     description: "Pay only for what you generate.",
     popular: true,
-    features: ["Per Image Cost", "HD 4K Downloads", "Commercial Usage Rights"],
+    features: ["Per Image Cost", "HD 4K Downloads"],
   },
   {
     name: "Custom Volume",
@@ -43,7 +43,6 @@ const tiers: PricingTier[] = [
     features: [
       "Bulk Processing Discounts",
       "API Access Integration",
-      "Team Management",
     ],
     href: "/contact",
   },
@@ -190,7 +189,7 @@ export const Pricing: React.FC<PricingProps> = ({
               className={`hidden md:block w-1 h-1 ${darkMode ? "bg-slate-700" : "bg-slate-300"
                 } rounded-full`}
             />
-            <div>Secure payment processing via DoDopayment.</div>
+            <div>Secure payment processing via DodoPayment.</div>
           </div>
         </div>
       </section>

@@ -34,7 +34,7 @@ export const HowItWorks: React.FC = () => {
               <div className="absolute -top-3 -right-3 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm border-4 border-slate-50">2</div>
             </div>
             <h3 className="text-xl font-bold text-slate-900 mb-2">Choose Style</h3>
-            <p className="text-slate-600 px-4 text-sm leading-relaxed">Type a prompt or select from our trending presets to define your new look.</p>
+            <p className="text-slate-600 px-4 text-sm leading-relaxed">Select from our trending presets to define your new look.</p>
           </div>
 
           {/* Step 3 */}
