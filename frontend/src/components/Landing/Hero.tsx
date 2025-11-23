@@ -87,9 +87,16 @@ export const Hero: React.FC = () => {
             <h1 className="text-5xl lg:text-7xl font-serif font-bold text-slate-900 leading-[1.1]">
               <TextAnimate animation="blurInUp" by="word" as="span">Find Your Perfect</TextAnimate>
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80 inline-block">
-                <TextAnimate animation="blurInUp" by="word" as="span" delay={0.5}>Hairstyle</TextAnimate>
-              </span>
+              <TextAnimate
+                animation="blurInUp"
+                by="word"
+                as="span"
+                delay={0.5}
+                className="inline-block"
+                segmentClassName="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80 pb-1"
+              >
+                Hairstyle
+              </TextAnimate>
               {" "}
               <TextAnimate animation="blurInUp" by="word" as="span" delay={0.6}>Instantly.</TextAnimate>
             </h1>
