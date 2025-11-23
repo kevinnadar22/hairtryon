@@ -30,5 +30,5 @@ def setup_middlewares(app: FastAPI):
         SessionMiddleware,
         secret_key=settings.SECRET_KEY,
         same_site="lax",
-        https_only=False,  # use config
+        https_only=settings.IS_PROD,
     )

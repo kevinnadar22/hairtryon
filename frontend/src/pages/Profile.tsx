@@ -42,6 +42,11 @@ export const Profile: React.FC = () => {
     const { data: transactions } = api.payments.getTransactionsByUserIdApiV1PaymentsTransactionsGet.useQuery();
 
     const handleLogout = () => {
+        // check if no user exists
+        if (!user) {
+            navigate('/try');
+            return;
+        }
         logoutMutate();
     };
 
