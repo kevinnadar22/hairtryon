@@ -22,6 +22,7 @@ class Settings(BaseSettings):
 
     # Other
     FREE_USER_CREDITS: int = 3
+    PORT: int = 8000
 
     # Auth Configurations
     SECRET_KEY: str = "your-secret"

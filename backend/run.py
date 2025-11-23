@@ -21,13 +21,15 @@ sys.path.insert(0, str(app_dir))
 @click.option("--host", default="127.0.0.1", help="Host to bind to")
 @click.option("--port", default=8000, help="Port to bind to")
 @click.option("--reload", is_flag=True, help="Enable auto-reload")
-def run(host, port, reload):
+@click.option("--workers", default=1, help="Number of worker processes")
+def run(host, port, reload, workers):
     """Run the development server"""
     uvicorn.run(
         "main:app",
         host=host,
         port=port,
         reload=reload,  # Changed from "app.main:app"
+        workers=workers,
     )
 
 
