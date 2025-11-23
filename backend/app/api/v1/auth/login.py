@@ -17,7 +17,7 @@ from core.dependencies import (
     UseAndBlacklistRefreshToken,
     UseAndBlacklistVerifyToken,
 )
-from core.exceptions import UserNotFoundException, UserNotVerifiedException
+from core.exceptions import UserNotVerifiedException, InvalidCredentialsException
 from enums import TokenType
 from fastapi import APIRouter, BackgroundTasks
 from schemas import (
@@ -57,7 +57,7 @@ async def request_login_token(
 
     user = auth_service.authenticate_user(payload.email, payload.password)
     if not user:
-        raise UserNotFoundException()
+        raise InvalidCredentialsException()
 
     if not user.verified:
         raise UserNotVerifiedException()

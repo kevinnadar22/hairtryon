@@ -7,6 +7,7 @@ password hashing, credential verification, and JWT token generation.
 
 import random
 import string
+import urllib.parse
 from typing import Literal, Optional, TypeVar
 
 from core.config import settings
@@ -35,7 +36,6 @@ from utils import (
     hash_password,
     verify_password,
 )
-import urllib.parse
 
 R = TypeVar("R", bound=Response)
 
@@ -468,6 +468,31 @@ class AuthService:
         return self.login_user_with_cookies(token_response)
 
     def _get_frontend_domain(self) -> str:
+        """
+        Extract the parent domain from the frontend URL for cookie sharing.
+
+        For example:
+        - hairtry.mariakevin.in -> .mariakevin.in
+        - localhost:3000 -> localhost
+
+        Returns:
+            str: Parent domain with leading dot (for production) or localhost
+        """
         frontend_url = settings.FRONTEND_URL
         domain = urllib.parse.urlparse(frontend_url).netloc
+
+        # Remove port if present (e.g., localhost:3000 -> localhost)
+        domain = domain.split(":")[0]
+
+        # For localhost, return as-is
+        if "localhost" in domain or domain == "127.0.0.1":
+            return domain
+
+        # For production domains, extract parent domain
+        # e.g., hairtry.mariakevin.in -> .mariakevin.in
+        parts = domain.split(".")
+        if len(parts) >= 2:
+            # Return parent domain with leading dot for cross-subdomain sharing
+            return f".{'.'.join(parts[-2:])}"
+
         return domain
