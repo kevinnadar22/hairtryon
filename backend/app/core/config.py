@@ -69,7 +69,9 @@ class Settings(BaseSettings):
     DODO_PAYMENTS_PRODUCT_ID: str
     DODO_PAYMENTS_WEBHOOK_SECRET: str
 
-    IS_PROD: bool = ENV == "prod"
+    @property
+    def IS_PROD(self) -> bool:
+        return self.ENV == "prod"
 
     model_config = ConfigDict(env_file=".env", extra="ignore")  # type: ignore
 
