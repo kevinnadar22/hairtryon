@@ -1,5 +1,5 @@
 #!/bin/sh
 set -e
 
-# Run migrations
-uv run alembic -c app/alembic.ini upgrade head
+cd app
+uv run alembic upgrade head
