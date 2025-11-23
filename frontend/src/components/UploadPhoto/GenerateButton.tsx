@@ -14,6 +14,7 @@ import { useUploadContext } from '@/contexts';
 import { useQueryClient } from '@tanstack/react-query';
 import { getErrorMessage } from '@/utils';
 import { CreditPurchaseModal } from '../Payments/CreditPurchaseModal';
+import { LoginPopup } from '../Auth/LoginPopup';
 
 interface GenerateButtonProps extends Omit<React.ComponentProps<typeof ActionButton>, 'onClick' | 'errorMessage' | 'loadingMessage' | 'successMessage'> {
     className?: string;
@@ -23,6 +24,7 @@ function GenerateButton({ className, ...props }: GenerateButtonProps) {
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
     const [showCreditModal, setShowCreditModal] = useState(false);
+    const [showLoginPopup, setShowLoginPopup] = useState(false);
 
 
     const { isGenerating, generatedImage, styleId: selectedHairstyle } = useSelector((state: RootState) => state.imageSlide);
@@ -96,7 +98,7 @@ function GenerateButton({ className, ...props }: GenerateButtonProps) {
         e?.stopPropagation();
 
         if (!user) {
-            toast.error('Please log in to generate images');
+            setShowLoginPopup(true);
             return false;
         }
 
@@ -166,6 +168,10 @@ function GenerateButton({ className, ...props }: GenerateButtonProps) {
             <CreditPurchaseModal
                 isOpen={showCreditModal}
                 onClose={() => setShowCreditModal(false)}
+            />
+            <LoginPopup
+                isOpen={showLoginPopup}
+                onClose={() => setShowLoginPopup(false)}
             />
         </>
     )

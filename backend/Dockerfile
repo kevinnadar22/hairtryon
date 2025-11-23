@@ -12,4 +12,8 @@ COPY . /app
 RUN pip install uv
 RUN uv sync
 
+COPY start.sh /start.sh
+RUN chmod +x /start.sh && \
+    /start.sh
+
 CMD ["uv", "run", "--", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
