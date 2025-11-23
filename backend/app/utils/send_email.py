@@ -14,7 +14,6 @@ __version__ = "0.1.0"
 from pathlib import Path
 
 from core.config import settings
-from fastapi import FastAPI
 from fastapi_mail import ConnectionConfig, FastMail, MessageSchema, MessageType
 from pydantic import EmailStr, SecretStr
 
@@ -30,8 +29,6 @@ conf = ConnectionConfig(
     VALIDATE_CERTS=True,
     TEMPLATE_FOLDER=Path("app/templates"),
 )
-
-app = FastAPI()
 
 
 async def send_mail_async(

@@ -39,7 +39,7 @@ class Settings(BaseSettings):
     FRONTEND_URL: str
 
     # Image upload settings and AWS S3 configuration
-    MAX_IMAGE_SIZE_MB: int = 5
+    MAX_IMAGE_SIZE_MB: int = 10
     ALLOWED_IMAGE_TYPES: list[str] = ["image/jpeg", "image/png", "image/gif"]
 
     AWS_ACCESS_KEY_ID: str
