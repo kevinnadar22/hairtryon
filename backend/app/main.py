@@ -16,6 +16,7 @@ from core.logging import setup_logging
 from core.ratelimiting import setup_ratelimiting
 from core.telementry import init_telemetry
 from core.config import settings
+from core.exceptions import setup_exception_handler
 from db import Base, engine
 from fastapi import FastAPI
 from middleware import setup_middlewares
@@ -44,4 +45,5 @@ for view in admin_views:
 init_telemetry(app, engine=engine, logfire_token=settings.LOGFIRE_TOKEN)
 setup_ratelimiting(app)
 setup_middlewares(app)
+setup_exception_handler(app, is_production=settings.IS_PROD)
 app.include_router(api_router)

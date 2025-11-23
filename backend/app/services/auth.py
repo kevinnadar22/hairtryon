@@ -35,6 +35,7 @@ from utils import (
     hash_password,
     verify_password,
 )
+import urllib.parse
 
 R = TypeVar("R", bound=Response)
 
@@ -389,17 +390,33 @@ class AuthService:
         Returns:
             JSONResponse: JSON response with cookies set.
         """
+        domain = self._get_frontend_domain()
+        secure: bool = False
+        samesite: Literal["lax", "strict", "none"] = "lax"
+        cookie_domain: Optional[str] = None
+
+        if domain and "localhost" not in domain:
+            secure = True
+            samesite = "none"
+            cookie_domain = domain
+
         response.set_cookie(
             "refresh_token",
             value=token_response.refresh_token,
             httponly=True,
             max_age=settings.REFRESH_TOKEN_EXPIRE_MINUTES * 60,
+            secure=secure,
+            samesite=samesite,
+            domain=cookie_domain,
         )
         response.set_cookie(
             "access_token",
             value=token_response.access_token,
             httponly=True,
             max_age=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+            secure=secure,
+            samesite=samesite,
+            domain=cookie_domain,
         )
         return response
 
@@ -449,3 +466,8 @@ class AuthService:
         )
 
         return self.login_user_with_cookies(token_response)
+
+    def _get_frontend_domain(self) -> str:
+        frontend_url = settings.FRONTEND_URL
+        domain = urllib.parse.urlparse(frontend_url).netloc
+        return domain

@@ -5,7 +5,10 @@ This module defines domain-specific exception classes that extend FastAPI's
 HTTPException for consistent error handling across the API.
 """
 
-from fastapi import HTTPException, status
+from fastapi import FastAPI, HTTPException, Request, status
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from loguru import logger
 
 
 class EmailAlreadyRegisteredException(HTTPException):
@@ -153,4 +156,40 @@ class NotEnoughCreditsException(HTTPException):
         super().__init__(
             status_code=status.HTTP_402_PAYMENT_REQUIRED,
             detail="Not enough credits, please top up your account.",
+        )
+
+
+class InternalServerException(HTTPException):
+    def __init__(self):
+        super().__init__(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error",
+        )
+
+
+def setup_exception_handler(app: FastAPI, is_production: bool) -> None:
+    if not is_production:
+        return
+
+    @app.exception_handler(Exception)
+    async def exception_handler(request: Request, exc: Exception):
+        logger.error(f"Exception: {exc}")
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={
+                "detail": "Internal server error",
+            },
+        )
+
+    # RequestValidationError
+    @app.exception_handler(RequestValidationError)
+    async def validation_exception_handler(
+        request: Request, exc: RequestValidationError
+    ):
+        logger.error(f"Validation error: {exc}")
+        return JSONResponse(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            content={
+                "detail": "Validation error, please check your input.",
+            },
         )

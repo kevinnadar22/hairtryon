@@ -79,26 +79,26 @@ export const Hero: React.FC = () => {
       <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 -skew-x-12 translate-x-32 -z-10 hidden lg:block" />
       <div className="absolute top-40 left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl -z-10" />
 
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+      <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
 
           {/* Text Content */}
           <div className="w-full lg:w-1/2 space-y-8 z-10">
-            <h1 className="text-5xl lg:text-7xl font-serif font-bold text-slate-900 leading-[1.1]">
-              <TextAnimate animation="blurInUp" by="word" as="span">Find Your Perfect</TextAnimate>
-              <br />
+            <h1 className="text-5xl lg:text-7xl font-serif font-bold text-slate-900 leading-[1.1] flex flex-col">
+              <div className="flex gap-3 lg:gap-4">
+                <TextAnimate animation="blurInUp" as="span">Find</TextAnimate>
+                <TextAnimate animation="blurInUp" as="span" delay={0.1}>Your</TextAnimate>
+              </div>
+              <TextAnimate animation="blurInUp" as="span" delay={0.2}>Perfect</TextAnimate>
               <TextAnimate
                 animation="blurInUp"
-                by="word"
                 as="span"
-                delay={0.5}
-                className="inline-block"
-                segmentClassName="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80 pb-1"
+                delay={0.3}
+                className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80 pb-1"
               >
                 Hairstyle
               </TextAnimate>
-              {" "}
-              <TextAnimate animation="blurInUp" by="word" as="span" delay={0.6}>Instantly.</TextAnimate>
+              <TextAnimate animation="blurInUp" as="span" delay={0.4}>Instantly.</TextAnimate>
             </h1>
 
             <p className="text-lg text-slate-600 max-w-xl leading-relaxed">
