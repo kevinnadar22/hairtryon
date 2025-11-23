@@ -8,7 +8,7 @@ and image upload settings. All settings are loaded from environment variables.
 from dotenv import load_dotenv
 from pydantic import ConfigDict
 from pydantic_settings import BaseSettings
-from typing import Literal
+from typing import Literal, Optional
 
 # This is needed even though we use BaseSettings which loads .env automatically
 # Because some libraries may rely on environment variables being set at import time
@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     # Other
     FREE_USER_CREDITS: int = 3
     PORT: int = 8000
+    LOGFIRE_TOKEN: Optional[str] = None
 
     # Auth Configurations
     SECRET_KEY: str = "your-secret"
