@@ -11,6 +11,7 @@ from core.exceptions import (
     NotAuthenticatedException,
     UserNotFoundException,
     UserNotVerifiedException,
+    NoCookiesException,
 )
 from db import Session, get_db
 from enums import TokenType
@@ -42,7 +43,10 @@ def get_current_user(
     cookies: CookiesModel = Depends(get_cookies),
     db: Session = Depends(get_db),
 ) -> User:
-    decoded_token = decode_access_token(cookies.access_token or "")
+    if not cookies.access_token:
+        raise NoCookiesException()
+
+    decoded_token = decode_access_token(cookies.access_token)
 
     if not decoded_token:
         raise NotAuthenticatedException()

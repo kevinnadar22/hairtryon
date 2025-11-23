@@ -55,7 +55,7 @@ export const CreditPurchaseModal: React.FC<CreditPurchaseModalProps> = ({
 
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-            <DialogContent className="max-w-md p-6 ">
+            <DialogContent className="max-w-md p-6 " onOpenAutoFocus={(e) => e.preventDefault()}>
                 <DialogHeader>
                     <DialogTitle className="text-2xl font-bold">
                         Pay As You Go Plan

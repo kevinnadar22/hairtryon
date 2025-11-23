@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { login, setAuthStatus, logout } from "@/features";
 import { api } from "@/api/client";
 import { toast } from "sonner";
+import { getErrorCode, getErrorMessage } from "@/utils";
 
 
 interface AuthProviderProps {
@@ -40,9 +41,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     if (userQuery.isError) {
+      const errCode = getErrorCode(userQuery.error);
 
-        toast.error("Session expired. Please log in again.");
-
+      if (errCode != "NO_COOKIES_FOUND") {
+        toast.error("Session expired, please login again");
+      }
+      
       dispatch(setAuthStatus("succeeded"));
       dispatch(logout());
     }

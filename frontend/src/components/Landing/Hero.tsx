@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from './Button';
 import { TextAnimate } from "@/components/ui/text-animate";
-import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import bobLanding from '@/assets/boblanding.jpg';
@@ -87,7 +87,7 @@ export const Hero: React.FC = () => {
             <h1 className="text-5xl lg:text-7xl font-serif font-bold text-slate-900 leading-[1.1]">
               <TextAnimate animation="blurInUp" by="word" as="span">Find Your Perfect</TextAnimate>
               <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-primary/80 inline-block">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80 inline-block">
                 <TextAnimate animation="blurInUp" by="word" as="span" delay={0.5}>Hairstyle</TextAnimate>
               </span>
               {" "}
@@ -181,9 +181,7 @@ export const Hero: React.FC = () => {
                     {/* Floating Badge only on front card */}
                     {isFront && (
                       <div className="absolute bottom-6 left-6 right-6 mx-auto bg-white/95 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-4 animate-fade-in-up">
-                        <div className={`w-10 h-10 rounded-full ${image.color} flex items-center justify-center shrink-0`}>
-                          <Sparkles size={18} />
-                        </div>
+
                         <div>
                           <p className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Style Applied</p>
                           <p className="font-serif font-bold text-slate-900 leading-tight">{image.style}</p>
@@ -195,7 +193,7 @@ export const Hero: React.FC = () => {
               })}
 
               {/* Decorative Background Blob behind cards */}
-              <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-linear-to-tr from-primary/20 to-primary/10 rounded-full blur-3xl -z-10 opacity-50 pointer-events-none" />
+              <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-tr from-primary/20 to-primary/10 rounded-full blur-3xl -z-10 opacity-50 pointer-events-none" />
             </div>
 
             {/* Manual Controls */}

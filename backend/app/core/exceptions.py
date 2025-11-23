@@ -28,7 +28,7 @@ class UserNotFoundException(HTTPException):
     def __init__(self):
         super().__init__(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User not found",
+            detail={"code": "USER_NOT_FOUND", "message": "User not found"},
             headers={"WWW-Authenticate": "Bearer"},
         )
 
@@ -37,8 +37,16 @@ class NotAuthenticatedException(HTTPException):
     def __init__(self):
         super().__init__(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Not authenticated",
+            detail={"code": "NOT_AUTHENTICATED", "message": "Not authenticated"},
             headers={"WWW-Authenticate": "Bearer"},
+        )
+
+
+class NoCookiesException(HTTPException):
+    def __init__(self):
+        super().__init__(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={"code": "NO_COOKIES_FOUND", "message": "No cookies found"},
         )
 
 

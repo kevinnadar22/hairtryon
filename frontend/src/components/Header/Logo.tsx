@@ -69,9 +69,10 @@ const Logo: React.FC<LogoProps> = ({
                 <video
                     ref={videoRef}
                     src={logoVideo}
-                    className={`absolute top-0 left-0 ${sizeClasses[size]} object-cover transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                    className={`absolute top-0 left-0 ${sizeClasses[size]} object-cover transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
                     loop={false}
                     muted
+                    playsInline
                 />
             </div>
             {showText && (
