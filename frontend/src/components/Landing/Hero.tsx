@@ -94,14 +94,7 @@ export const Hero: React.FC = () => {
                 animation="blurInUp"
                 as="span"
                 delay={0.3}
-                className="pb-1"
-                style={{
-                  background: 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--primary) / 0.8))',
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  color: 'hsl(var(--primary))' // Fallback for browsers that don't support background-clip
-                }}
+                className="text-primary pb-1"
               >
                 Hairstyle
               </TextAnimate>
