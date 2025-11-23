@@ -26,6 +26,7 @@ const CapturePhoto: React.FC<CapturePhotoProps> = ({
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [isCameraReady, setIsCameraReady] = useState(false);
+  const [videoAspectRatio, setVideoAspectRatio] = useState<number>(16 / 9);
 
   const startCamera = async () => {
     try {
@@ -76,12 +77,16 @@ const CapturePhoto: React.FC<CapturePhotoProps> = ({
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
         const imageDataUrl = canvas.toDataURL("image/png");
         setCapturedImage(imageDataUrl);
+        // Stop the camera stream after capturing
+        stopCamera();
       }
     }
   };
 
   const handleRetake = () => {
     setCapturedImage(null);
+    // Restart the camera when retaking
+    startCamera();
   };
 
   const handleConfirm = () => {
@@ -106,20 +111,29 @@ const CapturePhoto: React.FC<CapturePhotoProps> = ({
           <DialogTitle>Take a Photo</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col items-center justify-center gap-4 py-4">
-          <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden">
+          <div
+            className="relative w-full bg-black rounded-lg overflow-hidden"
+            style={{ aspectRatio: videoAspectRatio }}
+          >
             {!capturedImage ? (
               <video
                 ref={videoRef}
                 autoPlay
                 playsInline
                 muted
-                className="w-full h-full object-cover transform -scale-x-100" // Mirror effect
+                onLoadedMetadata={(e) => {
+                  const video = e.currentTarget;
+                  if (video.videoWidth && video.videoHeight) {
+                    setVideoAspectRatio(video.videoWidth / video.videoHeight);
+                  }
+                }}
+                className="w-full h-full object-contain transform -scale-x-100" // Mirror effect
               />
             ) : (
               <img
                 src={capturedImage}
                 alt="Captured"
-                className="w-full h-full object-cover transform -scale-x-100" // Mirror effect to match preview
+                className="w-full h-full object-contain transform -scale-x-100" // Mirror effect to match preview
               />
             )}
             <canvas ref={canvasRef} className="hidden" />
