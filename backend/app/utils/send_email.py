@@ -1,47 +1,61 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-File: send_email.py
-Author: Maria Kevin
-Created: 2025-11-18
-Description: Utility functions for sending emails.
-"""
-
-__author__ = "Maria Kevin"
-__version__ = "0.1.0"
-
-
+import re
 from pathlib import Path
 
+import aiohttp
 from core.config import settings
-from fastapi_mail import ConnectionConfig, FastMail, MessageSchema, MessageType
-from pydantic import EmailStr, SecretStr
-
-conf = ConnectionConfig(
-    MAIL_USERNAME=settings.MAIL_USERNAME,
-    MAIL_PASSWORD=SecretStr(settings.MAIL_PASSWORD),
-    MAIL_FROM=settings.MAIL_USERNAME,
-    MAIL_PORT=settings.MAIL_PORT,
-    MAIL_SERVER=settings.MAIL_SERVER,
-    MAIL_STARTTLS=True,
-    MAIL_SSL_TLS=False,
-    USE_CREDENTIALS=True,
-    VALIDATE_CERTS=True,
-    TEMPLATE_FOLDER=Path("app/templates"),
-)
+from loguru import logger
+from pydantic import EmailStr
 
 
 async def send_mail_async(
     subject: str, email: EmailStr, body: dict, template_name: str
-) -> bool:
-    message = MessageSchema(
-        subject=subject,
-        recipients=[email],  # type: ignore
-        template_body=body,
-        subtype=MessageType.html,
-        from_name=settings.MAIL_FROM,
-    )
+):
+    html_content = render_template(template_name, **body)
 
-    fm = FastMail(conf)
-    await fm.send_message(message, template_name=template_name)
-    return True
+    brevo_api_key = settings.BREVO_API_KEY  # Assuming BREVO_API_KEY is in settings
+    sender_email = settings.MAIL_FROM
+
+    url = "https://api.brevo.com/v3/smtp/email"
+    payload = {
+        "sender": {
+            "name": settings.MAIL_FROM_NAME,  # Assuming MAIL_FROM_NAME is in settings
+            "email": sender_email,
+        },
+        "to": [
+            {
+                "email": email,
+                "name": str(email).split("@")[0],  # Simple way to get a name from email
+            }
+        ],
+        "subject": subject,
+        "htmlContent": html_content,
+    }
+    headers = {
+        "api-key": brevo_api_key,
+        "accept": "application/json",
+        "content-type": "application/json",
+    }
+
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, json=payload, headers=headers) as response:
+            # log properly
+            logger.info(f"Email sent to {email} with subject {subject}")
+            logger.info(f"Response: {response.status}")
+            logger.info(f"Response body: {await response.json()}")
+
+
+def render_template(template_name: str, **kwargs: dict) -> str:
+    template_path = Path("app/templates/" + template_name)
+    if not template_path.is_file():
+        raise FileNotFoundError(f"Template file not found: {template_path}")
+
+    with open(template_path, "r", encoding="utf-8") as f:
+        template_content = f.read()
+
+    # Replace template variables using regex to handle varying whitespace
+    # Pattern matches: {{ key }}, {{key}}, {{  key  }}, etc.
+    for key, value in kwargs.items():
+        pattern = r"{{\s*" + re.escape(key) + r"\s*}}"
+        template_content = re.sub(pattern, str(value), template_content)
+
+    return template_content

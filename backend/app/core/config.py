@@ -55,11 +55,9 @@ class Settings(BaseSettings):
     REPLICATE_API_TOKEN: str
 
     # Email settings
-    MAIL_USERNAME: str
-    MAIL_PASSWORD: str
+    MAIL_FROM_NAME: str
     MAIL_FROM: str
-    MAIL_PORT: int
-    MAIL_SERVER: str
+    BREVO_API_KEY: str
 
     # Admin Panel settings
     ADMIN_USERNAME: str | None = "admin"
