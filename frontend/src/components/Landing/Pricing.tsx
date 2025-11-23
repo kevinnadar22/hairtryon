@@ -3,6 +3,9 @@ import { Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./Button";
 import { CreditPurchaseModal } from "../Payments/CreditPurchaseModal";
+import { LoginPopup } from "../Auth/LoginPopup";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/app/store";
 
 interface PricingTier {
   name: string;
@@ -51,9 +54,16 @@ export const Pricing: React.FC<PricingProps> = ({
   showHeader = true,
 }) => {
   const navigate = useNavigate();
+
   const [showModal, setShowModal] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const handleButtonClick = (tier: PricingTier) => {
+    if (!user) {
+      setShowLoginPopup(true);
+      return;
+    }
     if (!tier.href) {
       setShowModal(true);
     } else {
@@ -188,6 +198,11 @@ export const Pricing: React.FC<PricingProps> = ({
       <CreditPurchaseModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
+      />
+
+      <LoginPopup
+        isOpen={showLoginPopup}
+        onClose={() => setShowLoginPopup(false)}
       />
     </>
   );
