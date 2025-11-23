@@ -97,13 +97,12 @@ function GenerateButton({ className, ...props }: GenerateButtonProps) {
     const handleGenerate = async (e?: React.MouseEvent) => {
         e?.stopPropagation();
 
-        if (!user) {
-            setShowLoginPopup(true);
-            return false;
-        }
-
         if (!userUploadedImage) {
             toast.error('Please upload an image first');
+            return false;
+        }
+        if (!user) {
+            setShowLoginPopup(true);
             return false;
         }
 

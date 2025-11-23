@@ -60,9 +60,6 @@ const Styles: React.FC = () => {
         <StylesGrid styles={styles} selectedHairstyle={selectedHairstyle} setSelectedHairstyle={setSelectedHairstyle} />
     );
 
-    if (!userUploadedImage) {
-        return null;
-    }
 
     return (
         <Card className="p-6 h-fit relative">

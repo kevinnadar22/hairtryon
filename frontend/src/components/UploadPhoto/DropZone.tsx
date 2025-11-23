@@ -93,7 +93,7 @@ const DropZone: React.FC<DropZoneProps> = ({ onFileSelect, onClick }) => {
               </div>
 
               {/* add the generate button here too */}
-              <GenerateButton className="mt-4" />
+              {/* <GenerateButton className="mt-4" /> */}
             </div>
           </div>
         </div>
