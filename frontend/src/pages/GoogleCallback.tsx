@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useGoogleAuth } from "@/hooks/useGoogleAuth";
 
 function GoogleCallback() {
-    const { login } = useGoogleAuth();
+    const { googleLoginCallback } = useGoogleAuth();
     
     useEffect(() => {
-        login();
+        googleLoginCallback();
     }, []);
     return (
         <div className="flex items-center justify-center h-screen">

@@ -1,4 +1,4 @@
-import { setAuthStatus} from '@/features';
+import { setAuthStatus } from '@/features';
 import { cleanPath } from '@/utils/helpers';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -10,8 +10,14 @@ function useGoogleAuth() {
 
     function login() {
         cleanPath();
+        navigate("/try");
+    }
+
+    function googleLoginCallback() {
+        cleanPath();
         window.opener.postMessage({ type: "oauth_success" }, window.opener.location.origin);
     }
+
 
     function getGoogleRedirect() {
         const baseUrl = Config.API_URL;
@@ -49,7 +55,7 @@ function useGoogleAuth() {
 
         window.addEventListener("message", listener);
     }
-    return { handleGoogleSignIn, login };
+    return { handleGoogleSignIn, login, googleLoginCallback };
 }
 
 export { useGoogleAuth };
