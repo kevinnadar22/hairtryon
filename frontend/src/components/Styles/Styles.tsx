@@ -9,7 +9,7 @@ import GenerateButton from '../UploadPhoto/GenerateButton';
 import { api } from '@/api/client';
 import { useDispatch } from "react-redux";
 import { setStyleId } from "@/features/imageSlide/slice";
-import { useUploadContext } from '@/contexts';
+// import { useUploadContext } from '@/contexts';
 
 
 type StylesResponse = typeof api.image.getImageStylesApiV1ImageStylesGet.types.data[number];
@@ -33,7 +33,7 @@ const Styles: React.FC = () => {
     // State for the selected hairstyle
     const dispatch = useDispatch();
 
-    const { userUploadedImage } = useUploadContext();
+    // const { userUploadedImage } = useUploadContext();
     const { styleId: selectedHairstyle } = useSelector((state: RootState) => state.imageSlide);
 
     // States for hairstyles and celebrity hairstyles

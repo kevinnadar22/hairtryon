@@ -3,7 +3,7 @@ import IsoImage from "@/components/ui/IsoImage";
 import uploadiso from "@/assets/uploadiso.png";
 import { TextureOverlay } from "../ui/texture-overlay";
 import { Highlighter } from "../ui/highlighter";
-import GenerateButton from "./GenerateButton";
+// import GenerateButton from "./GenerateButton";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Camera } from "lucide-react";
