@@ -12,7 +12,7 @@ function PhotoEditorPage() {
             <div className="flex flex-col gap-8">
                 <UploadPhoto />
 
-                {<Styles />}
+                <Styles />
 
                 <div className="overflow-x-auto">
                     <History />
