@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Upload, Wand2, Download } from 'lucide-react';
 
 export const HowItWorks: React.FC = () => {
@@ -19,30 +20,36 @@ export const HowItWorks: React.FC = () => {
 
           {/* Step 1 */}
           <div className="relative z-10 text-center group">
-            <div className="w-24 h-24 mx-auto bg-white rounded-2xl shadow-lg flex items-center justify-center mb-8 border border-slate-100 group-hover:border-primary/20 group-hover:shadow-xl transition-all duration-300 relative">
-              <Upload className="text-primary" size={32} />
-              <div className="absolute -top-3 -right-3 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm border-4 border-slate-50">1</div>
-            </div>
+            <Link to="/try" className="block">
+              <div className="w-24 h-24 mx-auto bg-white rounded-2xl shadow-lg flex items-center justify-center mb-8 border border-slate-100 group-hover:border-primary/20 group-hover:shadow-xl group-hover:scale-105 transition-all duration-300 relative cursor-pointer">
+                <Upload className="text-primary" size={32} />
+                <div className="absolute -top-3 -right-3 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm border-4 border-slate-50">1</div>
+              </div>
+            </Link>
             <h3 className="text-xl font-bold text-slate-900 mb-2">Upload Photo</h3>
             <p className="text-slate-600 px-4 text-sm leading-relaxed">Take a selfie or upload a clear photo. Good lighting ensures the best results.</p>
           </div>
 
           {/* Step 2 */}
           <div className="relative z-10 text-center group">
-            <div className="w-24 h-24 mx-auto bg-white rounded-2xl shadow-lg flex items-center justify-center mb-8 border border-slate-100 group-hover:border-primary/20 group-hover:shadow-xl transition-all duration-300 relative">
-              <Wand2 className="text-primary" size={32} />
-              <div className="absolute -top-3 -right-3 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm border-4 border-slate-50">2</div>
-            </div>
+            <Link to="/try" className="block">
+              <div className="w-24 h-24 mx-auto bg-white rounded-2xl shadow-lg flex items-center justify-center mb-8 border border-slate-100 group-hover:border-primary/20 group-hover:shadow-xl group-hover:scale-105 transition-all duration-300 relative cursor-pointer">
+                <Wand2 className="text-primary" size={32} />
+                <div className="absolute -top-3 -right-3 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm border-4 border-slate-50">2</div>
+              </div>
+            </Link>
             <h3 className="text-xl font-bold text-slate-900 mb-2">Choose Style</h3>
             <p className="text-slate-600 px-4 text-sm leading-relaxed">Select from our trending presets to define your new look.</p>
           </div>
 
           {/* Step 3 */}
           <div className="relative z-10 text-center group">
-            <div className="w-24 h-24 mx-auto bg-white rounded-2xl shadow-lg flex items-center justify-center mb-8 border border-slate-100 group-hover:border-primary/20 group-hover:shadow-xl transition-all duration-300 relative">
-              <Download className="text-primary" size={32} />
-              <div className="absolute -top-3 -right-3 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm border-4 border-slate-50">3</div>
-            </div>
+            <Link to="/try" className="block">
+              <div className="w-24 h-24 mx-auto bg-white rounded-2xl shadow-lg flex items-center justify-center mb-8 border border-slate-100 group-hover:border-primary/20 group-hover:shadow-xl group-hover:scale-105 transition-all duration-300 relative cursor-pointer">
+                <Download className="text-primary" size={32} />
+                <div className="absolute -top-3 -right-3 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm border-4 border-slate-50">3</div>
+              </div>
+            </Link>
             <h3 className="text-xl font-bold text-slate-900 mb-2">Get Results</h3>
             <p className="text-slate-600 px-4 text-sm leading-relaxed">Download your transformed photo in HD instantly. Share or save for later.</p>
           </div>
