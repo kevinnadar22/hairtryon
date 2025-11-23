@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { login, setAuthStatus, logout } from "@/features";
 import { api } from "@/api/client";
 import { toast } from "sonner";
-import { getErrorCode, getErrorMessage } from "@/utils";
+import { getErrorCode } from "@/utils";
 
 
 interface AuthProviderProps {
