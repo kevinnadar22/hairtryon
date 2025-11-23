@@ -26,7 +26,7 @@ export const CreditPurchaseModal: React.FC<CreditPurchaseModalProps> = ({
 
     useEffect(() => {
         DodoPayments.Initialize({
-            mode: "test", // 'test' or 'live'
+            mode: import.meta.env.VITE_DODO_PAYMENTS_MODE as "test" | "live" || "test", // 'test' or 'live'
             theme: "light", // 'light' or 'dark'
         });
     }, []);
