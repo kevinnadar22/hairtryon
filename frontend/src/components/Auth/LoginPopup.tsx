@@ -9,9 +9,16 @@ interface LoginPopupProps {
 }
 
 export const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose }) => {
+    const handleContentClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+    };
+
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent
+                className="sm:max-w-[425px]"
+                onClick={handleContentClick}
+            >
                 <DialogHeader>
                     <DialogTitle>Login Required</DialogTitle>
                     <DialogDescription>
