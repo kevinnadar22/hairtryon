@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Home, ArrowLeft, SearchX } from 'lucide-react';
+import { Card,  CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Home, ArrowLeft} from 'lucide-react';
 
 export default function NotFound() {
     const navigate = useNavigate();
@@ -19,12 +19,7 @@ export default function NotFound() {
             <div className="max-w-2xl w-full">
                 <Card className="p-8 md:p-12">
                     <CardHeader className="px-0">
-                        {/* Icon */}
-                        <div className="flex justify-center mb-4">
-                            <div className="bg-muted p-6 rounded-full border border-border">
-                                <SearchX className="w-16 h-16 text-muted-foreground" strokeWidth={1.5} />
-                            </div>
-                        </div>
+
 
                         <CardTitle className="text-6xl md:text-7xl text-center">
                             404
@@ -37,16 +32,7 @@ export default function NotFound() {
                         </CardDescription>
                     </CardHeader>
 
-                    <CardContent className="px-0">
-                        {/* Suggestions */}
-                        <div className="bg-muted/50 border border-border rounded-lg p-6">
-                            <p className="text-sm text-muted-foreground">
-                                Check the URL for typos or navigate back to continue browsing.
-                            </p>
-                        </div>
-                    </CardContent>
-
-                    <CardFooter className="px-0 flex-col sm:flex-row gap-4">
+                    <CardFooter className="px-0 flex-col items-center justify-center sm:flex-row gap-4">
                         <Button
                             onClick={handleBack}
                             variant="outline"
