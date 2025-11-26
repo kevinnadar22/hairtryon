@@ -26,9 +26,11 @@ import {
   Test,
   GoogleCallback,
   PricingPage,
-  PaymentCallback
+  PaymentCallback,
+  NotFound
 } from "./pages";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ErrorBoundaryWrapper from "./components/Misc/ErrorBoundary";
 
 const router = createBrowserRouter([
   {
@@ -109,13 +111,19 @@ const router = createBrowserRouter([
     path: "/verify-login",
     element: <VerifyLogin />,
   },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
 ]);
 
 createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
     <Provider store={store}>
       <UploadProvider>
-        <RouterProvider router={router} />
+        <ErrorBoundaryWrapper>
+          <RouterProvider router={router} />
+        </ErrorBoundaryWrapper>
       </UploadProvider>
 
       <Toaster position="top-center" />

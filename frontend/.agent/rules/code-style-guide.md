@@ -1,3 +1,8 @@
+---
+trigger: glob
+globs: *.tsx
+---
+
 # Crictical
 
 Do not use explicit colors in tailwind props, like bg-red-500, 

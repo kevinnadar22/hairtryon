@@ -16,6 +16,7 @@ import PrivacyPolicy from "./PrivacyPolicy";
 import TermsOfService from "./TermsOfService";
 import PricingPage from "./PricingPage";
 import PaymentCallback from "./PaymentCallback";
+import NotFound from "./NotFound";
 
 export {
   PhotoEditorPage,
@@ -35,4 +36,5 @@ export {
   TermsOfService,
   PricingPage,
   PaymentCallback,
+  NotFound,
 };
