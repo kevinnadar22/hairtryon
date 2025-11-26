@@ -11,10 +11,10 @@ import { ActionButton } from '../ui/ActionButton';
 import { api } from '@/api/client';
 import uploadToS3 from '@/lib/uploadS3';
 import { useUploadContext } from '@/contexts';
-import { useQueryClient } from '@tanstack/react-query';
 import { getErrorMessage } from '@/utils';
 import { CreditPurchaseModal } from '../Payments/CreditPurchaseModal';
 import { LoginPopup } from '../Auth/LoginPopup';
+import { useInvalidateQuery } from '@/hooks/useInvalidateQuery';
 
 interface GenerateButtonProps extends Omit<React.ComponentProps<typeof ActionButton>, 'onClick' | 'errorMessage' | 'loadingMessage' | 'successMessage'> {
     className?: string;
@@ -22,10 +22,11 @@ interface GenerateButtonProps extends Omit<React.ComponentProps<typeof ActionBut
 
 function GenerateButton({ className, ...props }: GenerateButtonProps) {
     const dispatch = useDispatch();
-    const queryClient = useQueryClient();
+
     const [showCreditModal, setShowCreditModal] = useState(false);
     const [showLoginPopup, setShowLoginPopup] = useState(false);
 
+    const { invalidateMeQueries, invalidateUserImages } = useInvalidateQuery();
 
     const { isGenerating, generatedImage, styleId: selectedHairstyle } = useSelector((state: RootState) => state.imageSlide);
     const { userUploadedImage, selectFileFromUrl } = useUploadContext();
@@ -53,13 +54,8 @@ function GenerateButton({ className, ...props }: GenerateButtonProps) {
     );
 
     const invalidateQueries = () => {
-        queryClient.invalidateQueries({
-            queryKey: api.user.getUserImagesApiV1UserImagesGet.getQueryKey()
-        });
-
-        queryClient.invalidateQueries({
-            queryKey: api.user.readCurrentUserApiV1UserMeGet.getQueryKey()
-        });
+        invalidateMeQueries();
+        invalidateUserImages();
     }
 
 

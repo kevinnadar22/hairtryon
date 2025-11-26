@@ -50,7 +50,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       dispatch(setAuthStatus("succeeded"));
       dispatch(logout());
     }
-  }, [userQuery.isSuccess, userQuery.isError, userQuery.data]);
+  }, [userQuery.isSuccess, userQuery.isError, userQuery.data,]);
 
   return children;
 };

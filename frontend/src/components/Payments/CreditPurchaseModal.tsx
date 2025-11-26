@@ -3,6 +3,7 @@ import { Loader2 } from "lucide-react";
 import { Button } from "../Landing/Button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Input } from "../ui/input";
+import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 import { DodoPayments } from "dodopayments-checkout";
 import { api } from "@/api/client";
 import { toast } from "sonner";
@@ -94,6 +95,29 @@ export const CreditPurchaseModal: React.FC<CreditPurchaseModalProps> = ({
                                     }
                                     className="w-full"
                                 />
+
+                                {/* Predetermined price options */}
+                                <div className="pt-2">
+                                    <p className="text-xs text-muted-foreground mb-2">Quick select:</p>
+                                    <ToggleGroup
+                                        type="single"
+                                        value={imageQuantity.toString()}
+                                        onValueChange={(value) => {
+                                            if (value) setImageQuantity(parseInt(value));
+                                        }}
+                                        className="justify-start flex-wrap"
+                                    >
+                                        {[5, 10, 25, 50, 100].map((amount) => (
+                                            <ToggleGroupItem
+                                                key={amount}
+                                                value={amount.toString()}
+                                                aria-label={`Select ${amount} images`}
+                                            >
+                                                {amount} (₹{amount})
+                                            </ToggleGroupItem>
+                                        ))}
+                                    </ToggleGroup>
+                                </div>
                             </div>
                         </div>
 

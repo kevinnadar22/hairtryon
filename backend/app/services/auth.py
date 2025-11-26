@@ -390,33 +390,20 @@ class AuthService:
         Returns:
             JSONResponse: JSON response with cookies set.
         """
-        domain = self._get_frontend_domain()
-        secure: bool = False
-        samesite: Literal["lax", "strict", "none"] = "lax"
-        cookie_domain: Optional[str] = None
-
-        if domain and "localhost" not in domain:
-            secure = True
-            samesite = "none"
-            cookie_domain = domain
-
+        cookies_kwarg = self._cookies_kwarg()
         response.set_cookie(
             "refresh_token",
             value=token_response.refresh_token,
             httponly=True,
             max_age=settings.REFRESH_TOKEN_EXPIRE_MINUTES * 60,
-            secure=secure,
-            samesite=samesite,
-            domain=cookie_domain,
+            **cookies_kwarg,
         )
         response.set_cookie(
             "access_token",
             value=token_response.access_token,
             httponly=True,
             max_age=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
-            secure=secure,
-            samesite=samesite,
-            domain=cookie_domain,
+            **cookies_kwarg,
         )
         return response
 
@@ -428,9 +415,34 @@ class AuthService:
             JSONResponse: JSON response with cookies cleared.
         """
         response = JSONResponse(status_code=200, content={"message": "User logged out"})
-        response.delete_cookie("refresh_token")
-        response.delete_cookie("access_token")
+
+        cookies_kwarg = self._cookies_kwarg()
+        response.delete_cookie("refresh_token", **cookies_kwarg)
+        response.delete_cookie("access_token", **cookies_kwarg)
         return response
+
+    def _cookies_kwarg(self) -> dict:
+        """
+        Get cookies keyword arguments.
+
+        Returns:
+            dict: Cookies keyword arguments.
+        """
+        domain = self._get_frontend_domain()
+        secure: bool = False
+        samesite: Literal["lax", "strict", "none"] = "lax"
+        cookie_domain: Optional[str] = None
+
+        if domain and "localhost" not in domain:
+            secure = True
+            samesite = "none"
+            cookie_domain = domain
+
+        return {
+            "domain": cookie_domain,
+            "secure": secure,
+            "samesite": samesite,
+        }
 
     def refresh_user(self, refresh_token: str) -> JSONResponse:
         """

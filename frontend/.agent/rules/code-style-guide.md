@@ -7,7 +7,9 @@ globs: *.tsx
 
 Do not use explicit colors in tailwind props, like bg-red-500, 
 Use variables from index.css instead. like bg-primary, bg-secondary, etc.
-Use Shadcn UI components instead of custom components wheever required
+
+Crictical:
+Use Shadcn UI components instead of custom components everywhere applicable,
 If some component is not available in Shadcn UI, try instaling it or design new
 npx shadcn@latest add tabs
 

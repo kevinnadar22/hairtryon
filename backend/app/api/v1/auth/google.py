@@ -14,6 +14,7 @@ __version__ = "0.1.0"
 from core.config import settings
 from core.dependencies import AuthServiceDep, GoogleAuthServiceDep
 from fastapi import APIRouter, Request
+from core.exceptions import GoogleAuthException
 from fastapi.responses import RedirectResponse
 
 router = APIRouter()
@@ -54,9 +55,14 @@ async def google_auth(
     Raises:
         HTTPException: If Google authentication fails.
     """
+    try:
+        token = await google_auth_service.handle_authorization_callback(request)
+        redirect_url = f"{settings.FRONTEND_URL}/auth/callback?success=true"
+    except GoogleAuthException as e:
+        token = None
+        redirect_url = f"{settings.FRONTEND_URL}/auth/callback?error={e.detail}"
 
-    token = await google_auth_service.handle_authorization_callback(request)
-
-    redirect_url = f"{settings.FRONTEND_URL}/auth/callback"
     response = RedirectResponse(redirect_url)
-    return auth_service.inject_cookies(response, token)
+    if token:
+        response = auth_service.inject_cookies(response, token)
+    return response

@@ -18,7 +18,7 @@ load_dotenv()
 class Settings(BaseSettings):
     """Application configuration settings."""
 
-    DATABASE_URL: str = "sqlite:///./instance/test.db"
+    DATABASE_URL: str = "sqlite:///./app/instance/test.db"
 
     # Other
     FREE_USER_CREDITS: int = 3

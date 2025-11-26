@@ -19,8 +19,6 @@ export default function NotFound() {
             <div className="max-w-2xl w-full">
                 <Card className="p-8 md:p-12">
                     <CardHeader className="px-0">
-
-
                         <CardTitle className="text-6xl md:text-7xl text-center">
                             404
                         </CardTitle>

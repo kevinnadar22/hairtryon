@@ -3,19 +3,24 @@ import { cleanPath } from '@/utils/helpers';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Config from '@/app/config';
+import { toast } from 'sonner';
+import { useInvalidateQuery } from '@/hooks/useInvalidateQuery';
 
 function useGoogleAuth() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { refetchMeQueries } = useInvalidateQuery();
 
     function login() {
         cleanPath();
         navigate("/try");
+        refetchMeQueries();
     }
 
-    function googleLoginCallback() {
+
+    function googleLoginCallback(type: string, error?: string) {
         cleanPath();
-        window.opener.postMessage({ type: "oauth_success" }, window.opener.location.origin);
+        window.opener.postMessage({ type, error }, window.opener.location.origin);
     }
 
 
@@ -40,17 +45,22 @@ function useGoogleAuth() {
         const listener = (event: MessageEvent) => {
             if (event.data?.type === "oauth_success") {
                 dispatch(setAuthStatus("succeeded"));
-                window.removeEventListener("message", listener);
-                popup.close();
-                navigate("/try");
+            }
+            
+            else if (event.data?.type === "oauth_error") {
+                const error = event.data.error;
+                dispatch(setAuthStatus("failed"));
+                toast.error(error);
             }
 
-            if (event.data?.type === "oauth_error") {
-                dispatch(setAuthStatus("failed"));
-                window.removeEventListener("message", listener);
-                popup.close();
-                navigate("/try");
+            else {
+                return;
             }
+
+            window.removeEventListener("message", listener);
+            navigate("/try");
+            popup.close();
+            refetchMeQueries();
         };
 
         window.addEventListener("message", listener);

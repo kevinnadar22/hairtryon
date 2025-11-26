@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { api } from '@/api/client';
-import { toast } from 'sonner';
 import {
     Table,
     TableBody,
@@ -19,11 +18,13 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import { useInvalidateQuery } from '@/hooks/useInvalidateQuery';
 
 
 export const Profile: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { invalidateMeQueries } = useInvalidateQuery();
 
     const { mutate: logoutMutate } = api.auth.logoutApiV1AuthLogoutPost.useMutation(
         {},
@@ -34,7 +35,10 @@ export const Profile: React.FC = () => {
             },
             onError: (error) => {
                 console.error(error);
-                toast.error('Failed to logout, please try again');
+                navigate('/try');
+            },
+            onSettled: () => {
+                invalidateMeQueries();
             },
         }
     );
