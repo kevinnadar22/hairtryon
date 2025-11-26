@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Home, ArrowLeft, SearchX } from 'lucide-react';
 
 export default function NotFound() {
@@ -16,36 +17,36 @@ export default function NotFound() {
     return (
         <div className="min-h-screen w-full flex items-center justify-center bg-background p-4">
             <div className="max-w-2xl w-full">
-                <div className="rounded-lg bg-card border border-border p-8 md:p-12 space-y-8">
-                    {/* Icon */}
-                    <div className="flex justify-center">
-                        <div className="bg-muted p-6 rounded-full border border-border">
-                            <SearchX className="w-16 h-16 text-muted-foreground" strokeWidth={1.5} />
+                <Card className="p-8 md:p-12">
+                    <CardHeader className="px-0">
+                        {/* Icon */}
+                        <div className="flex justify-center mb-4">
+                            <div className="bg-muted p-6 rounded-full border border-border">
+                                <SearchX className="w-16 h-16 text-muted-foreground" strokeWidth={1.5} />
+                            </div>
                         </div>
-                    </div>
 
-                    {/* Content */}
-                    <div className="text-center space-y-4">
-                        <h1 className="text-6xl md:text-7xl font-bold text-foreground">
+                        <CardTitle className="text-6xl md:text-7xl text-center">
                             404
-                        </h1>
-                        <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
+                        </CardTitle>
+                        <h2 className="text-3xl md:text-4xl font-semibold text-foreground text-center">
                             Page Not Found
                         </h2>
-                        <p className="text-muted-foreground text-lg max-w-md mx-auto">
+                        <CardDescription className="text-lg text-center max-w-md mx-auto">
                             The page you're looking for doesn't exist or has been moved.
-                        </p>
-                    </div>
+                        </CardDescription>
+                    </CardHeader>
 
-                    {/* Suggestions */}
-                    <div className="bg-muted/50 border border-border rounded-lg p-6">
-                        <p className="text-sm text-muted-foreground">
-                            Check the URL for typos or navigate back to continue browsing.
-                        </p>
-                    </div>
+                    <CardContent className="px-0">
+                        {/* Suggestions */}
+                        <div className="bg-muted/50 border border-border rounded-lg p-6">
+                            <p className="text-sm text-muted-foreground">
+                                Check the URL for typos or navigate back to continue browsing.
+                            </p>
+                        </div>
+                    </CardContent>
 
-                    {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <CardFooter className="px-0 flex-col sm:flex-row gap-4">
                         <Button
                             onClick={handleBack}
                             variant="outline"
@@ -63,8 +64,8 @@ export default function NotFound() {
                             <Home className="w-4 h-4" />
                             Back to Home
                         </Button>
-                    </div>
-                </div>
+                    </CardFooter>
+                </Card>
             </div>
         </div>
     );

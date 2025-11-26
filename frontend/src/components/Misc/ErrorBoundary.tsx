@@ -1,6 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Home, ArrowLeft, AlertTriangle } from 'lucide-react';
 
 interface ErrorBoundaryProps {
@@ -17,33 +18,33 @@ function ErrorFallback({ onBack, onHome }: { onBack: () => void; onHome: () => v
     return (
         <div className="min-h-screen w-full flex items-center justify-center bg-background p-4">
             <div className="max-w-2xl w-full">
-                <div className="rounded-lg bg-card border border-border p-8 md:p-12 space-y-8">
-                    {/* Icon */}
-                    <div className="flex justify-center">
-                        <div className="bg-destructive/10 p-6 rounded-full border border-destructive/20">
-                            <AlertTriangle className="w-16 h-16 text-destructive" strokeWidth={1.5} />
+                <Card className="p-8 md:p-12">
+                    <CardHeader className="px-0">
+                        {/* Icon */}
+                        <div className="flex justify-center mb-4">
+                            <div className="bg-destructive/10 p-6 rounded-full border border-destructive/20">
+                                <AlertTriangle className="w-16 h-16 text-destructive" strokeWidth={1.5} />
+                            </div>
                         </div>
-                    </div>
 
-                    {/* Content */}
-                    <div className="text-center space-y-4">
-                        <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+                        <CardTitle className="text-4xl md:text-5xl text-center">
                             Oops! Something Went Wrong
-                        </h1>
-                        <p className="text-muted-foreground text-lg max-w-md mx-auto">
+                        </CardTitle>
+                        <CardDescription className="text-lg text-center max-w-md mx-auto">
                             We encountered an unexpected error. Don't worry, our team has been notified and we're working on it.
-                        </p>
-                    </div>
+                        </CardDescription>
+                    </CardHeader>
 
-                    {/* Error Details */}
-                    <div className="bg-muted/50 border border-border rounded-lg p-6">
-                        <p className="text-sm text-muted-foreground font-mono">
-                            Try refreshing the page or navigating back to continue using the app.
-                        </p>
-                    </div>
+                    <CardContent className="px-0">
+                        {/* Error Details */}
+                        <div className="bg-muted/50 border border-border rounded-lg p-6">
+                            <p className="text-sm text-muted-foreground font-mono">
+                                Try refreshing the page or navigating back to continue using the app.
+                            </p>
+                        </div>
+                    </CardContent>
 
-                    {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <CardFooter className="px-0 flex-col sm:flex-row gap-4">
                         <Button
                             onClick={onBack}
                             variant="outline"
@@ -61,8 +62,8 @@ function ErrorFallback({ onBack, onHome }: { onBack: () => void; onHome: () => v
                             <Home className="w-4 h-4" />
                             Back to Home
                         </Button>
-                    </div>
-                </div>
+                    </CardFooter>
+                </Card>
             </div>
         </div>
     );
@@ -70,14 +71,13 @@ function ErrorFallback({ onBack, onHome }: { onBack: () => void; onHome: () => v
 
 // Wrapper component to use hooks with class component
 function ErrorBoundaryWrapper({ children }: ErrorBoundaryProps) {
-    const navigate = useNavigate();
 
     const handleBack = () => {
-        navigate(-1);
+        window.history.back();
     };
 
     const handleHome = () => {
-        navigate('/');
+        window.location.href = '/';
     };
 
     return (
