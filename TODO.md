@@ -5,3 +5,4 @@ show predfeined amount in purchase
 when google cancel, redirect to try page
 have pre defined examples if no prev images
 bannner
+error boundary
