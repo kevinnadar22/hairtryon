@@ -3,9 +3,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import type { RootState } from '@/app/store';
 import { SideGenerateButton } from '../UploadPhoto/GenerateButton';
-import backplaceholder from '@/assets/backplaceholder.png';
-import leftplaceholder from '@/assets/leftplaceholder.png';
-import rightplaceholder from '@/assets/rightplaceholder.png';
+import { backplaceholder, leftplaceholder, rightplaceholder } from '@/app/images';
 import { resetSideImageState } from '@/features';
 import ActionButtons from './ActionButtons';
 

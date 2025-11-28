@@ -19,11 +19,8 @@ import {
 import Logo from './Logo';
 import AnimatedButton from '../ui/AnimatedButton';
 import IsoImage from '../ui/IsoImage';
-import homelogo from '@/assets/homeiso.png';
-import contact from '@/assets/contactiso.png';
-import historyiso from '@/assets/historyiso.png';
-import tryonIcon from '@/assets/3dsiscors.png';
-import pricingIcon from '@/assets/pricingiso.png';
+
+import { homelogo, contact, historyiso, tryonIcon, pricingIcon } from '@/app/images';
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/app/store';

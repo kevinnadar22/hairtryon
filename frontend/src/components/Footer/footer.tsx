@@ -4,11 +4,7 @@ import { Separator } from '../ui/separator';
 import { Card } from '../ui/card';
 import Logo from '../Header/Logo';
 import IsoImage from '../ui/IsoImage';
-import homelogo from '@/assets/homeiso.png';
-import contact from '@/assets/contactiso.png';
-import historyiso from '@/assets/historyiso.png';
-import tryon from '@/assets/3dsiscors.png';
-import pricing from '@/assets/pricingiso.png';
+import { homelogo, contact, historyiso, tryon, pricing } from '@/app/images';
 
 // Footer links configuration
 const links = {

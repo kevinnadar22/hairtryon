@@ -1,8 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '@/assets/logo.png';
-import logoVideo from '@/assets/logo.mp4';
-import logotext from '@/assets/logotext.png';
+import { logo, logoVideo, logotext } from '@/app/images';
 
 interface LogoProps {
     className?: string;

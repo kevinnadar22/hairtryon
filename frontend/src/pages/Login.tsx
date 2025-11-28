@@ -1,6 +1,6 @@
 
 import { FadeInTransition } from '@/components/ui/FadeInTransition';
-import loginbg from '@/assets/loginbg.png';
+import { loginbg } from '@/app/images';
 import { Meteors } from '@/components/ui/meteors';
 import { TextAnimate } from '@/components/ui/text-animate';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

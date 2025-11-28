@@ -1,8 +1,5 @@
 import React from 'react';
-import image3d from '@/assets/3ddepthfeature.png';
-import image360 from '@/assets/3viewsfeature.png';
-import imageCeleb from '@/assets/celebrityfeature.png';
-
+import { image3d, image360, imageCeleb } from '@/app/images';
 
 export const Features: React.FC = () => {
   const features = [

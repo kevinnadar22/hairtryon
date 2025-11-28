@@ -3,10 +3,8 @@ import { Button } from './Button';
 import { TextAnimate } from "@/components/ui/text-animate";
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import {bobLanding, buzzcutLanding, longshagLanding} from '@/app/images';
 
-import bobLanding from '@/assets/boblanding.jpg';
-import buzzcutLanding from '@/assets/buzzcutlanding.jpg';
-import longshagLanding from '@/assets/longshaglanding.jpg';
 
 const CAROUSEL_IMAGES = [
   {

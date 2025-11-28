@@ -4,7 +4,7 @@ import React from "react";
 import { BlurFade } from "../ui/blur-fade";
 import HistoryCardItem from "./HistoryImageCard";
 import { Card } from "../ui/card";
-import historyiso from "@/assets/historyiso.png";
+import { historyiso } from "@/app/images";
 import { IsoImage } from "@/components/ui";
 import { api } from "@/api/client";
 import { type components } from "@/api/schema";

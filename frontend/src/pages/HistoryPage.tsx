@@ -10,8 +10,7 @@ import { Error, Loading, Button, IsoImage, HistoryImageCard, Card } from '@/comp
 import { Toggle } from '@/components/ui/toggle';
 import { Heart } from 'lucide-react';
 
-import historyiso from '@/assets/historyiso.png';
-import noitemsfound from '@/assets/noitemsfound.jpg';
+import { noitemsfound, historyiso } from '@/app/images';
 
 const HistoryPage: React.FC = () => {
     const navigate = useNavigate();
