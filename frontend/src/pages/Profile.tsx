@@ -26,16 +26,20 @@ export const Profile: React.FC = () => {
     const navigate = useNavigate();
     const { invalidateMeQueries } = useInvalidateQuery();
 
+    const _redirectToTry = () => {
+        window.location.href = '/try';
+    };
+
     const { mutate: logoutMutate } = api.auth.logoutApiV1AuthLogoutPost.useMutation(
         {},
         {
             onSuccess: () => {
                 dispatch(logout());
-                navigate('/try');
+                _redirectToTry();
             },
             onError: (error) => {
                 console.error(error);
-                navigate('/try');
+                _redirectToTry();
             },
             onSettled: () => {
                 invalidateMeQueries();
