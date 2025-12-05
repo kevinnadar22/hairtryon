@@ -12,6 +12,7 @@ import {
     setIsGeneratingImageFromSide,
     resetSideGeneratedImages,
     setIsSideGenerated,
+    resetSideImageState
 } from "@/features";
 
 import { ActionButton } from "../ui/ActionButton";
@@ -147,6 +148,8 @@ function GenerateButton({ className, ...props }: GenerateButtonProps) {
 
         // resets the previous generated image
         dispatch(startRegeneratingImage());
+        // reset side views too
+        dispatch(resetSideImageState());
         // for loading state, set isGenerating to true
         dispatch(setIsGeneratingImage(true));
 
