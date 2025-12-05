@@ -3,9 +3,6 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import type { RootState } from '@/app/store';
 import { useSelector } from 'react-redux';
-
-import { logout } from '@/features';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { api } from '@/api/client';
@@ -18,15 +15,14 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { useInvalidateQuery } from '@/hooks/useInvalidateQuery';
+import { toast } from 'sonner';
+import { getErrorMessage } from '@/utils';
 
 
 export const Profile: React.FC = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { invalidateMeQueries } = useInvalidateQuery();
 
-    const _redirectToTry = () => {
+    const _redirectToLogin = () => {
         window.location.href = '/login';
     };
 
@@ -34,16 +30,13 @@ export const Profile: React.FC = () => {
         {},
         {
             onSuccess: () => {
-                dispatch(logout());
-                _redirectToTry();
+                _redirectToLogin();
             },
             onError: (error) => {
                 console.error(error);
-                _redirectToTry();
-            },
-            onSettled: () => {
-                invalidateMeQueries();
-            },
+                toast.error(getErrorMessage(error, 'Logout failed'));
+                _redirectToLogin();
+            }
         }
     );
 
@@ -52,7 +45,7 @@ export const Profile: React.FC = () => {
     const handleLogout = () => {
         // check if no user exists
         if (!user) {
-            navigate('/try');
+            _redirectToLogin();
             return;
         }
         logoutMutate();
@@ -62,7 +55,7 @@ export const Profile: React.FC = () => {
 
     useEffect(() => {
         if (!user && status === 'succeeded') {
-            navigate('/try');
+            navigate('/login');
         }
     }, [user, navigate, status]);
 
