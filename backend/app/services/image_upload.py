@@ -57,7 +57,7 @@ class ImageUploadService:
             ExpiresIn=expiration,
         )
         upload_url = response["url"]
-        file_url = f"https://{settings.BUCKET_NAME}.s3.{settings.AWS_REGION}.amazonaws.com/{object_name}"
+        file_url = ImageUploadService.make_url(object_name)
 
         return ImageUploadResponse(
             file_url=file_url,
@@ -94,7 +94,7 @@ class ImageUploadService:
             # ACL="public-read",
         )
 
-        file_url = f"https://{settings.BUCKET_NAME}.s3.{settings.AWS_REGION}.amazonaws.com/{object_name}"
+        file_url = ImageUploadService.make_url(object_name)
         return file_url
 
     # method to save to s3 from url
@@ -130,3 +130,9 @@ class ImageUploadService:
             os.remove(temp_file_path)
 
         return file_url
+
+    @staticmethod
+    def make_url(file_path: str) -> str:
+        if settings.CDN_DOMAIN:
+            return f"https://{settings.CDN_DOMAIN}/{file_path}"
+        return f"https://{settings.BUCKET_NAME}.s3.{settings.AWS_REGION}.amazonaws.com/{file_path}"

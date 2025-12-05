@@ -47,6 +47,7 @@ class Settings(BaseSettings):
     AWS_SECRET_ACCESS_KEY: str
     AWS_REGION: str = "ap-south-1"
     BUCKET_NAME: str = "hairtry"
+    CDN_DOMAIN: str | None = None
 
     UPLOADS_FOLDER: str = "uploads/"
     GENERATED_IMAGES_FOLDER: str = "generated/"
