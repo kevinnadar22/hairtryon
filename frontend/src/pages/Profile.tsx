@@ -27,7 +27,7 @@ export const Profile: React.FC = () => {
     const { invalidateMeQueries } = useInvalidateQuery();
 
     const _redirectToTry = () => {
-        window.location.href = '/try';
+        window.location.href = '/login';
     };
 
     const { mutate: logoutMutate } = api.auth.logoutApiV1AuthLogoutPost.useMutation(
