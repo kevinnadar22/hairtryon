@@ -4,13 +4,28 @@ A full-featured SaaS platform for virtual hair try-on with authentication, payme
 
 ## Screenshots
 
-### Landing Page
-![Landing Page](./screenshots/landing-page.png)
-*The landing page showcasing the main features and call-to-action for users to get started with virtual hair try-on.*
-
-### Editor Page
-![Editor Page](./screenshots/editor-page.png)
-*The interactive editor where users can upload their photo and try on different hairstyles in real-time.*
+<table>
+  <tr>
+    <td width="50%">
+      <img src="./screenshots/landing-page.png" alt="Landing Page" />
+      <p align="center"><em>Landing page with main features and call-to-action</em></p>
+    </td>
+    <td width="50%">
+      <img src="./screenshots/editor-page.png" alt="Editor Page" />
+      <p align="center"><em>Interactive editor for trying on hairstyles</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="./screenshots/front.png" alt="Front Page" />
+      <p align="center"><em>Front View</em></p>
+    </td>   
+    <td width="50%">
+      <img src="./screenshots/side.png" alt="Side Page" />
+      <p align="center"><em>Side View</em></p>
+    </td>
+  </tr>
+</table>
 
 ## Overview
 
