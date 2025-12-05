@@ -20,6 +20,7 @@ from schemas import (
     ImageGenResponse,
     ImageGenStatusResponse,
     StylesResponse,
+    ViewImageRequest,
 )
 from services import ImageGenService
 
@@ -33,7 +34,7 @@ router = APIRouter(prefix="/image", tags=["image"])
 )
 @limiter.limit("5/minute")
 async def generate_image(
-    request: Request,
+    request: Request,  # required by ratelimiting lib
     data: ImageGenRequest,
     background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
@@ -68,6 +69,53 @@ async def generate_image(
     )
 
     background_tasks.add_task(service.start_image_generation, image)
+
+    return ImageGenResponse(
+        image_id=image.id, message="Image generation started successfully."
+    )
+
+
+@router.post(
+    "/view-generate",
+    response_model=ImageGenResponse,
+    responses={402: {"description": "Not enough credits"}},
+)
+@limiter.limit("5/minute")
+async def generate_view_images(
+    request: Request,  # required by ratelimiting lib
+    data: ViewImageRequest,
+    background_tasks: BackgroundTasks,
+    current_user: User = Depends(get_current_user),
+    db=Depends(get_db),
+) -> ImageGenResponse:
+    """
+    Initiate an view image generation request.
+
+    Args:
+        data (ImageGenRequest): User input including style ID and input image URL.
+        background_tasks (BackgroundTasks): FastAPI background task handler.
+        current_user (User): Authenticated user via dependency.
+        db: Database session.
+
+    Returns:
+        ImageGenResponse: Contains image_id and confirmation message.
+
+    Raises:
+        NotEnoughCreditsException: If user has not enough credits.
+        HTTPException: If database record creation fails.
+    """
+
+    if current_user.credits < 3:
+        raise NotEnoughCreditsException()
+
+    service = ImageGenService(db=db)
+    image = service.get_image_record(image_id=data.image_id, user_id=current_user.id)
+
+    if not image:
+        raise ImageNotFoundException()
+
+    for view in ("right", "left", "back"):
+        background_tasks.add_task(service.start_image_generation, image, view)
 
     return ImageGenResponse(
         image_id=image.id, message="Image generation started successfully."

@@ -12,8 +12,9 @@ __version__ = "0.1.0"
 
 
 from datetime import datetime
-from pydantic import BaseModel
+
 from enums import IntentStatus
+from pydantic import BaseModel
 
 
 class PaymentSessionRequest(BaseModel):

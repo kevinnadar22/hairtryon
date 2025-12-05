@@ -12,8 +12,8 @@ __version__ = "0.1.0"
 
 
 from db import Session
-from models import Transaction
 from enums import IntentStatus
+from models import Transaction
 
 
 class TransactionRepository:

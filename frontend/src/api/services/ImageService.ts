@@ -294,6 +294,292 @@ export interface ImageService {
         };
     };
     /**
+     * @summary Generate View Images
+     * @description Initiate an view image generation request.
+     *
+     * Args:
+     *     data (ImageGenRequest): User input including style ID and input image URL.
+     *     background_tasks (BackgroundTasks): FastAPI background task handler.
+     *     current_user (User): Authenticated user via dependency.
+     *     db: Database session.
+     *
+     * Returns:
+     *     ImageGenResponse: Contains image_id and confirmation message.
+     *
+     * Raises:
+     *     NotEnoughCreditsException: If user has not enough credits.
+     *     HTTPException: If database record creation fails.
+     */
+    generateViewImagesApiV1ImageViewGeneratePost: {
+        /**
+         * @summary Generate View Images
+         * @description Initiate an view image generation request.
+         *
+         * Args:
+         *     data (ImageGenRequest): User input including style ID and input image URL.
+         *     background_tasks (BackgroundTasks): FastAPI background task handler.
+         *     current_user (User): Authenticated user via dependency.
+         *     db: Database session.
+         *
+         * Returns:
+         *     ImageGenResponse: Contains image_id and confirmation message.
+         *
+         * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
+         *     HTTPException: If database record creation fails.
+         */
+        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: ServiceOperationMutationFnOptions<GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostParameters, TMeta, TSignal>, client?: (schema: GenerateViewImagesApiV1ImageViewGeneratePostSchema, options: ServiceOperationMutationFnOptions<GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostParameters, TMeta, TSignal>) => Promise<RequestFnResponse<GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostError>>): Promise<RequestFnResponse<GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostError>>;
+        /**
+         * @summary Generate View Images
+         * @description Initiate an view image generation request.
+         *
+         * Args:
+         *     data (ImageGenRequest): User input including style ID and input image URL.
+         *     background_tasks (BackgroundTasks): FastAPI background task handler.
+         *     current_user (User): Authenticated user via dependency.
+         *     db: Database session.
+         *
+         * Returns:
+         *     ImageGenResponse: Contains image_id and confirmation message.
+         *
+         * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
+         *     HTTPException: If database record creation fails.
+         */
+        getMutationKey(parameters: DeepReadonly<GenerateViewImagesApiV1ImageViewGeneratePostParameters> | void): ServiceOperationMutationKey<GenerateViewImagesApiV1ImageViewGeneratePostSchema, GenerateViewImagesApiV1ImageViewGeneratePostParameters>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @summary Generate View Images
+         * @description Initiate an view image generation request.
+         *
+         * Args:
+         *     data (ImageGenRequest): User input including style ID and input image URL.
+         *     background_tasks (BackgroundTasks): FastAPI background task handler.
+         *     current_user (User): Authenticated user via dependency.
+         *     db: Database session.
+         *
+         * Returns:
+         *     ImageGenResponse: Contains image_id and confirmation message.
+         *
+         * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
+         *     HTTPException: If database record creation fails.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.imageService.generateViewImagesApiV1ImageViewGeneratePost.useMutation({
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * })
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.imageService.generateViewImagesApiV1ImageViewGeneratePost.useMutation()
+         * mutate({
+         *     body: bodyPayload,
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * });
+         * ```
+         */
+        useMutation<TVariables extends GenerateViewImagesApiV1ImageViewGeneratePostBody, TContext = unknown>(parameters: DeepReadonly<GenerateViewImagesApiV1ImageViewGeneratePostParameters>, options?: ServiceOperationUseMutationOptions<GenerateViewImagesApiV1ImageViewGeneratePostSchema, GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostParameters, TVariables, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TContext>): UseMutationResult<GenerateViewImagesApiV1ImageViewGeneratePostData, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TVariables, TContext>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @summary Generate View Images
+         * @description Initiate an view image generation request.
+         *
+         * Args:
+         *     data (ImageGenRequest): User input including style ID and input image URL.
+         *     background_tasks (BackgroundTasks): FastAPI background task handler.
+         *     current_user (User): Authenticated user via dependency.
+         *     db: Database session.
+         *
+         * Returns:
+         *     ImageGenResponse: Contains image_id and confirmation message.
+         *
+         * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
+         *     HTTPException: If database record creation fails.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.imageService.generateViewImagesApiV1ImageViewGeneratePost.useMutation({
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * })
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.imageService.generateViewImagesApiV1ImageViewGeneratePost.useMutation()
+         * mutate({
+         *     body: bodyPayload,
+         *     cookie: {
+         *         access_token: accessToken
+         *     }
+         * });
+         * ```
+         */
+        useMutation<TVariables extends MutationVariables<GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<GenerateViewImagesApiV1ImageViewGeneratePostSchema, GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostParameters, TVariables, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TContext>): UseMutationResult<GenerateViewImagesApiV1ImageViewGeneratePostData, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TVariables, TContext>;
+        /**
+         * Returns the count of currently in-progress mutations.
+         *
+         * @summary Generate View Images
+         * @description Initiate an view image generation request.
+         *
+         * Args:
+         *     data (ImageGenRequest): User input including style ID and input image URL.
+         *     background_tasks (BackgroundTasks): FastAPI background task handler.
+         *     current_user (User): Authenticated user via dependency.
+         *     db: Database session.
+         *
+         * Returns:
+         *     ImageGenResponse: Contains image_id and confirmation message.
+         *
+         * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
+         *     HTTPException: If database record creation fails.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+         * @example Check how many mutations are currently in progress for the specified service method.
+         * ```ts
+         * const generateViewImagesApiV1ImageViewGeneratePostTotal = qraft.imageService.generateViewImagesApiV1ImageViewGeneratePost.useIsMutating()
+         * ```
+         * @example Check how many mutations are currently in progress with the specified parameters.
+         * ```ts
+         * const generateViewImagesApiV1ImageViewGeneratePostTotal = qraft.imageService.generateViewImagesApiV1ImageViewGeneratePost.useIsMutating({
+         *     parameters: {
+         *         cookie: {
+         *             access_token: accessToken
+         *         }
+         *     }
+         * })
+         * ```
+         */
+        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostParameters, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TContext> | MutationFiltersByMutationKey<GenerateViewImagesApiV1ImageViewGeneratePostSchema, GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostParameters, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TContext>): number;
+        /**
+         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+         *
+         * @summary Generate View Images
+         * @description Initiate an view image generation request.
+         *
+         * Args:
+         *     data (ImageGenRequest): User input including style ID and input image URL.
+         *     background_tasks (BackgroundTasks): FastAPI background task handler.
+         *     current_user (User): Authenticated user via dependency.
+         *     db: Database session.
+         *
+         * Returns:
+         *     ImageGenResponse: Contains image_id and confirmation message.
+         *
+         * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
+         *     HTTPException: If database record creation fails.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+         * @example Get all variables of all running mutations.
+         * ```ts
+         * const generateViewImagesApiV1ImageViewGeneratePostPendingMutationVariables = qraft.imageService.generateViewImagesApiV1ImageViewGeneratePost.useMutationState({
+         *     filters: {
+         *         status: "pending"
+         *     },
+         *     select: mutation => mutation.state.variables
+         * })
+         * ```
+         * @example Get all data for specific mutations via the `parameters`.
+         * ```ts
+         * const generateViewImagesApiV1ImageViewGeneratePostMutationData = qraft.imageService.generateViewImagesApiV1ImageViewGeneratePost.useMutationState({
+         *     filters: {
+         *         parameters: {
+         *             cookie: {
+         *                 access_token: accessToken
+         *             }
+         *         }
+         *     },
+         *     select: mutation => mutation.state.data
+         * })
+         * ```
+         */
+        useMutationState<TContext = unknown, TResult = MutationState<GenerateViewImagesApiV1ImageViewGeneratePostData, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, MutationVariables<GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostParameters>, TContext>>(options?: {
+            filters?: MutationFiltersByParameters<GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostParameters, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TContext> | MutationFiltersByMutationKey<GenerateViewImagesApiV1ImageViewGeneratePostSchema, GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostParameters, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TContext>;
+            select?: (mutation: Mutation<GenerateViewImagesApiV1ImageViewGeneratePostData, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, MutationVariables<GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostParameters>, TContext>) => TResult;
+        }): Array<TResult>;
+        /**
+         * @summary Generate View Images
+         * @description Initiate an view image generation request.
+         *
+         * Args:
+         *     data (ImageGenRequest): User input including style ID and input image URL.
+         *     background_tasks (BackgroundTasks): FastAPI background task handler.
+         *     current_user (User): Authenticated user via dependency.
+         *     db: Database session.
+         *
+         * Returns:
+         *     ImageGenResponse: Contains image_id and confirmation message.
+         *
+         * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
+         *     HTTPException: If database record creation fails.
+         */
+        isMutating<TContext>(filters?: MutationFiltersByParameters<GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostParameters, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TContext> | MutationFiltersByMutationKey<GenerateViewImagesApiV1ImageViewGeneratePostSchema, GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostParameters, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TContext>): number;
+        /**
+         * Returns a `MutationCache` object that provides access to mutation cache operations
+         * for the specific endpoint.
+         *
+         * @summary Generate View Images
+         * @description Initiate an view image generation request.
+         *
+         * Args:
+         *     data (ImageGenRequest): User input including style ID and input image URL.
+         *     background_tasks (BackgroundTasks): FastAPI background task handler.
+         *     current_user (User): Authenticated user via dependency.
+         *     db: Database session.
+         *
+         * Returns:
+         *     ImageGenResponse: Contains image_id and confirmation message.
+         *
+         * Raises:
+         *     NotEnoughCreditsException: If user has not enough credits.
+         *     HTTPException: If database record creation fails.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/query-client/getMutationCache|`getMutationCache(...)` documentation}
+         *
+         * @example Find a mutation with specific parameters
+         * ```ts
+         * const mutationCache = qraft.imageService.generateViewImagesApiV1ImageViewGeneratePost.getMutationCache();
+         * const mutation = mutationCache.find({
+         *     parameters: {
+         *         cookie: {
+         *             access_token: accessToken
+         *         }
+         *     }
+         * });
+         * ```
+         *
+         * @example Find all mutations for the endpoint
+         * ```ts
+         * const mutationCache = qraft.imageService.generateViewImagesApiV1ImageViewGeneratePost.getMutationCache();
+         * const mutations = mutationCache.findAll();
+         * ```
+         */
+        getMutationCache(): Omit<MutationCache, "find" | "findAll"> & {
+            find<TContext = unknown>(filters: MutationFiltersByParameters<GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostParameters, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TContext> | MutationFiltersByMutationKey<GenerateViewImagesApiV1ImageViewGeneratePostSchema, GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostParameters, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TContext>): Mutation<GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostError, MutationVariables<GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostParameters>, TContext> | undefined;
+            findAll<TContext = unknown>(filters?: MutationFiltersByParameters<GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostParameters, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TContext> | MutationFiltersByMutationKey<GenerateViewImagesApiV1ImageViewGeneratePostSchema, GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostParameters, OperationError<GenerateViewImagesApiV1ImageViewGeneratePostError>, TContext>): Array<Mutation<GenerateViewImagesApiV1ImageViewGeneratePostData, GenerateViewImagesApiV1ImageViewGeneratePostError, MutationVariables<GenerateViewImagesApiV1ImageViewGeneratePostBody, GenerateViewImagesApiV1ImageViewGeneratePostParameters>, TContext>>;
+        };
+        schema: GenerateViewImagesApiV1ImageViewGeneratePostSchema;
+        types: {
+            parameters: GenerateViewImagesApiV1ImageViewGeneratePostParameters;
+            data: GenerateViewImagesApiV1ImageViewGeneratePostData;
+            error: GenerateViewImagesApiV1ImageViewGeneratePostError;
+            body: GenerateViewImagesApiV1ImageViewGeneratePostBody;
+        };
+    };
+    /**
      * @summary Get Image Status
      * @description Retrieve image generation status and results.
      *
@@ -2234,6 +2520,33 @@ export const generateImageApiV1ImageGeneratePost = {
     [QraftServiceOperationsToken]: ImageService["generateImageApiV1ImageGeneratePost"];
 };
 /**
+ * @summary Generate View Images
+ * @description Initiate an view image generation request.
+ *
+ * Args:
+ *     data (ImageGenRequest): User input including style ID and input image URL.
+ *     background_tasks (BackgroundTasks): FastAPI background task handler.
+ *     current_user (User): Authenticated user via dependency.
+ *     db: Database session.
+ *
+ * Returns:
+ *     ImageGenResponse: Contains image_id and confirmation message.
+ *
+ * Raises:
+ *     NotEnoughCreditsException: If user has not enough credits.
+ *     HTTPException: If database record creation fails.
+ */
+export const generateViewImagesApiV1ImageViewGeneratePost = {
+    schema: {
+        method: "post",
+        url: "/api/v1/image/view-generate",
+        mediaType: ["application/json"]
+    }
+} as {
+    schema: GenerateViewImagesApiV1ImageViewGeneratePostSchema;
+    [QraftServiceOperationsToken]: ImageService["generateViewImagesApiV1ImageViewGeneratePost"];
+};
+/**
  * @summary Get Image Status
  * @description Retrieve image generation status and results.
  *
@@ -2327,6 +2640,7 @@ export const dislikeImageApiV1ImageDislikeImageIdPost = {
 };
 export const imageService = {
     generateImageApiV1ImageGeneratePost,
+    generateViewImagesApiV1ImageViewGeneratePost,
     getImageStatusApiV1ImageStatusImageIdGet,
     getImageStylesApiV1ImageStylesGet,
     likeImageApiV1ImageLikeImageIdPost,
@@ -2343,6 +2657,17 @@ type GenerateImageApiV1ImageGeneratePostParameters = paths["/api/v1/image/genera
 type GenerateImageApiV1ImageGeneratePostData = paths["/api/v1/image/generate"]["post"]["responses"]["200"]["content"]["application/json"];
 type GenerateImageApiV1ImageGeneratePostError = null | paths["/api/v1/image/generate"]["post"]["responses"]["422"]["content"]["application/json"] | null;
 type GenerateImageApiV1ImageGeneratePostBody = paths["/api/v1/image/generate"]["post"]["requestBody"]["content"]["application/json"];
+type GenerateViewImagesApiV1ImageViewGeneratePostSchema = {
+    method: "post";
+    url: "/api/v1/image/view-generate";
+    mediaType: [
+        "application/json"
+    ];
+};
+type GenerateViewImagesApiV1ImageViewGeneratePostParameters = paths["/api/v1/image/view-generate"]["post"]["parameters"];
+type GenerateViewImagesApiV1ImageViewGeneratePostData = paths["/api/v1/image/view-generate"]["post"]["responses"]["200"]["content"]["application/json"];
+type GenerateViewImagesApiV1ImageViewGeneratePostError = null | paths["/api/v1/image/view-generate"]["post"]["responses"]["422"]["content"]["application/json"] | null;
+type GenerateViewImagesApiV1ImageViewGeneratePostBody = paths["/api/v1/image/view-generate"]["post"]["requestBody"]["content"]["application/json"];
 type GetImageStatusApiV1ImageStatusImageIdGetSchema = {
     method: "get";
     url: "/api/v1/image/status/{image_id}";

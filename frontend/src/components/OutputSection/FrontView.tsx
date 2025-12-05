@@ -96,7 +96,6 @@ function FrontView() {
         showIcons={{
           regenerate: true,
           copy: true,
-          share: true,
           download: true,
           likeDislike: true,
         }}

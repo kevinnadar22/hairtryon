@@ -6,7 +6,7 @@ record creation, Replicate API integration, and S3 storage management.
 """
 
 import time
-from typing import List, cast
+from typing import List, Literal, Optional, cast
 
 from core.config import settings
 from core.exceptions import StyleNotFoundException
@@ -18,7 +18,7 @@ from pydantic import HttpUrl
 from replicate.client import Client
 from repository import GeneratedImageRepository, StyleRepository, UserRepository
 from schemas import SideViewsResponse, UserImages, UserImagesResponse
-from utils import get_file_info, save_image_from_url
+from utils import get_file_info, get_view_prompt, save_image_from_url
 
 from .image_upload import ImageUploadService
 
@@ -59,7 +59,11 @@ class ImageGenService:
         )
         return image_instance
 
-    async def start_image_generation(self, image: GeneratedImage) -> int:
+    async def start_image_generation(
+        self,
+        image: GeneratedImage,
+        view: Optional[Literal["right", "left", "back"]] = None,
+    ) -> int:
         """
         Execute image generation workflow using Replicate API.
 
@@ -84,8 +88,14 @@ class ImageGenService:
             if not style:
                 raise StyleNotFoundException()
 
-            prompt = style.prompt
-            input_image = image_input_url
+            if view and image.output_image_url:
+                prompt = get_view_prompt(view)
+                input_image = image.output_image_url
+            elif not view:
+                prompt = style.prompt
+                input_image = image_input_url
+            else:
+                raise ValueError("Invalid view")
 
             self.image_repository.update_image_status(
                 image_id=image.id,
@@ -124,14 +134,36 @@ class ImageGenService:
 
         finally:
             duration = time.perf_counter() - start_time
-            self.image_repository.update_image(
-                image_id=image.id,
-                output_image_url=output_url,
+            self._update_image_url(
+                image=image,
+                output_url=output_url,
                 status=status,
                 time_taken=duration,
+                view=view,
             )
+            logger.info(f"{image.id}={view} Image generated successfully")
 
         return image.id
+
+    def _update_image_url(
+        self,
+        image: GeneratedImage,
+        output_url: Optional[str],
+        status: ImageStatus,
+        time_taken: float,
+        view: Optional[Literal["right", "left", "back"]] = None,
+    ):
+        image.status = status
+        image.time_taken = time_taken
+        if not view:
+            image.output_image_url = output_url
+        elif view == "right":
+            image.right_view_url = output_url
+        elif view == "left":
+            image.left_view_url = output_url
+        elif view == "back":
+            image.back_view_url = output_url
+        self.image_repository.raw_update_image(image)
 
     async def _save_output_to_s3(self, output_url: str) -> str:
         """

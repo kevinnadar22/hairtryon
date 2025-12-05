@@ -9,9 +9,6 @@ Routes included:
 management)
 """
 
-from fastapi import FastAPI
-from sqladmin import Admin
-
 from admin import admin_authentication, admin_views
 from api.router import router as api_router
 from core.config import settings
@@ -22,6 +19,8 @@ from core.middleware import setup_middlewares
 from core.ratelimiting import setup_ratelimiting
 from core.telementry import init_telemetry
 from db import engine
+from fastapi import FastAPI
+from sqladmin import Admin
 
 setup_logging()
 

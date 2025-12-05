@@ -17,7 +17,7 @@ from core.dependencies import (
     UseAndBlacklistRefreshToken,
     UseAndBlacklistVerifyToken,
 )
-from core.exceptions import UserNotVerifiedException, InvalidCredentialsException
+from core.exceptions import InvalidCredentialsException, UserNotVerifiedException
 from enums import TokenType
 from fastapi import APIRouter, BackgroundTasks
 from schemas import (

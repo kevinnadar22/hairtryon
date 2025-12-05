@@ -6,12 +6,8 @@ from db import Base
 
 # Import all models so they are registered with Base.metadata
 # This is required for Alembic autogenerate to detect them
-from models import (  # noqa: F401
-    BlackListTokens,
-    GeneratedImage,
-    Styles,
-    Transaction,
-    User,
+from models import (
+    Styles,  # noqa: F401
 )
 from sqlalchemy import engine_from_config, pool
 

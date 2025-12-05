@@ -27,7 +27,7 @@ class GeneratedImage(Base):
     )
 
     description: Mapped[str] = mapped_column(String, nullable=True)
-    output_image_url: Mapped[str] = mapped_column(String, nullable=True)
+    output_image_url: Mapped[str | None] = mapped_column(String, nullable=True)
     input_image_url: Mapped[str] = mapped_column(String, nullable=False)
 
     right_view_url: Mapped[str | None] = mapped_column(String, nullable=True)

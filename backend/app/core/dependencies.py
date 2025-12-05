@@ -8,10 +8,10 @@ from core.exceptions import (
     InvalidRefreshTokenException,
     InvalidResetTokenException,
     InvalidSignupTokenException,
+    NoCookiesException,
     NotAuthenticatedException,
     UserNotFoundException,
     UserNotVerifiedException,
-    NoCookiesException,
 )
 from db import Session, get_db
 from enums import TokenType

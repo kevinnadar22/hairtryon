@@ -33,15 +33,16 @@ from .image_gen import (
     StylesResponse,
     UserImages,
     UserImagesResponse,
+    ViewImageRequest,
 )
 from .image_upload import ImageUploadResponse
-from .user import UserBase
 from .payment import (
     PaymentSessionRequest,
     PaymentSessionResponse,
-    WebhookRequest,
     TransactionResponse,
+    WebhookRequest,
 )
+from .user import UserBase
 
 __all__ = [
     "SignupRequest",
@@ -80,4 +81,5 @@ __all__ = [
     "PaymentSessionResponse",
     "WebhookRequest",
     "TransactionResponse",
+    "ViewImageRequest",
 ]

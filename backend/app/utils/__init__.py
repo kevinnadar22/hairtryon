@@ -9,6 +9,7 @@ from .auth import (
     verify_password,
 )
 from .helpers import get_file_info, save_image_from_url
+from .prompt_builder import get_view_prompt
 from .send_email import send_mail_async
 
 __all__ = [
@@ -23,4 +24,5 @@ __all__ = [
     "get_jti_from_token",
     "create_refresh_token",
     "decode_refresh_token",
+    "get_view_prompt",
 ]

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Copy, Download, Share, ChevronDown, ChevronUp } from "lucide-react";
+import { Copy, Download, ChevronDown, ChevronUp } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { ActionButton } from "../ui/ActionButton";
 import {
@@ -17,7 +17,7 @@ import {
   type CarouselApi,
 } from "../ui/carousel";
 import { cn } from "@/lib/utils";
-import { copyImageToClipboard, downloadImage, shareImage } from "@/utils";
+import { copyImageToClipboard, downloadImage } from "@/utils";
 import type { components } from "@/api/schema";
 
 type HistoryItem = components["schemas"]["UserImages"];
@@ -250,19 +250,7 @@ const HistoryModal: React.FC<HistoryModalProps> = ({
                     </div>
                   }
                 />
-                <ActionButton
-                  variant="outline"
-                  size="lg"
-                  onClick={() => shareImage(getCurrentImage())}
-                  label={
-                    <div className="flex items-center gap-1 sm:gap-2">
-                      <Share
-                        className="w-4 h-4 sm:w-5 sm:h-5"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  }
-                />
+
               </div>
 
               {/* Thumbnail Carousel */}

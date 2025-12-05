@@ -267,3 +267,8 @@ class GeneratedImageRepository:
             .filter(GeneratedImage.user_id == user_id)
             .scalar()
         )
+
+    def raw_update_image(self, image: GeneratedImage):
+        self.db.commit()
+        self.db.refresh(image)
+        return image

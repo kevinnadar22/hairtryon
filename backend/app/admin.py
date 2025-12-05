@@ -12,7 +12,7 @@ __version__ = "0.1.0"
 
 
 from core.config import settings
-from models import BlackListTokens, GeneratedImage, Styles, User, Transaction
+from models import BlackListTokens, GeneratedImage, Styles, Transaction, User
 from sqladmin import ModelView
 from sqladmin.authentication import AuthenticationBackend
 from starlette.requests import Request

@@ -17,6 +17,10 @@ class ImageGenRequest(BaseModel):
     style_id: Annotated[int, "DB Identifier for the desired image style"]
 
 
+class ViewImageRequest(BaseModel):
+    image_id: int
+
+
 class ImageGenResponse(BaseModel):
     image_id: int
     message: str = "Image generation started successfully."
@@ -36,6 +40,9 @@ class ImageGenStatusResponse(BaseModel):
     status: ImageStatus
     description: str | None
     output_image_url: HttpUrl | None
+    right_view_url: HttpUrl | None
+    left_view_url: HttpUrl | None
+    back_view_url: HttpUrl | None
 
     model_config = ConfigDict(from_attributes=True)
 

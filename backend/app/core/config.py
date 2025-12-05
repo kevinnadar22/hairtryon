@@ -5,10 +5,11 @@ This module defines configuration classes for authentication, database,
 and image upload settings. All settings are loaded from environment variables.
 """
 
+from typing import Literal, Optional
+
 from dotenv import load_dotenv
 from pydantic import ConfigDict
 from pydantic_settings import BaseSettings
-from typing import Literal, Optional
 
 # This is needed even though we use BaseSettings which loads .env automatically
 # Because some libraries may rely on environment variables being set at import time

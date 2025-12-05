@@ -11,17 +11,15 @@ __author__ = "Maria Kevin"
 __version__ = "0.1.0"
 
 
-from core.dependencies import PaymentServiceDep, CurrentUser
-
+from core.dependencies import CurrentUser, PaymentServiceDep
 from core.exceptions import InvalidWebhookException, TransactionNotFoundException
+from fastapi import APIRouter, Header, Request, Response
 from schemas import (
     PaymentSessionRequest,
     PaymentSessionResponse,
-    WebhookRequest,
     TransactionResponse,
+    WebhookRequest,
 )
-from fastapi import APIRouter, Header, Request, Response
-
 
 router = APIRouter(prefix="/payments", tags=["Payments"])
 

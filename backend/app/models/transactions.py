@@ -12,10 +12,11 @@ __version__ = "0.1.0"
 
 
 import datetime
+
 from db import Base
-from sqlalchemy import DateTime, Integer, ForeignKey, Enum, String, func
-from sqlalchemy.orm import Mapped, mapped_column, relationship
 from enums import IntentStatus
+from sqlalchemy import DateTime, Enum, ForeignKey, Integer, String, func
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
 class Transaction(Base):

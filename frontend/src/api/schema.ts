@@ -553,6 +553,39 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/image/view-generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generate View Images
+         * @description Initiate an view image generation request.
+         *
+         *     Args:
+         *         data (ImageGenRequest): User input including style ID and input image URL.
+         *         background_tasks (BackgroundTasks): FastAPI background task handler.
+         *         current_user (User): Authenticated user via dependency.
+         *         db: Database session.
+         *
+         *     Returns:
+         *         ImageGenResponse: Contains image_id and confirmation message.
+         *
+         *     Raises:
+         *         NotEnoughCreditsException: If user has not enough credits.
+         *         HTTPException: If database record creation fails.
+         */
+        post: operations["generate_view_images_api_v1_image_view_generate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/image/status/{image_id}": {
         parameters: {
             query?: never;
@@ -797,6 +830,12 @@ export interface components {
             description: string | null;
             /** Output Image Url */
             output_image_url: string | null;
+            /** Right View Url */
+            right_view_url: string | null;
+            /** Left View Url */
+            left_view_url: string | null;
+            /** Back View Url */
+            back_view_url: string | null;
         };
         /**
          * ImageStatus
@@ -1062,6 +1101,11 @@ export interface components {
         VerifySignupResponse: {
             /** Verified */
             verified: boolean;
+        };
+        /** ViewImageRequest */
+        ViewImageRequest: {
+            /** Image Id */
+            image_id: number;
         };
     };
     responses: never;
@@ -1897,6 +1941,56 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": components["schemas"]["ImageGenRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImageGenResponse"];
+                };
+            };
+            /** @description Not enough credits */
+            402: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    generate_view_images_api_v1_image_view_generate_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: {
+                access_token?: string | null;
+                refresh_token?: string | null;
+            };
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ViewImageRequest"];
             };
         };
         responses: {

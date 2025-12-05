@@ -11,14 +11,15 @@ Routes included:
 - /api/v1/payment/*: Payment endpoints
 """
 
+from fastapi import APIRouter
+
 from .v1 import (
     auth_router,
     files_upload_router,
     image_router,
-    user_router,
     payment_router,
+    user_router,
 )
-from fastapi import APIRouter
 
 router = APIRouter(prefix="/api/v1")
 

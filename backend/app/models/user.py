@@ -5,10 +5,10 @@ This module defines the SQLAlchemy ORM model for user accounts
 including authentication credentials and profile information.
 """
 
+from core.config import settings
 from db import Base
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from core.config import settings
 
 
 class User(Base):

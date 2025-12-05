@@ -13,8 +13,8 @@ __version__ = "0.1.0"
 
 from core.config import settings
 from core.dependencies import AuthServiceDep, GoogleAuthServiceDep
-from fastapi import APIRouter, Request
 from core.exceptions import GoogleAuthException
+from fastapi import APIRouter, Request
 from fastapi.responses import RedirectResponse
 
 router = APIRouter()

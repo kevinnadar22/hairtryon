@@ -9,26 +9,16 @@ import ActionButtons from './ActionButtons';
 
 
 
+
 function SideView() {
-    let { backViewImage, leftViewImage, rightViewImage, isGenerated } = useSelector((state: RootState) => state.sideImageSlide);
+    let { backViewImage, leftViewImage, rightViewImage, isGenerated, isGenerating } = useSelector((state: RootState) => state.sideImageSlide);
     const dispatch = useDispatch();
 
-    // have default if not generated
-    if (!isGenerated) {
-        backViewImage = backplaceholder;
-        leftViewImage = leftplaceholder;
-        rightViewImage = rightplaceholder;
-    }
-    else {
-        backViewImage = backViewImage || '';
-        leftViewImage = leftViewImage || '';
-        rightViewImage = rightViewImage || '';
-    }
 
     const sideViews = [
-        { key: 'left', label: 'Left', src: leftViewImage, alt: 'Left Side' },
-        { key: 'back', label: 'Back', src: backViewImage, alt: 'Back View' },
-        { key: 'right', label: 'Right', src: rightViewImage, alt: 'Right Side' },
+        { key: 'left', label: 'Left', placeholderSrc: leftplaceholder, src: leftViewImage, alt: 'Left Side' },
+        { key: 'back', label: 'Back', placeholderSrc: backplaceholder, src: backViewImage, alt: 'Back View' },
+        { key: 'right', label: 'Right', placeholderSrc: rightplaceholder, src: rightViewImage, alt: 'Right Side' },
     ];
 
     const handleResetSideViews = () => {
@@ -36,47 +26,53 @@ function SideView() {
         return true;
     };
 
-    // just return with a coming soon message, nothing else
-    return (
-        <div className="mx-auto max-w-2xl text-center py-10">
-            Coming soon...  
-        </div>
-    );
+
     return (
         <div className="mx-auto max-w-2xl">
             {/* Compact row of three thumbnails */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {sideViews.map(({ key, label, src, alt }) => (
-                    <div key={key} className="space-y-3">
-                        <div className="aspect-square rounded-md overflow-hidden relative w-50 h-30 sm:w-full sm:h-full mx-auto">
-                            <img
-                                src={src}
-                                alt={alt}
-                                className="w-full h-full object-cover"
-                            />
-                            {!isGenerated &&
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/50 sm:bg-black/40">
-                                    <span className="text-md text-white font-semibold tracking-wide">{label}</span>
-                                </div>}
-                        </div>
-                        {isGenerated && (
-                            <ActionButtons
+                {sideViews.map(({ key, label, src, placeholderSrc, alt }) => {
 
-                                onReset={handleResetSideViews}
-                                url={src}
-                                showIcons={
-                                    {
-                                        // regenerate: true,
-                                        copy: true,
-                                        // share: true,
-                                        download: true,
-                                        // likeDislike: true,
+                    return (
+                        <div key={key} className="space-y-3">
+                            <div className="aspect-square rounded-md overflow-hidden relative w-50 h-30 sm:w-full sm:h-full mx-auto">
+
+                                {/* if loading and original image not generated, show loading spinner */}
+                                {isGenerating && !src &&
+                                    <div className="absolute inset-0 flex items-center justify-center bg-white/60">
+                                        {/* <Spinner className="size-8" /> */}
+                                    </div>}
+
+                                {/* when original image generated, show it or placeholder */}
+                                <img
+                                    src={src || placeholderSrc}
+                                    alt={alt}
+                                    className="w-full h-full object-cover"
+                                />
+
+                                {/* when not loading, or output image not generated, show idle state */}
+                                {!isGenerating && !src &&
+                                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 sm:bg-black/40">
+                                        <span className="text-md text-white font-semibold tracking-wide">{label}</span>
+                                    </div>}
+
+                            </div>
+                            {isGenerated && src && (
+                                <ActionButtons
+
+                                    onReset={handleResetSideViews}
+                                    url={src}
+                                    showIcons={
+                                        {
+                                            copy: true,
+                                            download: true,
+                                        }
                                     }
-                                }
-                            />
-                        )}
-                    </div>
-                ))}
+                                />
+                            )}
+                        </div>
+                    );
+                })}
             </div>
 
             {!isGenerated &&

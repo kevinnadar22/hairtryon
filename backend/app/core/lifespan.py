@@ -11,8 +11,9 @@ __author__ = "Maria Kevin"
 __version__ = "0.1.0"
 
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+
 from db import Base, engine
+from fastapi import FastAPI
 
 
 @asynccontextmanager
@@ -20,4 +21,3 @@ async def lifespan(app: FastAPI):
     # creates the database tables
     Base.metadata.create_all(bind=engine)
     yield
-    Base.metadata.drop_all(bind=engine)

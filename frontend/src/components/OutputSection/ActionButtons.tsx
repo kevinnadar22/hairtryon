@@ -1,10 +1,9 @@
-import { Copy, Download, Share, Undo2, Heart, ThumbsDown } from "lucide-react";
+import { Copy, Download, Heart, ThumbsDown, RotateCcw } from "lucide-react";
 import { ActionButton } from "../ui/ActionButton";
 import { Toggle } from "@/components/ui/toggle";
-import { copyImageToClipboard, downloadImage, shareImage } from "@/utils";
-import GenerateButton from "../UploadPhoto/GenerateButton";
+import { copyImageToClipboard, downloadImage } from "@/utils";
 import { useState } from "react";
-import { Separator } from "../ui/separator";
+
 
 interface ActionButtonsProps {
   onReset?: () => Promise<boolean> | boolean;
@@ -14,7 +13,6 @@ interface ActionButtonsProps {
     likeDislike?: boolean;
     copy?: boolean;
     download?: boolean;
-    share?: boolean;
   };
   onLike?: () => void;
   onDislike?: () => void;
@@ -100,43 +98,23 @@ function ActionButtons({
               label={<Download className="w-5 h-5" />}
             ></ActionButton>
           )}
-          {showIcons.share && (
+
+
+          {showIcons.regenerate && onReset && (
             <ActionButton
               variant="outline"
               size="icon-sm"
-              onClick={() => {
-                url && shareImage(url);
-                return true;
-              }}
-              aria-label="Share image"
-              label={<Share className="w-5 h-5" />}
-            ></ActionButton>
+              onClick={onReset}
+              label={
+                <RotateCcw aria-hidden="true" className="w-5 h-5" />
+              }
+            />
           )}
+
         </div>
       </div>
 
-      {showIcons.regenerate && (
-        <>
-          {" "}
-          <Separator className="my-2 bg-gray-300 h-[2]" />
-          <div className="flex justify-center gap-3 mt-4">
-            <GenerateButton size="sm" label="Regenerate" className="px-4" />
 
-            {onReset && (
-              <ActionButton
-                variant="outline"
-                size="sm"
-                onClick={onReset}
-                label={
-                  <div className="flex items-center gap-2">
-                    <Undo2 aria-hidden="true" />
-                  </div>
-                }
-              />
-            )}
-          </div>
-        </>
-      )}
     </div>
   );
 }
