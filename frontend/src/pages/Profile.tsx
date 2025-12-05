@@ -55,7 +55,7 @@ export const Profile: React.FC = () => {
 
     useEffect(() => {
         if (!user && status === 'succeeded') {
-            navigate('/login');
+            window.location.href = '/try';
         }
     }, [user, navigate, status]);
 
