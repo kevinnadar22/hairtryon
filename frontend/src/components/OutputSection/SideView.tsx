@@ -28,14 +28,14 @@ function SideView() {
 
 
     return (
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-5xl">
             {/* Compact row of three thumbnails */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {sideViews.map(({ key, label, src, placeholderSrc, alt }) => {
 
                     return (
                         <div key={key} className="space-y-3">
-                            <div className="aspect-square rounded-md overflow-hidden relative w-50 h-30 sm:w-full sm:h-full mx-auto">
+                            <div className="aspect-[3/4] rounded-md overflow-hidden relative w-full mx-auto">
 
                                 {/* if loading and original image not generated, show loading spinner */}
                                 {isGenerating && !src &&

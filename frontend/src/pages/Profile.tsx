@@ -23,7 +23,7 @@ export const Profile: React.FC = () => {
     const navigate = useNavigate();
 
     const _redirectToLogin = () => {
-        window.location.href = '/login';
+        window.location.replace('/login')
     };
 
     const { mutate: logoutMutate } = api.auth.logoutApiV1AuthLogoutPost.useMutation(
