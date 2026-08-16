@@ -2,10 +2,13 @@ name: CD
 
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'backend/**'
+  workflow_dispatch:
+
+  # Temporarily disabled — restore to re-enable auto-deploy:
+  # push:
+  #   branches: [ main ]
+  #   paths:
+  #     - 'backend/**'
 
 jobs:
   docker:
